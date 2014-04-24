@@ -1,12 +1,23 @@
-getGWLdata <- function(emsID, fromDate=NULL, toDate=NULL, hist_avg=TRUE
-                       , save=TRUE, data.dir) {
-  # fromDate: desired start date of time series, as a date object or character 
-  #           string in the form "YYYY-MM-DD"
-  # toDate: desired end date of time series, as a date object or character 
-  #           string in the form "YYYY-MM-DD". Default today's date
-  
-  require(RCurl)
-  require(lubridate)
+#' Download B.C. Groundwater level data
+#'
+#' Download time series of groundwater level measurements from a B.C. groundwater
+#' observation well.
+#' 
+#' @param emsID The EMS ID of the well
+#' @param  fromDate desired start date of time series, as a date object or character 
+#'         string in the form "YYYY-MM-DD"
+#' @param  toDate desired end date of time series, as a date object or character 
+#'         string in the form "YYYY-MM-DD". Default today's date
+#' @param  hist_avg Do you want the historical averages? (logical)
+#' @param  save Do you want to save the time series as a csv (logical)
+#' @param  data.dir The directory you want to save in
+#' @export
+#' @return if save, nothing is returned (but the file is saved in the directory specified). 
+#'         If save=FALSE, the well data is returned.
+#' @examples \dontrun{
+#'
+#'}
+getGWLdata <- function(emsID, fromDate=NULL, toDate=NULL, hist_avg=TRUE, save=TRUE, data.dir) {
   
   if (is.null(toDate)) {
     toDate <- today()

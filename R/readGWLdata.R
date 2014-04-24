@@ -1,3 +1,14 @@
+#' Read in groundwater data from file downloaded from GWL tool
+#'
+#' Read in groundwater data from file downloaded from GWL tool
+#' @param emsID The EMS ID of the well
+#' @param  wellNum The Well Number of the well
+#' @param  dir The directory the file is stored in
+#' @export
+#' @return A dataframe of the groundwater level observations
+#' @examples \dontrun{
+#'
+#'}
 readGWLdata <- function(emsID, wellNum, dir) {
   
   file.loc <- paste0(dir, "well", emsID, ".csv")

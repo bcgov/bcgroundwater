@@ -1,0 +1,39 @@
+\name{cumRuns}
+\alias{cumRuns}
+\title{Find consecuctive runs of a value in extremes of a vector}
+\usage{
+cumRuns(x, val, head = 0.2, tail = 0.8, n_consec)
+}
+\arguments{
+  \item{x}{the vector}
+
+  \item{val}{the value for which to find consecutive runs}
+
+  \item{head}{(proportion between 0 and 1, default = 0.2)
+  the beginning portion of the vector in which to look for
+  consecutive missing values}
+
+  \item{tail}{(proportion between 0 and 1, default = 0.8)
+  the end portion of the vector in which to look for
+  consecutive missing values}
+
+  \item{n_consec}{the number of consecutive values which
+  constitutes a 'long' run}
+}
+\value{
+a list of start and end points of a vector to remove
+heavily weighted heads and tails containing continuous runs
+of a value (likely denoting missing)
+}
+\description{
+Finds the start and end points of consecutive runs of of a
+value in the beginning and end of a vector
+}
+\examples{
+\dontrun{
+ x <- rbinom(100, size=1, prob=0.5)
+ trunc <- cumRuns(x, 1, n_consec=4)
+ trunc_x <- x[trunc$start:trunc$end]
+}
+}
+

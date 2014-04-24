@@ -1,0 +1,40 @@
+\name{getGWLdata}
+\alias{getGWLdata}
+\title{Download B.C. Groundwater level data}
+\usage{
+getGWLdata(emsID, fromDate = NULL, toDate = NULL, hist_avg = TRUE,
+  save = TRUE, data.dir)
+}
+\arguments{
+  \item{emsID}{The EMS ID of the well}
+
+  \item{fromDate}{desired start date of time series, as a
+  date object or character string in the form "YYYY-MM-DD"}
+
+  \item{toDate}{desired end date of time series, as a date
+  object or character string in the form "YYYY-MM-DD".
+  Default today's date}
+
+  \item{hist_avg}{Do you want the historical averages?
+  (logical)}
+
+  \item{save}{Do you want to save the time series as a csv
+  (logical)}
+
+  \item{data.dir}{The directory you want to save in}
+}
+\value{
+if save, nothing is returned (but the file is saved in the
+directory specified).  If save=FALSE, the well data is
+returned.
+}
+\description{
+Download time series of groundwater level measurements from
+a B.C. groundwater observation well.
+}
+\examples{
+\dontrun{
+
+}
+}
+

@@ -1,13 +1,16 @@
+#' Get full time series with missing values interpolated  
+#'
+#' Takes a dataframe with monthly values and creates a full time series, interpolating
+#' missing values.
+#' @param df A monthly dataframe created by `monthlyValues`. Must minimally include 
+#'        fields `EMS_ID`, `Well_Num` `Date`, 'med_GWL`
+#' @export
+#' @return A full monthly time series with interpolated missing values, 
+#'         retaining all of the columns in the original data frame.
+#' @examples \dontrun{
+#'
+#'}
 makeWellTS <- function(df) {
-  ##############################################################################
-  ## Get full time series with missing values interpolated  
-  ## df: a monthly dataframe created by getWellData() with monthlyOut=TRUE, or 
-  ##     an annual df by summarizing monthly by year
-  ##############################################################################
-  
-  require(zoo)
-  require(lubridate)
-  require(dplyr)
   
   well <- df[1,"EMS_ID"]
   

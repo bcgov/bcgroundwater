@@ -1,14 +1,23 @@
+#' Find consecuctive runs of a value in extremes of a vector
+#'
+#' Finds the start and end points of consecutive runs of of a value in the 
+#' beginning and end of a vector 
+#' @param  x the vector
+#' @param  val the value for which to find consecutive runs
+#' @param  head (proportion between 0 and 1, default = 0.2) the beginning portion of 
+#'         the vector in which to look for consecutive missing values
+#' @param  tail (proportion between 0 and 1, default = 0.8) the end portion of 
+#'         the vector in which to look for consecutive missing values
+#' @param  n_consec the number of consecutive values which constitutes a 'long' run
+#' @export
+#' @return a list of start and end points of a vector to remove heavily weighted
+#'         heads and tails containing continuous runs of a value (likely denoting missing)
+#' @examples \dontrun{
+#'  x <- rbinom(100, size=1, prob=0.5)
+#'  trunc <- cumRuns(x, 1, n_consec=4)
+#'  trunc_x <- x[trunc$start:trunc$end]
+#'}
 cumRuns <- function(x, val, head=0.2, tail=0.8, n_consec)  {
-  # Return a list of start and end points of a vector to remove heavily weighted
-  # heads and tails containing continuous runs of a value (likely denoting misssing)
-  # x: the vector
-  # val: the value fo which to find consecutive runs
-  # head (proportion between 0 and 1, default = 0.2): the beginning portion of 
-  #       the vector in which to look for consecutive missing values
-  # tail (proportion between 0 and 1, default = 0.8): the end portion of 
-  #       the vector in which to look for consecutive missing values
-  # n_consec: the number of consecutive values which constitutes a 'long' run
-  
   runs <- unclass(rle(x))
   runs$end <- cumsum(runs$lengths)
   runs$beginning <- runs$end - runs$lengths

@@ -1,22 +1,22 @@
-utm_dd <- function(zone=NULL, easting=NULL, northing=NULL, datum="NAD83"
-                   , data=NULL, key=NULL) {
-  
-  ## Convert zone+utm pairs to lat/long. Can take either a single zone + utm,
-  ## or a data frame with many.  Allows for datasets with different zones and 
-  ## datum for each utm.
-  #
-  # Depends: rgdal, plyr
-  #
-  # zone: a number, or column name in 'data'
-  # easting: a number, or column name in 'data'
-  # northing: a number, or column name in 'data'
-  # data: (optional) a data frame with zone + utms
-  # key: Name of column 'data' that contains a unique identifier for each row
-  # datum: string or column name in 'data'. Default 'NAD83'
-  #
-  # Returns: either a vector of length 2 with longitude  and latitude
-  #          respectively, or a dataframe with the 'key' column and longitude
-  #          and latitude.
+#' Convert zone+utm pairs to lat/long.
+#'
+#' Convert zone+utm pairs to lat/long. Can take either a single zone + utm,
+#' or a data frame with many.  Allows for datasets with different zones and 
+#' datum for each utm.
+#' @param zone integer, or column name in 'data'
+#' @param  easting integer, or column name in 'data'
+#' @param  northing integer, or column name in 'data'
+#' @param  datum string or column name in 'data'. Default 'NAD83'
+#' @param  data (optional) a data frame with zone + utms
+#' @param  key Name of column in 'data' that contains a unique identifier for each row
+#' @export
+#' @return either a vector of length 2 with longitude  and latitude
+#'        respectively, or a dataframe with the 'key' column and longitude
+#'        and latitude.
+#' @examples \dontrun{
+#'
+#'}
+utm_dd <- function(zone=NULL, easting=NULL, northing=NULL, datum="NAD83", data=NULL, key=NULL) {
 
   get_dd <- function(d) {
     # requires a one-row dataframe with zone, easting, northing, datum (in that order)
@@ -53,8 +53,9 @@ utm_dd <- function(zone=NULL, easting=NULL, northing=NULL, datum="NAD83"
     
     utms <- na.omit(utms)
     
-    ## TODO: See about using this with dplyr
-    longlat <- plyr::ddply(.data=utms,.variables=1, .fun= function(x) get_dd(x[2:5]))
+    longlat <- utms %.%
+      do(function(x) get_dd(x[2:5]))
+    
     names(longlat)[2:3] <- c("Longitude","Latitude")
     
     return(longlat)    

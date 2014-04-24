@@ -1,9 +1,16 @@
 Package: bcgroundwater
-Type: Package
-Title: What the package does (short line)
-Version: 1.0
+Title: Analyse B.C. groundwater level data
+Version: 0.1
 Date: 2014-04-22
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Author: Andy Teucher <andy.teucher@gmail.com>
+Maintainer: Andy Teucher <andy.teucher@gmail.com>
+Description: Set of functions for downloading, analysing, and visualising
+    groundwater level data from the BC Ministry of Environment groundwater
+    observation well network.
+License: None yet
+Imports:
+    dplyr,
+    RCurl,
+    lubridate,
+    zoo,
+    rgdal
