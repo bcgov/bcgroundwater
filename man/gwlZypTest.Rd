@@ -1,0 +1,33 @@
+\name{gwlZypTest}
+\alias{gwlZypTest}
+\title{<brief desc>}
+\usage{
+gwlZypTest(dataframe, wells = NULL, col, method = "both")
+}
+\arguments{
+  \item{dataframe}{dataframe containing minimally: EMS_ID,
+  med_GWL}
+
+  \item{wells}{vector of well numbers to test. Default NULL
+  does all in dataframe}
+
+  \item{col}{the name of the column with the GWL values}
+
+  \item{method="both"}{"both" (default), "yuepilon", or
+  "zhang"}
+}
+\value{
+a dataframe of results for all wells evaluated
+}
+\description{
+Uses the zyp package to calculate Mann-Kendall trend test
+on pre-whitened data (to remove autocorrelation) for many
+wells, using one or both of two Pre-whitening methods, see
+zyp documentation
+}
+\examples{
+\dontrun{
+
+}
+}
+
