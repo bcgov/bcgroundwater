@@ -3,12 +3,12 @@
 \alias{bcgroundwater}
 \docType{package}
 \title{
-What the package does (short line)
-~~ package title ~~
+Work with B.C. groundwater level data
 }
 \description{
-More about what it does (maybe more than one line)
-~~ A concise (1-5 lines) description of the package ~~
+Set of functions for downloading, analysing, and visualising
+groundwater level data from the BC Ministry of Environment groundwater
+observation well network.
 }
 \details{
 \tabular{ll}{
@@ -16,26 +16,17 @@ Package: \tab bcgroundwater\cr
 Type: \tab Package\cr
 Version: \tab 1.0\cr
 Date: \tab 2014-04-22\cr
-License: \tab What license is it under?\cr
+License: \tab None Yet\cr
 }
-~~ An overview of how to use the package, including the most important functions ~~
+
 }
 \author{
-Who wrote it
-
-Maintainer: Who to complain to <yourfault@somewhere.net>
-~~ The author and/or maintainer of the package ~~
+Andy Teucher <andy.teucher@gov.bc.ca>
 }
 \references{
-~~ Literature or other references for background information ~~
 }
-~~ Optionally other standard keywords, one per line, from file KEYWORDS in the R documentation ~~
-~~ directory ~~
 \keyword{ package }
 \seealso{
-~~ Optional links to other man pages, e.g. ~~
-~~ \code{\link[<pkg>:<pkg>-package]{<pkg>}} ~~
 }
 \examples{
-~~ simple examples of the most important functions ~~
 }

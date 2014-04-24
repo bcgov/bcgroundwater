@@ -1,4 +1,4 @@
-#'<brief desc>
+#' Perform Mann-Kendall trend test on many wells
 #'
 #' Uses the zyp package to calculate Mann-Kendall trend test on pre-whitened
 #' data (to remove autocorrelation) for many wells, using one or both of two 

@@ -1,19 +1,29 @@
-gwlMonthlyPlot <- function(dataframe, splines=TRUE, last12=TRUE, save=FALSE
-                           , path="./", opts=NULL) {
-  require(plyr)
-  require(lubridate)
-  require(ggplot2)
+#' Create a graph of historical monthly water level deviations
+#'
+#' Create a graph of historical median monthly water level deviations from yearly 
+#' average with 5th and 95th percentiles
+#' @param  dataframe dataframe containing 'Well_Num', 'Date', 'dev_med_GWL'
+#' @param  splines logical: smooth the line using splines?
+#' @param  last12 logical: plot the last 12 monthly readings as points?
+#' @param  save logical: save as a pdf?
+#' @param  path path to folder in which to save if save=TRUE
+#' @param  opts other options passed on to ggplot2
+#' @export
+#' @return A ggplot object
+#' @examples \dontrun{
+#'
+#'}
+gwlMonthlyPlot <- function(dataframe, splines=TRUE, last12=TRUE, save=FALSE, path="./", opts=NULL) {
   
   wellNum <- dataframe$Well_Num[1]
   
-  data <- ddply(dataframe
-                , .(month=month(Date, label=TRUE))
-                , summarize
-                , dev_med = mean(dev_med_GWL, na.rm=TRUE)
-                , dev_Q5 = quantile(dev_med_GWL, prob=0.05
-                                    , na.rm=TRUE)
-                , dev_Q95 = quantile(dev_med_GWL, prob=0.95
-                                     , na.rm=TRUE))
+  data <- dataframe %.%
+    group_by(month=month(Date, label=TRUE)) %.%
+    summarize(dev_med = mean(dev_med_GWL, na.rm=TRUE)
+              , dev_Q5 = quantile(dev_med_GWL, prob=0.05
+                                  , na.rm=TRUE)
+              , dev_Q95 = quantile(dev_med_GWL, prob=0.95
+                                   , na.rm=TRUE))
   
   data.last.12 <- tail(dataframe[,c("Date","dev_med_GWL")],12)
   row.names(data.last.12) <- 1:12

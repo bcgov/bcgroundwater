@@ -1,6 +1,7 @@
 #' Replace characters with LaTeX compatible characters/code
 #'
-#'<full description>
+#' Replaces or escapes characters (\,#,$,%,&,_,^,~) that can't be used 
+#' directly in LaTeX. Does not deal with { and }
 #' @param x String containing invalid LaTeX characters
 #' @export
 #' @return String with LaTeX compatbible characters

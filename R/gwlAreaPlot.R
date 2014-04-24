@@ -1,23 +1,26 @@
-gwlAreaPlot <- function (dataframe, trend, intercept, state, sig, change 
-                         , showInterpolated=FALSE, save=FALSE
-                         , path="./", mkperiod="monthly", opts=NULL)
-{
-  # Creates area plot of gw levels with Mann-Kendall Trend line plotted
-  
-  # dataframe: a dataframe with well level monthly time series and the following 
-  #            columns: Date, med_GWL, nReadings
-  # trend: (numeric) trend in m/month
-  # intercept: (numeric) intercept in m
-  # state: Trend classification (stable, declining, increasing)
-  # sig: (numeric)significance of trend test
-  # change: (numeric) total change in water level in m. Only printed if smooth=TRUE
-  # showInterpolated: (logical) show the points where missing values in the 
-  #             time series were interpolated
-  # mkperiod: the period (monthly or annual) the m-k test was performed on
-  
-  require(grid)
-  require(ggplot2)
-  require(scales)
+#' Creates an area plot of groundwater levels with trend line
+#'
+#' An area plot (hydrograph) of groundwater levels, with trend line of a 
+#' given slope and intercept, optionally with interpolated values shown.
+#' @param  dataframe a dataframe with well level monthly time series and the 
+#'         following columns: Date, med_GWL, nReadings
+#' @param  trend (numeric) trend in m/month
+#' @param  intercept (numeric) intercept in m
+#' @param  state Trend classification (stable, declining, increasing)
+#' @param  sig (numeric) significance of trend test
+#' @param  showInterpolated (logical) show the points where missing values in the 
+#'         time series were interpolated
+#' @param  save Save the graph to file?
+#' @param  path Where to save the graph if save=TRUE
+#' @param  mkperiod the period (monthly or annual) the Mann-Kendall test was 
+#'         performed on
+#' @param  opts other options to pass to ggplot2
+#' @export
+#' @return A ggplot2 object
+#' @examples \dontrun{
+#'
+#'}
+gwlAreaPlot <- function(dataframe, trend, intercept, state, sig, showInterpolated=FALSE, save=FALSE, path="./", mkperiod="monthly", opts=NULL) {
   
   if (showInterpolated) {
     df <- dataframe
@@ -28,9 +31,6 @@ gwlAreaPlot <- function (dataframe, trend, intercept, state, sig, change
   } else {
     df <- dataframe[dataframe$nReadings > 0,]
   }
-  
-  smooth <- FALSE # Did have as a parameter, but building legend was complicated 
-  # and I don't think it's necessary anyway
   
   minDate <- min(as.Date(df$Date))
   maxDate <- max(as.Date(df$Date))
@@ -49,16 +49,6 @@ gwlAreaPlot <- function (dataframe, trend, intercept, state, sig, change
                                  , scientific=FALSE),"m/year")
   
   trendprint <- paste0(trendpre, trendprintval)
-  
-  #Don't print change unless smooth (because change derived from smooth)
-  if (smooth) {
-    changepre <- ifelse(change > 0
-                        , "        Total change in water level: +"
-                        , "        Total change in water level: ")
-    changetxt <- paste0(changepre, format(change, digits=2, nsmall=1), "m")
-  } else {
-    changetxt <- NULL
-  }
   
   int.well <- intercept + slope*as.numeric(minDate)
   
@@ -80,8 +70,7 @@ gwlAreaPlot <- function (dataframe, trend, intercept, state, sig, change
              , label=paste0(trendprint, "        Significance: "
                             , format(sig, digits=2, nsmall=3
                                      , scientific=3)
-                            , "        State: ", state
-                            , changetxt)) + 
+                            , "        State: ", state)) + 
     labs(title="Groundwater levels and long-term trend", x="Date"
          , y="Depth below ground (m)") + 
     theme(panel.background=element_rect(fill="white")
@@ -109,11 +98,6 @@ gwlAreaPlot <- function (dataframe, trend, intercept, state, sig, change
     intline <- NULL
     intshape <- NULL
     intlabel <- NULL
-  }
-  
-  if (smooth) {
-    plot.area <- plot.area + geom_smooth(aes(y=med_GWL, colour='Smooth Trend')
-                                         , method="loess")
   }
   
   plot.area <- plot.area + 

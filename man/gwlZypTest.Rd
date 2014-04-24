@@ -1,6 +1,6 @@
 \name{gwlZypTest}
 \alias{gwlZypTest}
-\title{<brief desc>}
+\title{Perform Mann-Kendall trend test on many wells}
 \usage{
 gwlZypTest(dataframe, wells = NULL, col, method = "both")
 }
@@ -13,8 +13,7 @@ gwlZypTest(dataframe, wells = NULL, col, method = "both")
 
   \item{col}{the name of the column with the GWL values}
 
-  \item{method="both"}{"both" (default), "yuepilon", or
-  "zhang"}
+  \item{method}{"both" (default), "yuepilon", or "zhang"}
 }
 \value{
 a dataframe of results for all wells evaluated

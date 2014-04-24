@@ -11,7 +11,8 @@ knitr_latex_char(x)
 String with LaTeX compatbible characters
 }
 \description{
-<full description>
+Replaces or escapes characters (\,#,$,%,&,_,^,~) that can't
+be used directly in LaTeX. Does not deal with { and }
 }
 \examples{
 \dontrun{
