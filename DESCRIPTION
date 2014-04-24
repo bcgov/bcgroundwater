@@ -13,4 +13,5 @@ Imports:
     RCurl,
     lubridate,
     zoo,
-    rgdal
+    rgdal,
+    zyp

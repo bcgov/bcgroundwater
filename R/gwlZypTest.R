@@ -6,7 +6,7 @@
 #' @param dataframe dataframe containing minimally: EMS_ID, med_GWL
 #' @param  wells vector of well numbers to test. Default NULL does all in dataframe
 #' @param  col the name of the column with the GWL values
-#' @param  method="both" "both" (default), "yuepilon", or "zhang"
+#' @param  method "both" (default), "yuepilon", or "zhang"
 #' @export
 #' @return a dataframe of results for all wells evaluated
 #' @examples \dontrun{

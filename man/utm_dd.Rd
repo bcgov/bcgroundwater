@@ -22,6 +22,8 @@ utm_dd(zone = NULL, easting = NULL, northing = NULL, datum = "NAD83",
 }
 \value{
 either a vector of length 2 with longitude and latitude
+respectively, or a dataframe with the 'key' column and
+longitude and latitude.
 }
 \description{
 Convert zone+utm pairs to lat/long. Can take either a

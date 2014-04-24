@@ -15,7 +15,7 @@ string
 }
 \examples{
 \dontrun{
-
+simpleCap(c("HELLO MY NAME IS", "the quick brown fox"))
 }
 }
 

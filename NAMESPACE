@@ -1,6 +1,8 @@
 export(cumRuns)
 export(getGWLdata)
 export(getLastRow)
+export(gwlZypTest)
+export(knitr_latex_char)
 export(makeWellTS)
 export(monthlyValues)
 export(readGWLdata)
