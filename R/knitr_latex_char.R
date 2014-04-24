@@ -1,3 +1,12 @@
+#' Replace characters with LaTeX compatible characters/code
+#'
+#'<full description>
+#' @param x String containing invalid LaTeX characters
+#' @export
+#' @return String with LaTeX compatbible characters
+#' @examples \dontrun{
+#'
+#'}
 knitr_latex_char <- function(x) {
   y <- gsub("\\\\", "\\\\textbackslash{}", x) # backslash has to be first!
   y <- gsub("([#$%&_])", "\\\\\\1", y) # Doesdn't deal with { or } because of function{}
