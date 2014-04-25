@@ -3,7 +3,8 @@
 #' Convert zone+utm pairs to lat/long. Can take either a single zone + utm,
 #' or a data frame with many.  Allows for datasets with different zones and 
 #' datum for each utm.
-#' @import rgdal dplyr
+#' @import rgdal sp dplyr
+#' 
 #' @param zone integer, or column name in 'data'
 #' @param  easting integer, or column name in 'data'
 #' @param  northing integer, or column name in 'data'
@@ -20,11 +21,10 @@
 utm_dd <- function(zone=NULL, easting=NULL, northing=NULL, datum="NAD83", data=NULL, key=NULL) {
 
   get_dd <- function(d) {
+    # TODO Vectorise by grouping input by datum and zone
     # requires a one-row dataframe with zone, easting, northing, datum (in that order)
     
-    utm <- SpatialPoints(d[2:3]
-                         , proj4string=CRS(paste0("+proj=utm +datum=", d[4]
-                                                  , " +zone=", d[1])))
+    utm <- SpatialPoints(d[2:3], proj4string=CRS(paste0("+proj=utm +datum=", d[4], " +zone=", d[1])))
     sp <- spTransform(utm, CRS("+proj=longlat"))  
     coordinates(sp)
     
@@ -54,12 +54,17 @@ utm_dd <- function(zone=NULL, easting=NULL, northing=NULL, datum="NAD83", data=N
     
     utms <- na.omit(utms)
     
-    longlat <- utms %.%
-      do(function(x) get_dd(x[2:5]))
+    longlat <- utms %>%
+      select(c(2:5)) %>%
+      rowwise() %>%
+      do(data.frame(get_dd(.))) %>%
+      ungroup
     
-    names(longlat)[2:3] <- c("Longitude","Latitude")
+    longlat <- cbind(utms[,key],longlat)
     
-    return(longlat)    
+    names(longlat) <- c(key,"Longitude","Latitude")
+    
+    return(longlat)
   }
   
 }

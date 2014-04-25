@@ -14,6 +14,7 @@ Imports:
     lubridate,
     zoo,
     rgdal,
+    sp,
     zyp,
     ggplot2,
     grid,
