@@ -2,6 +2,9 @@
 #'
 #' Create a graph of historical median monthly water level deviations from yearly 
 #' average with 5th and 95th percentiles
+#' @import dplyr ggplot2
+#' @importFrom lubridate month
+#' 
 #' @param  dataframe dataframe containing 'Well_Num', 'Date', 'dev_med_GWL'
 #' @param  splines logical: smooth the line using splines?
 #' @param  last12 logical: plot the last 12 monthly readings as points?

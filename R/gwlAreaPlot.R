@@ -2,6 +2,7 @@
 #'
 #' An area plot (hydrograph) of groundwater levels, with trend line of a 
 #' given slope and intercept, optionally with interpolated values shown.
+#' @import grid ggplot2 scales
 #' @param  dataframe a dataframe with well level monthly time series and the 
 #'         following columns: Date, med_GWL, nReadings
 #' @param  trend (numeric) trend in m/month

@@ -3,6 +3,7 @@
 #' Convert zone+utm pairs to lat/long. Can take either a single zone + utm,
 #' or a data frame with many.  Allows for datasets with different zones and 
 #' datum for each utm.
+#' @import rgdal dplyr
 #' @param zone integer, or column name in 'data'
 #' @param  easting integer, or column name in 'data'
 #' @param  northing integer, or column name in 'data'

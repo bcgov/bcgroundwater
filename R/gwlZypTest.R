@@ -3,6 +3,7 @@
 #' Uses the zyp package to calculate Mann-Kendall trend test on pre-whitened
 #' data (to remove autocorrelation) for many wells, using one or both of two 
 #' Pre-whitening methods, see zyp documentation
+#' @import zyp
 #' @param dataframe dataframe containing minimally: EMS_ID, med_GWL
 #' @param  wells vector of well numbers to test. Default NULL does all in dataframe
 #' @param  col the name of the column with the GWL values

@@ -3,6 +3,12 @@
 #' Download time series of groundwater level measurements from a B.C. groundwater
 #' observation well.
 #' 
+#' @import RCurl
+#' @importFrom lubridate today
+#' @importFrom lubridate year
+#' @importFrom lubridate month
+#' @importFrom lubridate mday
+#' 
 #' @param emsID The EMS ID of the well
 #' @param  fromDate desired start date of time series, as a date object or character 
 #'         string in the form "YYYY-MM-DD"

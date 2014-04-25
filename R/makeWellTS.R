@@ -2,6 +2,9 @@
 #'
 #' Takes a dataframe with monthly values and creates a full time series, interpolating
 #' missing values.
+#' @import zoo dplyr
+#' @importFrom lubridate year
+#' @importFrom lubridate month
 #' @param df A monthly dataframe created by `monthlyValues`. Must minimally include 
 #'        fields `EMS_ID`, `Well_Num` `Date`, 'med_GWL`
 #' @export
@@ -31,7 +34,7 @@ makeWellTS <- function(df) {
   # http://stackoverflow.com/questions/4964255/interpolate-
   # missing-values-in-a-time-series-with-a-seasonal-cycle
   # Answer by Rob Hyndman
-  x <- ts(well.ts$med_GWL,f=12)
+  x <- ts(well.ts$med_GWL,frequency=12)
   
   #Check for convergence fitting the time series model
   struct <- suppressWarnings(StructTS(x))
@@ -39,7 +42,6 @@ makeWellTS <- function(df) {
     print(paste0("Convergence code for well ", well, " returned ", struct$code
                  , ": ", struct$message))
   }
-  
   
   well.ts$fit <- as.vector(ts(rowSums(tsSmooth(struct)[,-2])))
   # Fill in missing values
