@@ -4,10 +4,7 @@
 #' observation well.
 #' 
 #' @import RCurl
-#' @importFrom lubridate today
-#' @importFrom lubridate year
-#' @importFrom lubridate month
-#' @importFrom lubridate mday
+#' @importFrom lubridate today year month mday
 #' 
 #' @param emsID The EMS ID of the well
 #' @param  fromDate desired start date of time series, as a date object or character 

@@ -3,8 +3,8 @@
 #' Takes a dataframe with monthly values and creates a full time series, interpolating
 #' missing values.
 #' @import zoo dplyr
-#' @importFrom lubridate year
-#' @importFrom lubridate month
+#' @importFrom lubridate year month
+#' 
 #' @param df A monthly dataframe created by `monthlyValues`. Must minimally include 
 #'        fields `EMS_ID`, `Well_Num` `Date`, 'med_GWL`
 #' @export

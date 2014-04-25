@@ -4,10 +4,8 @@
 #' month that may be better assigned to a different month if they are at the 
 #' border.  Does not estimate values for months where there were 0 observations.
 #' @import dplyr
-#' @importFrom lubridate year
-#' @importFrom lubridate month
-#' @importFrom lubridate round_date
-#' @importFrom lubridate floor_date
+#' @importFrom lubridate year month round_date floor_date
+#' 
 #' @param df data frame with columns EMS_ID, Well_Num, Date, GWL
 #' @export
 #' @return a data frame with one value per month. Does not estimate values 
