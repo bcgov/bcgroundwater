@@ -46,7 +46,7 @@ makeWellTS <- function(df) {
   well.ts$fit <- as.vector(ts(rowSums(tsSmooth(struct)[,-2])))
   # Fill in missing values
   
-  well.ts[is.na(well.ts$EMS_ID),] <- well.ts[is.na(well.ts$EMS_ID),] %.%
+  well.ts[is.na(well.ts$EMS_ID),] <- well.ts[is.na(well.ts$EMS_ID),] %>%
     mutate(EMS_ID=well,
            Well_Num=df[1,"Well_Num"],
            Date=as.POSIXct(yearmonth),

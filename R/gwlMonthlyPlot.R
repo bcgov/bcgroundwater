@@ -20,8 +20,8 @@ gwlMonthlyPlot <- function(dataframe, splines=TRUE, last12=TRUE, save=FALSE, pat
   
   wellNum <- dataframe$Well_Num[1]
   
-  data <- dataframe %.%
-    group_by(month=month(Date, label=TRUE)) %.%
+  data <- dataframe %>%
+    group_by(month=month(Date, label=TRUE)) %>%
     summarize(dev_med = mean(dev_med_GWL, na.rm=TRUE)
               , dev_Q5 = quantile(dev_med_GWL, prob=0.05
                                   , na.rm=TRUE)
