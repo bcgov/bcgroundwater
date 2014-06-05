@@ -11,6 +11,8 @@ License: None yet
 Imports:
     dplyr,
     RCurl,
+    rgdal,
+    sp,
     lubridate,
     zoo,
     zyp,
