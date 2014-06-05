@@ -22,7 +22,7 @@ cumRuns <- function(x, val, head=0.2, tail=0.8, n_consec)  {
   runs$end <- cumsum(runs$lengths)
   runs$beginning <- runs$end - runs$lengths
   runs <- as.data.frame(runs, stringsAsFactors=FALSE)
-  runs <- runs[runs$values == val & runs$length >= n_consec,]
+  runs <- runs[runs$values == val & runs$lengths >= n_consec,]
   
   # Find where runs occur in head
   head_remove <- suppressWarnings(
