@@ -13,8 +13,6 @@ Imports:
     RCurl,
     lubridate,
     zoo,
-    rgdal,
-    sp,
     zyp,
     ggplot2,
     grid,
