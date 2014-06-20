@@ -6,7 +6,7 @@
 #' @importFrom lubridate year month
 #' 
 #' @param df A monthly dataframe created by `monthlyValues`. Must minimally include 
-#'        fields `EMS_ID`, `Well_Num` `Date`, 'med_GWL`
+#'        fields `EMS_ID`, `Well_Num` `Date`, 'med_GWL`, `nReadings`
 #' @export
 #' @return A full monthly time series with interpolated missing values, 
 #'         retaining all of the columns in the original data frame.
@@ -46,14 +46,18 @@ makeWellTS <- function(df) {
   well.ts$fit <- as.vector(ts(rowSums(tsSmooth(struct)[,-2])))
   # Fill in missing values
   
-  well.ts[is.na(well.ts$EMS_ID),] <- well.ts[is.na(well.ts$EMS_ID),] %>%
-    mutate(EMS_ID=well,
-           Well_Num=df[1,"Well_Num"],
-           Date=as.POSIXct(yearmonth),
-           Year=year(yearmonth),
-           Month=month(yearmonth),
-           med_GWL=fit,
-           nReadings=0)
+  well.ts <- mutate(well.ts, 
+                  Date=as.POSIXct(yearmonth),
+                  Year=year(yearmonth),
+                  Month=month(yearmonth),
+                  med_GWL = ifelse(is.na(med_GWL), fit, med_GWL),
+                  nReadings = ifelse(is.na(nReadings), 0, nReadings))
+  
+  for (col in c("EMS_ID", "Well_Num")) {
+    well.ts[,col] <- na.locf(well.ts[,col])
+  }
+  
+  
   
   return(well.ts)
 }
