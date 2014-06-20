@@ -15,28 +15,24 @@
 #'}
 monthlyValues <- function(df) {
   
-  if (!is.data.frame(df)) {
-    stop("df must be a dataframe")
-  } else {
-    well <- df
-  }
+  if (!is.data.frame(df)) stop("df must be a dataframe")
    
-    monthlywell <- well %>%
-      group_by(EMS_ID, Well_Num, Year=year(Date)
-               , Month = month(Date)) %>%
-      mutate(length_x = n()
-             , Date = if (n() < 5) {
-               lubridate::round_date(Date, "month")
-             } else {
-               lubridate::floor_date(Date, "month")
-             }
-      ) %>%
-      group_by(Date, add=TRUE) %>%
-      summarize(med_GWL = median(GWL)
-                , nReadings = length(GWL)) %>%
-      ungroup() %>% group_by(EMS_ID, Well_Num, Year) %>%
-      mutate(dev_med_GWL = med_GWL-mean(med_GWL)) %>%
-      ungroup()
+  monthlywell <- df %>%
+    group_by(EMS_ID, Well_Num, Year=year(Date)
+             , Month = month(Date)) %>%
+    mutate(Date = if (n() < 5) {
+      lubridate::round_date(Date, "month")
+    } else {
+      lubridate::floor_date(Date, "month")
+    }
+    ) %>% ungroup() %>% 
+    group_by(EMS_ID, Well_Num, Date) %>% 
+    summarize(med_GWL = median(GWL), 
+              nReadings = n()) %>% 
+    mutate(Year = year(Date), Month = month(Date)) %>%
+    ungroup() %>% group_by(EMS_ID, Well_Num, Year) %>%
+    mutate(dev_med_GWL = med_GWL-mean(med_GWL)) %>%
+    ungroup()
 
 #   TODO: May want to make these values flipped in sign, then would have to 
 #   remove the scale_y_reverse in gwlMonthlyPlot 
