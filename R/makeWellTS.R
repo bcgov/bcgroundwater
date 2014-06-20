@@ -47,7 +47,7 @@ makeWellTS <- function(df) {
   # Fill in missing values
   
   well.ts <- mutate(well.ts, 
-                  Date=as.POSIXct(yearmonth),
+                  Date=as.Date(yearmonth),
                   Year=year(yearmonth),
                   Month=month(yearmonth),
                   med_GWL = ifelse(is.na(med_GWL), fit, med_GWL),
