@@ -18,6 +18,8 @@
 #'  trunc_x <- x[trunc$start:trunc$end]
 #'}
 cumRuns <- function(x, val, head=0.2, tail=0.8, n_consec)  {
+  
+  # The function body
   runs <- unclass(rle(x))
   runs$end <- cumsum(runs$lengths)
   runs$beginning <- runs$end - runs$lengths
@@ -27,15 +29,23 @@ cumRuns <- function(x, val, head=0.2, tail=0.8, n_consec)  {
   # Find where runs occur in head
   head_remove <- suppressWarnings(
     max(runs$end[length(x) * head - runs$beginning >= n_consec])
-    )
+  )
   if (is.infinite(head_remove)) head_remove <- 1
   if (x[head_remove] == val) head_remove <- 2
   
   # Find where runs occur in tail:
   tail_remove <- suppressWarnings(
     min(runs$beginning[runs$end - length(x) * tail >= n_consec])
-    )
+  )
+  
   if (is.infinite(tail_remove)) tail_remove <- length(x)
   
-  list(start=head_remove, end=tail_remove)
+  # The recursive part
+  if (head_remove == 1 && tail_remove == nrow(x)) {
+    return(x[head_remove:tail_remove])
+    #return(list(start=head_remove, end=tail_remove))
+  } else {
+    cumRuns(x[head_remove:tail_remove], val, head, tail, n_consec)
+  }
+
 }
