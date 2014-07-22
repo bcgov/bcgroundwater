@@ -31,7 +31,7 @@ cumRuns <- function(x, val, head=0.2, tail=0.8, n_consec)  {
     max(runs$end[length(x) * head - runs$beginning >= n_consec])
   )
   if (is.infinite(head_remove)) head_remove <- 1
-  if (x[head_remove] == val) head_remove <- 2
+  if (x[head_remove] == val) head_remove <- head_remove + 1
   
   # Find where runs occur in tail:
   tail_remove <- suppressWarnings(
@@ -41,7 +41,7 @@ cumRuns <- function(x, val, head=0.2, tail=0.8, n_consec)  {
   if (is.infinite(tail_remove)) tail_remove <- length(x)
   
   # The recursive part
-  if (head_remove == 1 && tail_remove == nrow(x)) {
+  if (head_remove == 1 && tail_remove == length(x)) {
     return(x[head_remove:tail_remove])
     #return(list(start=head_remove, end=tail_remove))
   } else {
