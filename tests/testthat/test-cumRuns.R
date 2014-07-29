@@ -24,7 +24,7 @@ cumRuns(x, val = 0, n_consec = 5)
 
 # Two sets in head and tail
 set.seed(20)
-x <- rnorm(200)
-x[c(2:8, 10:20, 185:190, 194:199)] <- 0
-cumRuns(x, val = 0, n_consec = 5)
+x <- rnorm(100000)
+x[c(10:20, 2000:2010, 10000:10099,90010:90020,95000:96000)] <- 0
+foo <- cumRuns(x, val = 0, n_consec = 5)
 

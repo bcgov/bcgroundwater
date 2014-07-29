@@ -40,7 +40,7 @@ cumRuns <- function(x, val, head=0.2, tail=0.8, n_consec)  {
   
   if (is.infinite(tail_remove)) tail_remove <- length(x)
   
-  # The recursive part
+  # The recursive part. TODO: iterate head_remove and tail_remove
   if (head_remove == 1 && tail_remove == length(x)) {
     return(x[head_remove:tail_remove])
     #return(list(start=head_remove, end=tail_remove))
