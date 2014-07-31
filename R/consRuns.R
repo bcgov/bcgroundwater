@@ -14,10 +14,10 @@
 #'         heads and tails containing continuous runs of a value (likely denoting missing)
 #' @examples \dontrun{
 #'  x <- rbinom(100, size=1, prob=0.5)
-#'  trunc <- cumRuns(x, 1, n_consec=4)
+#'  trunc <- consRuns(x, 1, n_consec=4)
 #'  trunc_x <- x[trunc$start:trunc$end]
 #'}
-cumRuns <- function(x, val, head=0.2, tail=0.8, n_consec)  {
+consRuns <- function(x, val, head=0.2, tail=0.8, n_consec)  {
   
   # The function body
   runs <- unclass(rle(x))
@@ -45,7 +45,7 @@ cumRuns <- function(x, val, head=0.2, tail=0.8, n_consec)  {
     return(x[head_remove:tail_remove])
     #return(list(start=head_remove, end=tail_remove))
   } else {
-    cumRuns(x[head_remove:tail_remove], val, head, tail, n_consec)
+    consRuns(x[head_remove:tail_remove], val, head, tail, n_consec)
   }
-
+  
 }
