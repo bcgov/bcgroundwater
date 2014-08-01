@@ -13,7 +13,7 @@ cumRuns(x, val = 0, n_consec = 5)
 # Two sets in head
 set.seed(20)
 x <- rnorm(200)
-x[c(2:8, 10:20)] <- 0
+x[c(2:8, 20:30)] <- 0 # check that these would be evaluated in two loops
 cumRuns(x, val = 0, n_consec = 5)
 
 # Two sets in tail
