@@ -49,3 +49,46 @@ consRuns <- function(x, val, head=0.2, tail=0.8, n_consec)  {
   }
   
 }
+
+# http://stackoverflow.com/questions/16480722/recursive-functions-and-global-vs-local-variables
+
+consRuns_r <- function(x, val, head=0.1, tail=0.9, n_consec)  {
+  
+  runs <- unclass(rle(x))
+  runs$end <- cumsum(runs$lengths)
+  runs$beginning <- runs$end - runs$lengths
+  runs <- as.data.frame(runs, stringsAsFactors=FALSE)
+  cons_runs <- runs[runs$values == val & runs$lengths >= n_consec,]
+  
+  repeat {
+    # Find where runs occur in head
+    # NOt working on subsequent iterations because runs not updated, so length 
+    # is of original ... need to keep track of updated length
+    in_head <- cons_runs[sum(runs$lengths) * head - 
+                               cons_runs$beginning >= n_consec,]
+    
+    head_remove <- suppressWarnings(
+      max(in_head$end)
+    )
+    if (is.infinite(head_remove)) head_remove <- 1
+    if (x[head_remove] == val) head_remove <- head_remove + 1
+    
+    # Find where runs occur in tail:
+    in_tail <- cons_runs[cons_runs$end - sum(runs$lengths) * 
+                                     tail >= n_consec,]
+    tail_remove <- suppressWarnings(
+      min(in_tail$begining)
+    )
+    
+    if (is.infinite(tail_remove)) tail_remove <- sum(runs$lengths)
+    
+    if (head_remove == 1 && tail_remove == length(x)) {
+      break
+    }
+    
+    if (head_remove != 1) cons_runs <- cons_runs[-1,]
+    #return(list(start=head_remove, end=tail_remove))
+  }
+  x <- x[head_remove:tail_remove]
+  x
+}
