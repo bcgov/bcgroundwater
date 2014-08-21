@@ -19,34 +19,56 @@
 #'}
 consRuns <- function(x, val, head=0.2, tail=0.8, n_consec)  {
   
-  # The function body
-  runs <- unclass(rle(x))
-  runs$end <- cumsum(runs$lengths)
-  runs$beginning <- runs$end - runs$lengths
-  runs <- as.data.frame(runs, stringsAsFactors=FALSE)
-  runs <- runs[runs$values == val & runs$lengths >= n_consec,]
-  
   # Find where runs occur in head
-  head_remove <- suppressWarnings(
-    max(runs$end[length(x) * head - runs$beginning >= n_consec])
-  )
-  if (is.infinite(head_remove)) head_remove <- 1
-  if (x[head_remove] == val) head_remove <- head_remove + 1
+  remHead <- function(x, val, head, n_consec) {
+    
+    runs <- unclass(rle(x))
+    runs <- as.data.frame(runs, stringsAsFactors=FALSE)
+    runs$end <- cumsum(runs$lengths)
+    runs$beginning <- runs$end - runs$lengths
+    runs <- runs[runs$values == val & runs$lengths >= n_consec,]
+    
+    head_remove <- suppressWarnings(
+      max(runs$end[length(x) * head - runs$beginning >= n_consec])
+    )
+    
+    if (is.infinite(head_remove)) head_remove <- 1
+    if (x[head_remove] == val) head_remove <- head_remove + 1
+    
+    if (head_remove == 1) {
+      return(x[head_remove:length(x)])
+      #return(list(start=head_remove, end=tail_remove))
+    } else {
+      remHead(x[head_remove:length(x)], val, head, n_consec)
+    }
+  }
   
   # Find where runs occur in tail:
-  tail_remove <- suppressWarnings(
-    min(runs$beginning[runs$end - length(x) * tail >= n_consec])
-  )
-  
-  if (is.infinite(tail_remove)) tail_remove <- length(x)
-  
-  # The recursive part. TODO: iterate head_remove and tail_remove
-  if (head_remove == 1 && tail_remove == length(x)) {
-    return(x[head_remove:tail_remove])
-    #return(list(start=head_remove, end=tail_remove))
-  } else {
-    consRuns(x[head_remove:tail_remove], val, head, tail, n_consec)
+  remTail <- function(x, val, tail, n_consec) {
+    
+    runs <- unclass(rle(x))
+    runs$end <- cumsum(runs$lengths)
+    runs$beginning <- runs$end - runs$lengths
+    runs <- as.data.frame(runs, stringsAsFactors=FALSE)
+    runs <- runs[runs$values == val & runs$lengths >= n_consec,]
+    
+    tail_remove <- suppressWarnings(
+      min(runs$beginning[runs$end - length(x) * tail >= n_consec])
+    )
+    
+    if (is.infinite(tail_remove)) tail_remove <- length(x)
+    
+    # The recursive part. TODO: iterate head_remove and tail_remove
+    if (tail_remove == length(x)) {
+      return(x[1:tail_remove])
+    } else {
+      remTail(x[1:tail_remove], val, tail, n_consec)
+    }
   }
+  
+  hd <- remHead(x=x, val=val, head=head, n_consec=n_consec)
+  tl <- remTail(x=x, val=val, tail=tail, n_consec=n_consec)
+  return(list(start = length(x) - length(hd) + 1, end = length(tl)))
   
 }
 
