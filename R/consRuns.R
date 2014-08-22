@@ -21,18 +21,9 @@ consRuns <- function(x, val, head=0.2, tail=0.8, n_consec)  {
   
   x_orig <- x
   
-  # occur function from here:
-  # http://r.789695.n4.nabble.com/matching-a-sequence-in-a-vector-td4389523.html
-  occur <- function(patrn, exmpl)
-  {
-    m <- length(patrn)
-    n <- length(exmpl)
-    candidate <- seq.int(length=n-m+1)
-    for (i in seq.int(length=m)) {
-      candidate <- candidate[patrn[i] == exmpl[candidate + i - 1]]
-    }
-    candidate
-  }
+  counter_env <- new.env()
+  counter_env$head_rem <- 1
+  counter_env$tail_rem <- length(x)
   
   wrap <- function(x, val, head, tail, n_consec) {
     
@@ -45,24 +36,29 @@ consRuns <- function(x, val, head=0.2, tail=0.8, n_consec)  {
     
     # Find where runs occur in head
     head_remove <- suppressWarnings(
-      max(runs$end[length(x) * head - runs$beginning >= n_consec])
+      max(runs$end[runs$beginning + n_consec <= length(x) * head])
     )
-    if (is.infinite(head_remove)) head_remove <- 1
-    if (x[head_remove] == val) head_remove <- head_remove + 1
+    
+    if (is.infinite(head_remove)) head_remove <- 0
     
     # Find where runs occur in tail:
     tail_remove <- suppressWarnings(
-      min(runs$beginning[runs$end - length(x) * tail >= n_consec])
+      min(runs$beginning[runs$end - n_consec >= length(x) * tail])
     )
     
     if (is.infinite(tail_remove)) tail_remove <- length(x)
     
+    head_rem <- get("head_rem", envir = counter_env)
+    assign("head_rem", head_rem + head_remove, envir = counter_env)
+    
+    tail_rem <- get("tail_rem", envir = counter_env)
+    assign("tail_rem", tail_rem - (length(x) - tail_remove), envir = counter_env)
+    
     # The recursive part. TODO: iterate head_remove and tail_remove
-    if (head_remove == 1 && tail_remove == length(x)) {
-      #return(x[head_remove:tail_remove])
-      start <- occur(x[head_remove:tail_remove], x_orig)
-      end <- length(x[head_remove:tail_remove]) + start - 1
-      return(list(start = start, end = end))
+    if (head_remove == 0 && tail_remove == length(x)) {
+      head_rem <- get("head_rem", envir = counter_env)
+      tail_rem <- get("tail_rem", envir = counter_env)
+      return(list(start = head_rem, end = tail_rem))
     } else {
       wrap(x[head_remove:tail_remove], val, head, tail, n_consec)
     }
@@ -72,6 +68,3 @@ consRuns <- function(x, val, head=0.2, tail=0.8, n_consec)  {
   wrap(x, val, head, tail, n_consec)
   
 }
-
-# http://stackoverflow.com/questions/16480722/recursive-functions-and-global-vs-local-variables
-                                                                                                          
