@@ -26,5 +26,5 @@ consRuns(x, val = 0, n_consec = 5)
 set.seed(20)
 x <- rnorm(100000)
 x[c(10:20, 2000:2010, 10000:10099,90010:90020,95000:96000)] <- 0
-foo <- consRuns(x, val = 0, n_consec = 5)
+foo <- consRuns(x, val = 0, n_consec = 5, head = 0.1, tail = 0.9)
 

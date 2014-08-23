@@ -25,7 +25,7 @@ consRuns <- function(x, val, head=0.2, tail=0.8, n_consec)  {
   counter_env$head_rem <- 1
   counter_env$tail_rem <- length(x)
   
-  wrap <- function(x, val, head, tail, n_consec) {
+  inner <- function(x, val, head, tail, n_consec) {
     
     # The function body
     runs <- unclass(rle(x))
@@ -48,23 +48,22 @@ consRuns <- function(x, val, head=0.2, tail=0.8, n_consec)  {
     
     if (is.infinite(tail_remove)) tail_remove <- length(x)
     
-    head_rem <- get("head_rem", envir = counter_env)
-    assign("head_rem", head_rem + head_remove, envir = counter_env)
+    # Get counters from counter_env and update them
+    glob_head_rem <- get("head_rem", envir = counter_env) + head_remove
+    assign("head_rem", glob_head_rem, envir = counter_env)
     
-    tail_rem <- get("tail_rem", envir = counter_env)
-    assign("tail_rem", tail_rem - (length(x) - tail_remove), envir = counter_env)
+    glob_tail_rem <- get("tail_rem", envir = counter_env) - (length(x) - tail_remove)
+    assign("tail_rem", glob_tail_rem, envir = counter_env)
     
-    # The recursive part. TODO: iterate head_remove and tail_remove
+    # The recursive part.
     if (head_remove == 0 && tail_remove == length(x)) {
-      head_rem <- get("head_rem", envir = counter_env)
-      tail_rem <- get("tail_rem", envir = counter_env)
-      return(list(start = head_rem, end = tail_rem))
+      return(list(start = glob_head_rem, end = glob_tail_rem))
     } else {
-      wrap(x[head_remove:tail_remove], val, head, tail, n_consec)
+      inner(x[head_remove:tail_remove], val, head, tail, n_consec)
     }
     
   }
   
-  wrap(x, val, head, tail, n_consec)
+  inner(x, val, head, tail, n_consec)
   
 }
