@@ -22,7 +22,7 @@ consRuns <- function(x, val, head=0.2, tail=0.8, n_consec)  {
   x_orig <- x
   
   counter_env <- new.env()
-  counter_env$head_rem <- 1
+  counter_env$head_rem <- 0
   counter_env$tail_rem <- length(x)
   
   inner <- function(x, val, head, tail, n_consec) {
@@ -57,9 +57,9 @@ consRuns <- function(x, val, head=0.2, tail=0.8, n_consec)  {
     
     # The recursive part.
     if (head_remove == 0 && tail_remove == length(x)) {
-      return(list(start = glob_head_rem, end = glob_tail_rem))
+      return(list(start = glob_head_rem + 1, end = glob_tail_rem))
     } else {
-      inner(x[head_remove:tail_remove], val, head, tail, n_consec)
+      inner(x[(head_remove + 1):tail_remove], val, head, tail, n_consec)
     }
     
   }
