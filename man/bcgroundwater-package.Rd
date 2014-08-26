@@ -14,7 +14,7 @@ observation well network.
 \tabular{ll}{
 Package: \tab bcgroundwater\cr
 Type: \tab Package\cr
-Version: \tab 1.0\cr
+Version: \tab 0.2\cr
 Date: \tab 2014-04-22\cr
 License: \tab None Yet\cr
 }

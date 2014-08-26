@@ -1,6 +1,6 @@
 Package: bcgroundwater
 Title: Analyse B.C. groundwater level data
-Version: 0.1
+Version: 0.2
 Date: 2014-06-23
 Author: Andy Teucher <andy.teucher@gov.bc.ca>
 Maintainer: Andy Teucher <andy.teucher@gov.bc.ca>
