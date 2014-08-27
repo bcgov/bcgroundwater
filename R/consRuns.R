@@ -14,10 +14,10 @@
 #'         heads and tails containing continuous runs of a value (likely denoting missing)
 #' @examples \dontrun{
 #'  x <- rbinom(100, size=1, prob=0.5)
-#'  trunc <- consRuns(x, 1, n_consec=4)
+#'  trunc <- trimConsRuns(x, 1, n_consec=4)
 #'  trunc_x <- x[trunc$start:trunc$end]
 #'}
-consRuns <- function(x, val, head=0.2, tail=0.8, n_consec)  {
+trimConsRuns <- function(x, val, head=0.2, tail=0.8, n_consec)  {
   
   x_orig <- x
   
