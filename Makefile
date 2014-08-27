@@ -7,7 +7,7 @@ check:
 
 build:
 	Rscript -e "library(devtools); build('.', binary=TRUE)"
-	cp ../bcgroundwater_0.2.zip ../bcgroundwater_0.2.zip "I:/SPD/Science Policy & Economics/State of Environment/_dev/packages/"
+	cp ../bcgroundwater_0.2.zip ../bcgroundwater_0.2.tar.gz "I:/SPD/Science Policy & Economics/State of Environment/_dev/packages/"
 
 install:
 	Rscript -e "library(devtools); install('.')"
