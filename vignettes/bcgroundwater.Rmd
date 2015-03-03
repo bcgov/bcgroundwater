@@ -16,7 +16,7 @@ First, download some data for a well into your R session:
 library("bcgroundwater")
 
 data <- getGWLdata("E208036", fromDate = "1989-01-01", 
-                   toDate = "2014-01-01", save = TRUE, data.dir = ".")
+                   toDate = "2014-01-01", save = FALSE)
 ```
 
 Alternatively, you can download to a file, then read it in with `readGWLdata()`;
