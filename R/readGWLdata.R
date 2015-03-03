@@ -10,8 +10,7 @@
 #'}
 readGWLdata <- function(path, emsID) {
   
-
-  if (!file.exists(path)) {
+  if (!inherits(path, "textConnection") && !file.exists(path)) {
     stop(paste0("The file ", path, "does not exist."))
   }
   

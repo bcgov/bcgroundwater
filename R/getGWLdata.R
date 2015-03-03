@@ -18,7 +18,8 @@
 #' @return if save, nothing is returned (but the file is saved in the directory specified). 
 #'         If save=FALSE, the well data is returned.
 #' @examples \dontrun{
-#'
+#'         getGWLdata("1401054", fromDate = "2013-01-01", 
+#'                    toDate = "2014-01-01", save = FALSE)
 #'}
 getGWLdata <- function(emsID, fromDate=NULL, toDate=NULL, hist_avg=TRUE, save=TRUE, data.dir) {
   
@@ -75,7 +76,7 @@ getGWLdata <- function(emsID, fromDate=NULL, toDate=NULL, hist_avg=TRUE, save=TR
       
     } else {
       
-      return(wellChar)
+      readGWLdata(path = textConnection(wellChar), emsID = emsID)
       
     }
   }
