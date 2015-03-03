@@ -1,3 +1,5 @@
+SHELL = C:\windows\SYSTEM32\cmd.exe
+
 docs:
 	rm NAMESPACE
 	Rscript -e "library(devtools); library(methods); document('.'); check_doc('.')"
