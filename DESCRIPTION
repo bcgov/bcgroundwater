@@ -7,7 +7,9 @@ Maintainer: Andy Teucher <andy.teucher@gov.bc.ca>
 Description: Set of functions for downloading, analysing, and visualising
     groundwater level data from the BC Ministry of Environment groundwater
     observation well network.
-License: Default
+License: file LICENSE
+Depends:
+    R (>= 3.1.2)
 Imports:
     dplyr,
     RCurl,
