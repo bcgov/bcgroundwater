@@ -46,11 +46,11 @@ gwlMonthlyPlot <- function(dataframe, splines=TRUE, last12=TRUE, save=FALSE, pat
     geom_ribbon(aes(ymin=dev_Q5, ymax=dev_Q95, fill="#1E90FF"), alpha=0.2) + 
     geom_line(aes(colour="#1E90FF", alpha=0.4), size=1) + 
     labs(title="Monthly groundwater level deviation", x="Month"
-         , y ="Mean difference from yearly average GWL (m)") + 
+         , y ="Difference from yearly average GWL (m)") + 
     theme(panel.background=element_rect(fill="white")
           , line=element_line(colour="grey50")
           , text=element_text(colour="grey50")
-          , legend.position="top", legend.box='vertical'
+          , legend.position="top", legend.box="vertical"
           , legend.box.just = "left"
           # , axis.text.x=element_text(angle=45) # May need if using full month names
           ) + 
@@ -59,8 +59,8 @@ gwlMonthlyPlot <- function(dataframe, splines=TRUE, last12=TRUE, save=FALSE, pat
     scale_fill_identity(name = '', guide = 'legend'
                         , labels = c('Range of 90% of water levels')) + 
     scale_colour_identity(name=''
-                        , labels=c("Deviation from yearly average")
-                        , guide='legend') + 
+                        , labels=c("Mean deviation from yearly average")
+                        , guide="legend") + 
     scale_alpha_identity(name='', labels=NA) + 
     opts
   
