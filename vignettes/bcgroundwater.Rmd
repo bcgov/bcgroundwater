@@ -13,7 +13,6 @@ vignette: >
 knitr::opts_chunk$set(fig.width = 6, fig.height = 4)
 ```
 
-
 First, download some data for a well into your R session:
 
 ```{r}
@@ -46,15 +45,16 @@ monthly_data <- monthlyValues(data)
 head(monthly_data)
 ```
 
-You can plot the seasonal patterns in the water levels of the well with `gwlMonthlyPlot()`:
+You can plot the seasonal patterns in the water levels of the well with
+`gwlMonthlyPlot()`:
 
 ```{r}
 monthlyplot <- gwlMonthlyPlot(monthly_data, last12 = TRUE)
 plot(monthlyplot)
 ```
 
-To perform the analysis, you will need to generate a full time series with no gaps.
-`makeWellTS()` does this for you, interpolating the missing values : 
+To perform the analysis, you will need to generate a full time series with no
+gaps. `makeWellTS()` does this for you, interpolating the missing values:
 
 ```{r, fig.width=6, fig.height=4}
 full_monthly_data <- makeWellTS(monthly_data)
@@ -62,7 +62,8 @@ head(monthly_data)
 ```
 
 For trend analysis over a long time series, it is often beneficial to test for 
-trends with yearly averages. These can be calculated easily using the `dplyr` package:
+trends with yearly averages. These can be calculated easily using the `dplyr`
+package:
 
 ```{r}
 library("dplyr")
@@ -85,7 +86,8 @@ trends <- gwlZypTest(annual_data, col = "mean_GWL")
 trends
 ```
 
-Finally, plot the time series with the trend overlaid (we will use the results from the yuepilon method), optionally with interpolated values overlaid:
+Finally, plot the time series with the trend overlaid (we will use the results
+from the yuepilon method), optionally with interpolated values overlaid:
 
 ```{r, warning=FALSE}
 trend_plot <- gwlAreaPlot(full_monthly_data, trend = trends$trend[1], 
