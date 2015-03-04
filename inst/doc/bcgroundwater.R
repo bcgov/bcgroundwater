@@ -1,4 +1,4 @@
-## ----, set-options, echo=FALSE, message=FALSE, results='hide'------------
+## ----set-options, echo=FALSE---------------------------------------------
 knitr::opts_chunk$set(fig.width = 6, fig.height = 4)
 
 ## ------------------------------------------------------------------------

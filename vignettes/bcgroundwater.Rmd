@@ -9,6 +9,11 @@ vignette: >
   \usepackage[utf8]{inputenc}
 ---
 
+```{r set-options, echo=FALSE}
+knitr::opts_chunk$set(fig.width = 6, fig.height = 4)
+```
+
+
 First, download some data for a well into your R session:
 
 ```{r}
@@ -51,7 +56,7 @@ plot(monthlyplot)
 To perform the analysis, you will need to generate a full time series with no gaps.
 `makeWellTS()` does this for you, interpolating the missing values : 
 
-```{r}
+```{r, fig.width=6, fig.height=4}
 full_monthly_data <- makeWellTS(monthly_data)
 head(monthly_data)
 ```
@@ -63,6 +68,7 @@ trends with yearly averages. These can be calculated easily using the `dplyr` pa
 library("dplyr")
 
 annual_data <- full_monthly_data %>%
+  select(-yearmonth) %>% 
   group_by(EMS_ID, Well_Num, Year) %>%
   summarize(nReadings = n()
             , mean_GWL = mean(med_GWL)
@@ -79,9 +85,9 @@ trends <- gwlZypTest(annual_data, col = "mean_GWL")
 trends
 ```
 
-Finally, plot the time series with the trend overlaid, optionally with interpolated values overlaid:
+Finally, plot the time series with the trend overlaid (we will use the results from the yuepilon method), optionally with interpolated values overlaid:
 
-```{r}
+```{r, warning=FALSE}
 trend_plot <- gwlAreaPlot(full_monthly_data, trend = trends$trend[1], 
                           intercept = trends$intercept[1], sig = trends$sig[1], 
                           state = "Stable", mkperiod = "annual", showInterpolated = TRUE)

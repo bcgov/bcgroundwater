@@ -9,7 +9,7 @@ vignette: >
   \usepackage[utf8]{inputenc}
 ---
 
-```{r, set-options, echo=FALSE, message=FALSE, results='hide'}
+```{r set-options, echo=FALSE}
 knitr::opts_chunk$set(fig.width = 6, fig.height = 4)
 ```
 
