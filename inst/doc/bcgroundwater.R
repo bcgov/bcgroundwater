@@ -2,17 +2,8 @@
 knitr::opts_chunk$set(fig.width = 6, fig.height = 4)
 
 ## ------------------------------------------------------------------------
-## First load the library:
 library("bcgroundwater")
-
-data <- getGWLdata("E208036", fromDate = "1989-01-01", 
-                   toDate = "2014-01-01", save = FALSE)
-
-## ----, eval=FALSE--------------------------------------------------------
-#  getGWLdata("E208036", fromDate = "1989-01-01",
-#             toDate = "2014-01-01", save = TRUE, data.dir = ".")
-#  
-#  data <- readGWLdata("wellE208036.csv", emsID = "E208036")
+data <- readGWLdata("gwl_report.csv", emsID = "E208036")
 
 ## ----echo = FALSE--------------------------------------------------------
 head(data)

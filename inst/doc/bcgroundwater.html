@@ -10,7 +10,7 @@
 
 <meta name="author" content="Andy Teucher" />
 
-<meta name="date" content="2015-03-04" />
+<meta name="date" content="2015-03-10" />
 
 <title>Using the bcgroundwater package</title>
 
@@ -54,21 +54,14 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <div id="header">
 <h1 class="title">Using the bcgroundwater package</h1>
 <h4 class="author"><em>Andy Teucher</em></h4>
-<h4 class="date"><em>2015-03-04</em></h4>
+<h4 class="date"><em>2015-03-10</em></h4>
 </div>
 
 
-<p>First, download some data for a well into your R session:</p>
-<pre class="sourceCode r"><code class="sourceCode r">## First load the library:
-<span class="kw">library</span>(<span class="st">&quot;bcgroundwater&quot;</span>)
-
-data &lt;-<span class="st"> </span><span class="kw">getGWLdata</span>(<span class="st">&quot;E208036&quot;</span>, <span class="dt">fromDate =</span> <span class="st">&quot;1989-01-01&quot;</span>, 
-                   <span class="dt">toDate =</span> <span class="st">&quot;2014-01-01&quot;</span>, <span class="dt">save =</span> <span class="ot">FALSE</span>)</code></pre>
-<p>Alternatively, you can download to a file, then read it in with <code>readGWLdata()</code>;</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">getGWLdata</span>(<span class="st">&quot;E208036&quot;</span>, <span class="dt">fromDate =</span> <span class="st">&quot;1989-01-01&quot;</span>, 
-           <span class="dt">toDate =</span> <span class="st">&quot;2014-01-01&quot;</span>, <span class="dt">save =</span> <span class="ot">TRUE</span>, <span class="dt">data.dir =</span> <span class="st">&quot;.&quot;</span>)
-
-data &lt;-<span class="st"> </span><span class="kw">readGWLdata</span>(<span class="st">&quot;wellE208036.csv&quot;</span>, <span class="dt">emsID =</span> <span class="st">&quot;E208036&quot;</span>)</code></pre>
+<p>First, download some data for a well of interest from the B.C. Observation Well Network <a href="http://www.env.gov.bc.ca/wsd/data_searches/obswell/map/obsWells.html">interactive map tool</a>. We have downloaded the data from Observation Well 309 and saved it.</p>
+<p>Load the package, and read in the data:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;bcgroundwater&quot;</span>)
+data &lt;-<span class="st"> </span><span class="kw">readGWLdata</span>(<span class="st">&quot;gwl_report.csv&quot;</span>, <span class="dt">emsID =</span> <span class="st">&quot;E208036&quot;</span>)</code></pre>
 <p>The data will be in the following format:</p>
 <pre><code>##    EMS_ID Well_Num                                     Station_Name
 ## 1 E208036      309 OBS WELL 309 - GOLDEN (HIGHWAY 95 &amp; ALMBERG RD.)
@@ -78,60 +71,51 @@ data &lt;-<span class="st"> </span><span class="kw">readGWLdata</span>(<span cla
 ## 5 E208036      309 OBS WELL 309 - GOLDEN (HIGHWAY 95 &amp; ALMBERG RD.)
 ## 6 E208036      309 OBS WELL 309 - GOLDEN (HIGHWAY 95 &amp; ALMBERG RD.)
 ##                  Date    GWL Historical_Daily_Average
-## 1 1989-10-19 12:00:00 23.971                   24.055
-## 2 1989-10-31 12:00:00 23.994                   24.090
-## 3 1989-12-01 12:00:00 24.029                   24.236
-## 4 1990-01-01 12:00:00 24.286                   24.340
-## 5 1990-02-01 12:00:00 24.339                   24.403
-## 6 1990-03-01 12:00:00 24.429                   24.435
+## 1 1989-10-19 12:00:00 23.971                       NA
+## 2 1989-10-31 12:00:00 23.994                       NA
+## 3 1989-12-01 12:00:00 24.029                       NA
+## 4 1990-01-01 12:00:00 24.286                       NA
+## 5 1990-02-01 12:00:00 24.339                       NA
+## 6 1990-03-01 12:00:00 24.429                       NA
 ##   Historical_Daily_Minimum Historical_Daily_Maximum     Status
-## 1                   24.561                   23.606  Validated
-## 2                   24.598                   23.640  Validated
-## 3                   24.708                   23.602  Validated
-## 4                   24.783                   23.708  Validated
-## 5                   24.842                   23.773  Validated
-## 6                   24.912                   23.756  Validated</code></pre>
+## 1                       NA                       NA  Validated
+## 2                       NA                       NA  Validated
+## 3                       NA                       NA  Validated
+## 4                       NA                       NA  Validated
+## 5                       NA                       NA  Validated
+## 6                       NA                       NA  Validated</code></pre>
 <p>Next, calculate the median monthly values:</p>
 <pre class="sourceCode r"><code class="sourceCode r">monthly_data &lt;-<span class="st"> </span><span class="kw">monthlyValues</span>(data)
 <span class="kw">head</span>(monthly_data)</code></pre>
 <pre><code>## Source: local data frame [6 x 8]
 ## 
 ##    EMS_ID Well_Num       Date med_GWL nReadings Year Month dev_med_GWL
-## 1 E208036      309 1989-11-01 23.9825         2 1989    11    -0.02325
-## 2 E208036      309 1989-12-01 24.0290         1 1989    12     0.02325
-## 3 E208036      309 1990-01-01 24.2860         1 1990     1     0.60000
-## 4 E208036      309 1990-02-01 24.3390         1 1990     2     0.65300
-## 5 E208036      309 1990-03-01 24.4290         1 1990     3     0.74300
-## 6 E208036      309 1990-04-01 24.2290         1 1990     4     0.54300</code></pre>
+## 1 E208036      309 1989-11-01 23.9825         4 1989    11    -0.02325
+## 2 E208036      309 1989-12-01 24.0290         2 1989    12     0.02325
+## 3 E208036      309 1990-01-01 24.2860         2 1990     1     0.60000
+## 4 E208036      309 1990-02-01 24.3390         2 1990     2     0.65300
+## 5 E208036      309 1990-03-01 24.4290         2 1990     3     0.74300
+## 6 E208036      309 1990-04-01 24.2290         2 1990     4     0.54300</code></pre>
 <p>You can plot the seasonal patterns in the water levels of the well with <code>gwlMonthlyPlot()</code>:</p>
 <pre class="sourceCode r"><code class="sourceCode r">monthlyplot &lt;-<span class="st"> </span><span class="kw">gwlMonthlyPlot</span>(monthly_data, <span class="dt">last12 =</span> <span class="ot">TRUE</span>)
 <span class="kw">plot</span>(monthlyplot)</code></pre>
 <p><img src="data:image/png;base64,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" /></p>
-<p>To perform the analysis, you will need to generate a full time series with no gaps. <code>makeWellTS()</code> does this for you, interpolating the missing values :</p>
+<p>To perform the analysis, you will need to generate a full time series with no gaps. <code>makeWellTS()</code> does this for you, interpolating the missing values:</p>
 <pre class="sourceCode r"><code class="sourceCode r">full_monthly_data &lt;-<span class="st"> </span><span class="kw">makeWellTS</span>(monthly_data)
 <span class="kw">head</span>(monthly_data)</code></pre>
 <pre><code>## Source: local data frame [6 x 8]
 ## 
 ##    EMS_ID Well_Num       Date med_GWL nReadings Year Month dev_med_GWL
-## 1 E208036      309 1989-11-01 23.9825         2 1989    11    -0.02325
-## 2 E208036      309 1989-12-01 24.0290         1 1989    12     0.02325
-## 3 E208036      309 1990-01-01 24.2860         1 1990     1     0.60000
-## 4 E208036      309 1990-02-01 24.3390         1 1990     2     0.65300
-## 5 E208036      309 1990-03-01 24.4290         1 1990     3     0.74300
-## 6 E208036      309 1990-04-01 24.2290         1 1990     4     0.54300</code></pre>
+## 1 E208036      309 1989-11-01 23.9825         4 1989    11    -0.02325
+## 2 E208036      309 1989-12-01 24.0290         2 1989    12     0.02325
+## 3 E208036      309 1990-01-01 24.2860         2 1990     1     0.60000
+## 4 E208036      309 1990-02-01 24.3390         2 1990     2     0.65300
+## 5 E208036      309 1990-03-01 24.4290         2 1990     3     0.74300
+## 6 E208036      309 1990-04-01 24.2290         2 1990     4     0.54300</code></pre>
 <p>For trend analysis over a long time series, it is often beneficial to test for trends with yearly averages. These can be calculated easily using the <code>dplyr</code> package:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;dplyr&quot;</span>)</code></pre>
-<pre><code>## 
-## Attaching package: 'dplyr'
-## 
-## The following object is masked from 'package:stats':
-## 
-##     filter
-## 
-## The following objects are masked from 'package:base':
-## 
-##     intersect, setdiff, setequal, union</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">annual_data &lt;-<span class="st"> </span>full_monthly_data %&gt;%
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;dplyr&quot;</span>)
+
+annual_data &lt;-<span class="st"> </span>full_monthly_data %&gt;%
 <span class="st">  </span><span class="kw">select</span>(-yearmonth) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw">group_by</span>(EMS_ID, Well_Num, Year) %&gt;%
 <span class="st">  </span><span class="kw">summarize</span>(<span class="dt">nReadings =</span> <span class="kw">n</span>()

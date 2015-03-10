@@ -13,23 +13,15 @@ vignette: >
 knitr::opts_chunk$set(fig.width = 6, fig.height = 4)
 ```
 
-First, download some data for a well into your R session:
+First, download some data for a well of interest from the B.C. Observation Well
+Network [interactive map tool](http://www.env.gov.bc.ca/wsd/data_searches/obswell/map/obsWells.html). 
+We have downloaded the data from Observation Well 309 and saved it.
+
+Load the package, and read in the data:
 
 ```{r}
-## First load the library:
 library("bcgroundwater")
-
-data <- getGWLdata("E208036", fromDate = "1989-01-01", 
-                   toDate = "2014-01-01", save = FALSE)
-```
-
-Alternatively, you can download to a file, then read it in with `readGWLdata()`;
-
-```{r, eval=FALSE}
-getGWLdata("E208036", fromDate = "1989-01-01", 
-           toDate = "2014-01-01", save = TRUE, data.dir = ".")
-
-data <- readGWLdata("wellE208036.csv", emsID = "E208036")
+data <- readGWLdata("gwl_report.csv", emsID = "E208036")
 ```
 
 The data will be in the following format: 
