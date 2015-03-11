@@ -5,13 +5,14 @@ visualization of groundwater data from the British Columbia groundwater
 [observation well network](http://www.env.gov.bc.ca/wsd/data_searches/obswell/index.html).
 
 This package was developed by [Environmental Reporting BC](http://www.env.gov.bc.ca/soe/) 
-for the analysis of trends in groundwater levels. You can view the results of the 
+for our 2013 analysis of trends in groundwater levels. You can view the results of the 
 analysis [here](http://www.env.gov.bc.ca/soe/indicators/water/wells/index.html?WT.ac=GH_wells).
 The code for the actual analysis is available in its own [GitHub repository](https://github.com/bcgov/gwl_2013).
 
-## Features
+### Features
 
 Core functions include:
+
 - Import data (csv files) downloaded from the [Observation Well Network](http://www.env.gov.bc.ca/wsd/data_searches/obswell/map/obsWells.html)
 - Summarize and plot monthly groundwater levels
 - Interpolate missing values
@@ -20,54 +21,49 @@ Core functions include:
   [zyp](http://cran.r-project.org/web/packages/zyp/index.html) package.
 - Plot trends
 
-## Usage
+### Installation
 
-See the package [vignette](demo/bcgroundwater.md) for a simple demonstration.
-
-After installing the package, use:
-
-```R
-browseVignettes("bcgroundwater")
-```
-
-## Requirements
-
-## Installation
-
-To install the package, you will need the `devtools` package if you don't 
-already have it installed:
+You can install the package directly from this repository. To do so, you will 
+need the [devtools](https://github.com/hadley/devtools/) package:
 
 ```R
 install.packages("devtools")
 ```
 
-Next, you can install the `bcgroundwater` package using `devtools::install_github()`;
+Next, install the `bcgroundwater` package using `devtools::install_github()`;
 
 ```R
 library("devtools")
 install_github("bcgov/bcgroundwater")
 ```
 
-## Project Status
+### Usage
+
+See the package [vignette](demo/bcgroundwater.md) for a simple demonstration. 
+Or, after installing the package, use:
+
+```R
+browseVignettes("bcgroundwater")
+```
+
+### Project Status
 
 The package works as is for its intended purpose, which was to provide a set of 
 functions required for the analysis underlying the 
 [indicator](http://www.env.gov.bc.ca/soe/indicators/water/wells/index.html?WT.ac=GH_wells).
 We are not actively developing it at this time, but you can check the 
-[issues](https://github.com/bcgov/bcgroundwater/isuues/) for things we would 
+[issues](https://github.com/bcgov/bcgroundwater/issues/) for things we would 
 like to fix or work on.
 
-## Goals/Roadmap
+### Getting Help or Reporting an Issue
 
-## Getting Help or Reporting an Issue
+To report bugs/issues/feature requests, please file an [issue](https://github.com/bcgov/bcgroundwater/issues/).
 
-To report bugs/issues/feature requests, please file an [issue](https://github.com/bcgov/bcgroundwater/isuues/).
-
-## How to Contribute
+### How to Contribute
 
 If you would like to contribute to the package, please see our 
 [CONTRIBUTING](CONTRIBUTING.md) guidelines.
 
-## License
+### License
 
 Apache 2.0. See our [license](LICENSE) for more details.
