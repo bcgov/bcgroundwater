@@ -54,7 +54,8 @@ head(monthly_data)
 ```
 
 For trend analysis over a long time series, it is often beneficial to test for 
-trends with yearly averages. These can be calculated easily using the `dplyr`
+trends with yearly averages, otherwise serial autocorrelation can be a problem 
+(even with pre-whitening). These can be calculated easily using the `dplyr`
 package:
 
 ```{r}

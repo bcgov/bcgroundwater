@@ -10,7 +10,7 @@
 
 <meta name="author" content="Andy Teucher" />
 
-<meta name="date" content="2015-03-10" />
+<meta name="date" content="2015-03-11" />
 
 <title>Using the bcgroundwater package</title>
 
@@ -54,7 +54,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <div id="header">
 <h1 class="title">Using the bcgroundwater package</h1>
 <h4 class="author"><em>Andy Teucher</em></h4>
-<h4 class="date"><em>2015-03-10</em></h4>
+<h4 class="date"><em>2015-03-11</em></h4>
 </div>
 
 
@@ -112,10 +112,19 @@ data &lt;-<span class="st"> </span><span class="kw">readGWLdata</span>(<span cla
 ## 4 E208036      309 1990-02-01 24.3390         2 1990     2     0.65300
 ## 5 E208036      309 1990-03-01 24.4290         2 1990     3     0.74300
 ## 6 E208036      309 1990-04-01 24.2290         2 1990     4     0.54300</code></pre>
-<p>For trend analysis over a long time series, it is often beneficial to test for trends with yearly averages. These can be calculated easily using the <code>dplyr</code> package:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;dplyr&quot;</span>)
-
-annual_data &lt;-<span class="st"> </span>full_monthly_data %&gt;%
+<p>For trend analysis over a long time series, it is often beneficial to test for trends with yearly averages, otherwise serial autocorrelation can be a problem (even with pre-whitening). These can be calculated easily using the <code>dplyr</code> package:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;dplyr&quot;</span>)</code></pre>
+<pre><code>## 
+## Attaching package: 'dplyr'
+## 
+## The following object is masked from 'package:stats':
+## 
+##     filter
+## 
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">annual_data &lt;-<span class="st"> </span>full_monthly_data %&gt;%
 <span class="st">  </span><span class="kw">select</span>(-yearmonth) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw">group_by</span>(EMS_ID, Well_Num, Year) %&gt;%
 <span class="st">  </span><span class="kw">summarize</span>(<span class="dt">nReadings =</span> <span class="kw">n</span>()
