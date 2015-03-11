@@ -1,5 +1,7 @@
 SHELL = C:\windows\SYSTEM32\cmd.exe
 
+all: build install
+
 docs:
 	rm NAMESPACE
 	Rscript -e "library(devtools); library(methods); document('.'); check_doc('.')"
@@ -7,9 +9,9 @@ docs:
 check:
 	Rscript -e "library(devtools); library(methods); check('.')"
 
-build:
+build: check
 	Rscript -e "library(devtools); build('.', binary=TRUE)"
-	cp ../bcgroundwater_0.2.zip ../bcgroundwater_0.2.tar.gz "I:/SPD/Science Policy & Economics/State of Environment/_dev/packages/"
+	cp ../bcgroundwater_0.2.zip ../bcgroundwater_0.2.tar.gz "D:/_dev/packages/"
 
-install:
+install: check
 	Rscript -e "library(devtools); install('.')"
