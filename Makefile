@@ -6,7 +6,7 @@ docs:
 	rm NAMESPACE
 	Rscript -e "library(devtools); library(methods); document('.'); check_doc('.')"
 
-check:
+check: vignette
 	Rscript -e "library(devtools); library(methods); check('.')"
 
 build: check
@@ -15,3 +15,13 @@ build: check
 
 install: check
 	Rscript -e "library(devtools); install('.')"
+	
+vignette: 
+	Rscript -e "library(rmarkdown); library(devtools); library(methods);\
+	build_vignettes('.');\
+	render('vignettes/bcgroundwater.Rmd', output_format = 'md_document', output_dir = '../demo')"
+	rm vignettes/bcgroundwater.R
+
+demo: 
+	Rscript -e "library(rmarkdown); library(methods);\
+	render('vignettes/bcgroundwater.Rmd', output_format = 'md_document', output_dir = '../demo')"
