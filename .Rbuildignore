@@ -3,4 +3,3 @@
 Makefile
 ^README\.md$
 ^CONTRIBUTING\.md$
-/demo

@@ -39,8 +39,8 @@ install_github("bcgov/bcgroundwater")
 
 ### Usage
 
-See the package [vignette](demo/bcgroundwater.md) for a simple demonstration. 
-Or, after installing the package, use:
+See the package [vignette](https://htmlpreview.github.com/?https://github.com/bcgov/bcgroundwater/inst/doc/bcgroundwater.html) 
+for a simple demonstration. Or, after installing the package, use:
 
 ```R
 browseVignettes("bcgroundwater")

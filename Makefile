@@ -18,11 +18,4 @@ install: check
 	Rscript -e "library(devtools); install('.')"
 	
 vignette: 
-	Rscript -e "library(rmarkdown); library(devtools); library(methods);\
-	build_vignettes('.');\
-	render('vignettes/bcgroundwater.Rmd', output_format = 'md_document', output_dir = '../demo')"
-	rm vignettes/bcgroundwater.R
-
-demo: 
-	Rscript -e "library(rmarkdown); library(methods);\
-	render('vignettes/bcgroundwater.Rmd', output_format = 'md_document', output_dir = '../demo')"
+	Rscript -e "library(rmarkdown); library(devtools); library(methods); build_vignettes('.')"

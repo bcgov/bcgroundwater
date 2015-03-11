@@ -1,6 +1,8 @@
 ---
 title: "Using the bcgroundwater package"
 date: "`r Sys.Date()`"
+output_format: 
+  rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Using the bcgroundwater package}
   %\VignetteEngine{knitr::rmarkdown}
