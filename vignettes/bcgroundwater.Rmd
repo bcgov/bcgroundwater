@@ -46,8 +46,9 @@ monthlyplot <- gwlMonthlyPlot(monthly_data, last12 = TRUE)
 plot(monthlyplot)
 ```
 
-To perform the analysis, you will need to generate a full time series with no
-gaps. `makeWellTS()` does this for you, interpolating the missing values:
+To perform the analysis, you will need to generate a full regular time series 
+with no gaps in the dates. `makeWellTS()` does this for you, interpolating the 
+missing values:
 
 ```{r, fig.width=6, fig.height=4}
 full_monthly_data <- makeWellTS(monthly_data)
