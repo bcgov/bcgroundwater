@@ -1,6 +1,6 @@
 SHELL = C:\windows\SYSTEM32\cmd.exe
 
-all: build install
+all: build install demo
 
 docs:
 	rm NAMESPACE
@@ -11,7 +11,8 @@ check: vignette
 
 build: check
 	Rscript -e "library(devtools); build('.', binary=TRUE)"
-	cp ../bcgroundwater_0.2.zip ../bcgroundwater_0.2.tar.gz "D:/_dev/packages/"
+	mv -f ../bcgroundwater_0.2.zip D:/packages/
+	mv -f ../bcgroundwater_0.2.tar.gz D:/packages/
 
 install: check
 	Rscript -e "library(devtools); install('.')"
