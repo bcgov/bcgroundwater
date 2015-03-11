@@ -38,7 +38,8 @@ head(monthly_data)
 ```
 
 You can plot the seasonal patterns in the water levels of the well with
-`gwlMonthlyPlot()`:
+`gwlMonthlyPlot()`. This displays the mean deviation from the yearly average, 
+as well as the range of variation:
 
 ```{r}
 monthlyplot <- gwlMonthlyPlot(monthly_data, last12 = TRUE)
