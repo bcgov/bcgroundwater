@@ -1,3 +1,5 @@
+<a rel="delivery" href="https://github.com/BCDevExchange/docs/wiki/Project-States"><img alt="In production, but maybe in Alpha or Beta. Intended to persist and be supported." style="border-width:0" src="https://img.shields.io/badge/BCDevExchange-Delivery-brightgreen.svg" title="In production, but maybe in Alpha or Beta. Intended to persist and be supported." /></a>
+
 # bcgroundwater
 
 An [R](http://www.r-project.org) package to facilitate analysis and 
