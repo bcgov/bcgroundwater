@@ -42,7 +42,7 @@ gwlZypTest <- function(dataframe, wells=NULL, col, method="both") {
                            , intercept=numeric(), stringsAsFactors=FALSE)
   
   for (well in wells) {
-    d <- dataframe[dataframe$EMS_ID==well,col]
+    d <- dataframe[[col]][dataframe$EMS_ID==well]
     if (method == "both" | method == "yuepilon") {
       zyp.yuepilon <- zyp.trend.vector(d, method="yuepilon", conf.intervals=TRUE)
       
