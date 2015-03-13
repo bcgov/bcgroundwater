@@ -1,6 +1,6 @@
 SHELL = C:\windows\SYSTEM32\cmd.exe
-
-all: build install demo
+PKGNAME := $(shell sed -n "s/Package: *\([^ ]*\)/\1/p" DESCRIPTION)
+PKGVERS := $(shell sed -n "s/Version: *\([^ ]*\)/\1/p" DESCRIPTION)
 
 docs:
 	rm NAMESPACE
@@ -11,8 +11,8 @@ check: vignette
 
 build: check
 	Rscript -e "library(devtools); build('.', binary=TRUE)"
-	mv -f ../bcgroundwater_0.2.zip D:/packages/
-	mv -f ../bcgroundwater_0.2.tar.gz D:/packages/
+	mv -f ../$(PKGNAME)_$(PKGVERS).zip D:/packages/
+	mv -f ../$(PKGNAME)_$(PKGVERS).tar.gz D:/packages/
 
 install: check
 	Rscript -e "library(devtools); install('.')"
