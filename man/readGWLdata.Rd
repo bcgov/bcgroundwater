@@ -4,7 +4,7 @@
 \alias{readGWLdata}
 \title{Read in groundwater data from file downloaded from GWL tool}
 \usage{
-readGWLdata(path, emsID)
+readGWLdata(path, emsID = NULL)
 }
 \arguments{
 \item{path}{The path to the csv}

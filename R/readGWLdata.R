@@ -20,7 +20,7 @@
 #' @examples \dontrun{
 #'
 #'}
-readGWLdata <- function(path, emsID) {
+readGWLdata <- function(path, emsID = NULL) {
   
   if (!inherits(path, "textConnection") && !file.exists(path)) {
     stop(paste0("The file ", path, "does not exist."))
@@ -38,15 +38,22 @@ readGWLdata <- function(path, emsID) {
   
   welldf <- welldf[!is.na(welldf$GWL),]
   
-  welldf$Station_Name <- welldf$Station_Name[1]
+  ## Extract Well number and if deep or shallow from station name:
+  st_name <- welldf$Station_Name[1]
+  wl_num <- gsub("OBS\\w*\\s*WELL\\s*#*\\s*(\\d+)(\\s.+|$)", "\\1", st_name)
+  if (grepl("shallow", st_name, ignore.case = TRUE)) wl_num <- paste(wl_num, "shallow")
+  if (grepl("deep", st_name, ignore.case = TRUE)) wl_num <- paste(wl_num, "deep")
+
+  ## Set station name and well number
+  welldf$Station_Name <- st_name
+  welldf$Well_Num <- wl_num
+  
   
   welldf$Date <- as.POSIXct(strptime(welldf$Date
                                      , format="%Y-%m-%d %H:%M", tz="GMT"))
   
   welldf$EMS_ID <- emsID
   
-  welldf$Well_Num <- as.numeric(gsub("OBS\\w*\\s*WELL\\s*#*\\s*(\\d+)(\\s.+|$)", 
-                                     "\\1", welldf$Station_Name))
   
   welldf[,c(8,9,1:7)]
 }

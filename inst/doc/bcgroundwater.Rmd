@@ -26,7 +26,7 @@ data <- readGWLdata("gwl_report.csv", emsID = "E208036")
 
 The data will be in the following format: 
 
-```{r echo = FALSE}
+```{r}
 head(data)
 ```
 
@@ -38,15 +38,17 @@ head(monthly_data)
 ```
 
 You can plot the seasonal patterns in the water levels of the well with
-`gwlMonthlyPlot()`:
+`gwlMonthlyPlot()`. This displays the mean deviation from the yearly average, 
+as well as the range of variation:
 
 ```{r}
 monthlyplot <- gwlMonthlyPlot(monthly_data, last12 = TRUE)
 plot(monthlyplot)
 ```
 
-To perform the analysis, you will need to generate a full time series with no
-gaps. `makeWellTS()` does this for you, interpolating the missing values:
+To perform the analysis, you will need to generate a full regular time series 
+with no gaps in the dates. `makeWellTS()` does this for you, interpolating the 
+missing values:
 
 ```{r, fig.width=6, fig.height=4}
 full_monthly_data <- makeWellTS(monthly_data)
