@@ -16,8 +16,9 @@
 #' data (to remove autocorrelation) for many wells, using one or both of two 
 #' Pre-whitening methods, see zyp documentation
 #' @import zyp
-#' @param dataframe dataframe containing minimally: EMS_ID, med_GWL
+#' @param dataframe dataframe containing: an ID column (specified in \code{by}) and a column of values
 #' @param  wells vector of well numbers to test. Default NULL does all in dataframe
+#' @param  byID the name of the ID column
 #' @param  col the name of the column with the GWL values
 #' @param  method "both" (default), "yuepilon", or "zhang"
 #' @export
@@ -25,16 +26,16 @@
 #' @examples \dontrun{
 #'
 #'}
-gwlZypTest <- function(dataframe, wells=NULL, col, method="both") {
+gwlZypTest <- function(dataframe, wells=NULL, byID, col, method="both") {
   
   if (is.null(wells)) {
-    wells <- unique(dataframe$EMS_ID)
+    wells <- unique(dataframe[[byID]])
   } else {
     wells <- wells
   }
   
   # create an empty dataframe to store results
-  mk.results <- data.frame(EMS_ID=character(), test_type=character()
+  mk.results <- data.frame(ID=character(), test_type=character()
                            , lbound=numeric(), trend=numeric(), trendp=numeric()
                            , ubound=numeric(), tau=numeric(), sig=numeric()
                            , nruns=numeric(), autocor=numeric()
@@ -42,7 +43,7 @@ gwlZypTest <- function(dataframe, wells=NULL, col, method="both") {
                            , intercept=numeric(), stringsAsFactors=FALSE)
   
   for (well in wells) {
-    d <- dataframe[[col]][dataframe$EMS_ID==well]
+    d <- dataframe[[col]][dataframe[[byID]]==well]
     if (method == "both" | method == "yuepilon") {
       zyp.yuepilon <- zyp.trend.vector(d, method="yuepilon", conf.intervals=TRUE)
       
@@ -56,5 +57,7 @@ gwlZypTest <- function(dataframe, wells=NULL, col, method="both") {
       mk.results[nrow(mk.results),3:13] <- zyp.zhang
     }
   }
+  names(mk.results)[1] <- byID
+  
   mk.results
 }

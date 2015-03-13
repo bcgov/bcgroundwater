@@ -4,12 +4,14 @@
 \alias{gwlZypTest}
 \title{Perform Mann-Kendall trend test on many wells}
 \usage{
-gwlZypTest(dataframe, wells = NULL, col, method = "both")
+gwlZypTest(dataframe, wells = NULL, byID, col, method = "both")
 }
 \arguments{
-\item{dataframe}{dataframe containing minimally: EMS_ID, med_GWL}
+\item{dataframe}{dataframe containing: an ID column (specified in \code{by}) and a column of values}
 
 \item{wells}{vector of well numbers to test. Default NULL does all in dataframe}
+
+\item{byID}{the name of the ID column}
 
 \item{col}{the name of the column with the GWL values}
 
