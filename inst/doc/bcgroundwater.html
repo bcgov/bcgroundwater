@@ -133,11 +133,11 @@ data &lt;-<span class="st"> </span><span class="kw">readGWLdata</span>(<span cla
             , <span class="dt">q95_GWL =</span> <span class="kw">quantile</span>(med_GWL, <span class="fl">0.95</span>)) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw">as.data.frame</span>(<span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</code></pre>
 <p>You can now calculate the trend:</p>
-<pre class="sourceCode r"><code class="sourceCode r">trends &lt;-<span class="st"> </span><span class="kw">gwlZypTest</span>(annual_data, <span class="dt">col =</span> <span class="st">&quot;mean_GWL&quot;</span>)
+<pre class="sourceCode r"><code class="sourceCode r">trends &lt;-<span class="st"> </span><span class="kw">gwlZypTest</span>(annual_data, <span class="dt">byID =</span> <span class="st">&quot;Well_Num&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;mean_GWL&quot;</span>)
 trends</code></pre>
-<pre><code>##    EMS_ID test_type       lbound       trend    trendp     ubound
-## 1 E208036  yuepilon -0.008583992 0.006788462 0.1765000 0.02009167
-## 2 E208036     zhang -0.016730728 0.006209184 0.1614388 0.02940131
+<pre><code>##   Well_Num test_type       lbound       trend    trendp     ubound
+## 1      309  yuepilon -0.008583992 0.006788462 0.1765000 0.02009167
+## 2      309     zhang -0.016730728 0.006209184 0.1614388 0.02940131
 ##          tau       sig nruns   autocor valid_frac      linear intercept
 ## 1 0.07999999 0.5911541     1 0.3956237          1 0.006665493  24.03000
 ## 2 0.07999999 0.5911541     3 0.3935714          1 0.006665493  23.95836</code></pre>

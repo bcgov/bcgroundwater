@@ -77,7 +77,7 @@ annual_data <- full_monthly_data %>%
 You can now calculate the trend:
 
 ```{r}
-trends <- gwlZypTest(annual_data, col = "mean_GWL")
+trends <- gwlZypTest(annual_data, byID = "Well_Num", col = "mean_GWL")
 trends
 ```
 

@@ -34,7 +34,7 @@ annual_data <- full_monthly_data %>%
   as.data.frame(stringsAsFactors = FALSE)
 
 ## ------------------------------------------------------------------------
-trends <- gwlZypTest(annual_data, col = "mean_GWL")
+trends <- gwlZypTest(annual_data, byID = "Well_Num", col = "mean_GWL")
 trends
 
 ## ----, warning=FALSE-----------------------------------------------------
