@@ -11,7 +11,7 @@ visualization of groundwater data from the British Columbia groundwater
 This package was developed by [Environmental Reporting BC](http://www.env.gov.bc.ca/soe/) 
 for our 2013 analysis of trends in groundwater levels. You can view the results of the 
 analysis [here](http://www.env.gov.bc.ca/soe/indicators/water/wells/index.html?WT.ac=GH_wells).
-The code for the actual analysis is available in its own [GitHub repository](https://github.com/bcgov/gwl_2013).
+The code for the actual analysis is available in its own [GitHub repository](https://github.com/bcgov/groundwater_levels).
 
 ### Features
 

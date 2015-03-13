@@ -11,8 +11,7 @@ check: vignette
 
 build: check
 	Rscript -e "library(devtools); build('.', binary=TRUE)"
-	mv -f ../$(PKGNAME)_$(PKGVERS).zip D:/packages/$(PKGNAME)_$(PKGVERS).zip
-	mv -f ../$(PKGNAME)_$(PKGVERS).tar.gz D:/packages/$(PKGNAME)_$(PKGVERS).tar.gz
+	mv -f ../$(PKGNAME)_$(PKGVERS).zip ../$(PKGNAME)_$(PKGVERS).tar.gz D:/packages/
 
 install: check
 	Rscript -e "library(devtools); install('.')"
