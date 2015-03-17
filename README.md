@@ -70,3 +70,6 @@ If you would like to contribute to the package, please see our
 ### License
 
 Apache 2.0. See our [license](LICENSE) for more details.
+
+###### BCDevExchange Search Tags ######
+BCDevExchange-Resource, BCDevExchange-Delivery
