@@ -3,14 +3,12 @@
 
 # bcgroundwater
 
-An [R](http://www.r-project.org) package to facilitate analysis and 
+[bcgroundwater](https://github.com/bcgov/bcgroundwater/) is an [R](http://www.r-project.org) package to facilitate analysis and 
 visualization of groundwater data from the British Columbia groundwater 
-[observation well network](http://www.env.gov.bc.ca/wsd/data_searches/obswell/index.html).
+[observation well network](http://www.env.gov.bc.ca/wsd/data_searches/obswell/index.html). It provides functions for importing, cleaning, and summarizing groundwater data, analyzing long-term trends in groundwater levels, and visualizing analysis results. 
 
 This package was developed by [Environmental Reporting BC](http://www.env.gov.bc.ca/soe/) 
-for our 2013 analysis of trends in groundwater levels. You can view the results of the 
-analysis [here](http://www.env.gov.bc.ca/soe/indicators/water/wells/index.html?WT.ac=GH_wells).
-The code for the actual analysis is available in its own [GitHub repository](https://github.com/bcgov/groundwater_levels).
+to support our 2013 analysis of [trends in groundwater levels](http://www.env.gov.bc.ca/soe/indicators/water/wells/index.html?WT.ac=GH_wells).
 
 ### Features
 
