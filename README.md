@@ -21,7 +21,7 @@ Core functions include:
 - Perform Mann-Kendall trend tests with prewhitening on multiple datasets using 
   methods implemented in the 
   [zyp](http://cran.r-project.org/web/packages/zyp/index.html) package.
-- Plot trends
+- Plot trends in groundwater levels
 
 ### Installation
 
