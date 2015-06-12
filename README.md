@@ -5,6 +5,8 @@
 
 # bcgroundwater
 
+*Please note: the format of the data available for download from the [Observation Well Network tool](http://www.env.gov.bc.ca/wsd/data_searches/obswell/map/obsWells.html) has changed after an upgrade to some database infrastructure.  As a result, the function `readGWLdata` will not import data downloaded from the web tool. In addition, several other functions including `monthlyValues` and `makeWellTs` will not work with data from the web tool. See the [issue](https://github.com/bcgov/bcgroundwater/issues/5)*
+
 An [R](http://www.r-project.org) package to facilitate analysis and 
 visualization of groundwater data from the British Columbia groundwater 
 [observation well network](http://www.env.gov.bc.ca/wsd/data_searches/obswell/index.html). It provides functions for importing, cleaning, and summarizing groundwater data, analyzing long-term trends in groundwater levels, and visualizing analysis results. 
