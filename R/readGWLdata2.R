@@ -11,6 +11,8 @@
 # See the License for the specific language governing permissions and limitations under the License.
 #'
 #' Read in groundwater data from files downloaded from GWL tool
+#' @author Jay R Brown, \email{jay@@systemicresult.com}
+#' @importFrom reshape2 dcast
 #' @param path The path to the csv with historical data
 #' @param path The path to the csv with current data
 #' @param stnName The station name to use as it is no longer in data
@@ -52,7 +54,6 @@ readGWLdata2 <- function(historical, datafile, stnName="Not Available", emsID="N
   }
   
   # put measures into columns using reshape2 library
-  library(reshape2)
   historicaldf <- dcast(historicaldf, dummydate ~ type, value.var="Value")
   
   # why is the max < min?
