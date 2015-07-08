@@ -1,4 +1,4 @@
-# Copyright 2015 Province of British Columbia
+# Copyright 2015 Jay R Brown
 # 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,8 +13,8 @@
 #' Read in groundwater data from files downloaded from GWL tool
 #' @author Jay R Brown, \email{jay@@systemicresult.com}
 #' @importFrom reshape2 dcast
-#' @param path The path to the csv with historical data
-#' @param path The path to the csv with current data
+#' @param historical The path to the csv with historical data
+#' @param datafile The path to the csv with current data
 #' @param stnName The station name to use as it is no longer in data
 #' @param emsID The EMS ID of the well retained for compatibility
 #' @export
