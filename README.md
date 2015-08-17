@@ -5,7 +5,7 @@
 
 # bcgroundwater
 
-*Please note: the format of the data available for download from the [Observation Well Network tool](http://www.env.gov.bc.ca/wsd/data_searches/obswell/map/obsWells.html) has changed after an upgrade to some database infrastructure.  As a result, the function `readGWLdata` will not import data downloaded from the web tool. In addition, several other functions including `monthlyValues` and `makeWellTs` will not work with data from the web tool. See the [issue](https://github.com/bcgov/bcgroundwater/issues/5)*
+*Please note: the format of the data available for download from the [Observation Well Network tool](http://www.env.gov.bc.ca/wsd/data_searches/obswell/map/obsWells.html) has changed after an upgrade to some database infrastructure.  Work is ongoing in the [`fix-newdata`](https://github.com/bcgov/bcgroundwater/tree/fix-newdata) branch, where contributor [jayrbrown](https://github.com/jayrbrown) has created a new function `readGWLdata2` for importing data in the new format. See the [issue](https://github.com/bcgov/bcgroundwater/issues/5) for details.*
 
 An [R](http://www.r-project.org) package to facilitate analysis and 
 visualization of groundwater data from the British Columbia groundwater 
@@ -41,6 +41,13 @@ Next, install the `bcgroundwater` package using `devtools::install_github()`:
 ```R
 library("devtools")
 install_github("bcgov/bcgroundwater")
+```
+
+If you want to install the development version with the `readGWLdata2` function 
+for importing data from the new web tool, install from the [`fix-newdata`](https://github.com/bcgov/bcgroundwater/tree/fix-newdata) branch:
+
+```R
+install_github("bcgov/bcgroundwater", ref = "fix-newdata")
 ```
 
 ### Usage
