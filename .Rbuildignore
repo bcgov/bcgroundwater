@@ -4,3 +4,4 @@ Makefile
 ^README\.md$
 ^CONTRIBUTING\.md$
 CODE_OF_CONDUCT.md
+^\.travis\.yml$
