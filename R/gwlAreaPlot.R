@@ -71,13 +71,10 @@ gwlAreaPlot <- function(dataframe, trend, intercept, state, sig, showInterpolate
   midgwl <- (maxgwl+mingwl)/2
   lims <- c(midgwl+gwlrange, midgwl-gwlrange)
   
-  .e <- environment()
-  
-  plot.area <- ggplot(df, aes(x=as.Date(Date)), environment=.e) + 
+  plot.area <- ggplot(df, aes(x=as.Date(Date))) + 
     geom_ribbon(aes(ymin=med_GWL, ymax=max(lims[1],max(med_GWL, na.rm=TRUE)+5)
-                    , fill="#1E90FF"), alpha=0.3) + 
-    geom_abline(intercept=-int.well, slope=slope
-                , aes(colour='LTT'), size=1, show_guide=TRUE) + 
+                    , fill="Groundwater Level"), alpha=0.3) + 
+    geom_abline(intercept=-int.well, slope=slope, aes(colour='LTT'), size=1) + 
     annotate(geom="text", x=minDate+as.numeric(maxDate-minDate)/50
              , y=lims[2], hjust=0, vjust=1, colour="grey50", size=3
              , label=paste0(trendprint, "        Significance: "
@@ -95,31 +92,28 @@ gwlAreaPlot <- function(dataframe, trend, intercept, state, sig, showInterpolate
     scale_y_reverse(expand=c(0,0)) + coord_cartesian(ylim=lims) + 
     scale_x_date(labels=date_format("%Y"), breaks=date_breaks("2 years")
                  , expand=c(0,0)) + 
-    scale_fill_identity(name='', labels=c('Groundwater Level')
-                        , guide=guide_legend(override.aes=list(linetype = 0
-                                                                 , shape=NA)))
+    scale_fill_manual(name='', values=c('Groundwater Level' = "#1E90FF"))
+  
+  nms <- c('', '')
+  vals <- c(Interp='red', LTT='orange')
+  labs <- c('Interpolated (missing) values', 'Long-term trend')
+  override_list <- list(shape=c(16, NA), linetype=c(0, 1))
   
   if (showInterpolated) {
     plot.area <- plot.area + geom_point(data=df[df$nReadings==0,]
-                                        , aes(y=med_GWL
-                                              , colour='Interp')
+                                        , aes(y=med_GWL), colour='red'
                                         , size=1)
-    intline <- 0
-    intshape <- 16
-    intlabel <- 'Interpolated (missing) values'
   } else {
-    intline <- NULL
-    intshape <- NULL
-    intlabel <- NULL
+    vals <- vals[-1]
+    labs <- labs[-1]
+    override_list <- lapply(override_list, `[`, -1)
   }
   
-  plot.area <- plot.area + 
-    scale_colour_manual(name='', values=c('Interp'='red', 'LTT'='orange')
-                        , labels=c(intlabel, 'Long-term trend')
-                        , guide=guide_legend(override.aes=
-                                               list(linetype=c(intline, 1)
-                                                    , shape=c(intshape,NA)))) + 
-    opts
+  plot.area <- plot.area +
+    scale_colour_manual(name = nms, values=vals, labels=labs) +
+    guides(fill = guide_legend(override.aes=list(linetype = 0, shape=NA)),
+           colour = guide_legend(override.aes= override_list))
+  opts
   
   if (save) {
     ggsave(filename=paste0(path, "trend_chart_well_", WellNum, ".pdf")
