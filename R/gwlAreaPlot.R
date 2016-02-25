@@ -30,9 +30,6 @@
 #' @param  opts other options to pass to ggplot2
 #' @export
 #' @return A ggplot2 object
-#' @examples \dontrun{
-#'
-#'}
 gwlAreaPlot <- function(dataframe, trend, intercept, state, sig, showInterpolated=FALSE, save=FALSE, path="./", mkperiod="monthly", opts=NULL) {
   
   if (showInterpolated) {
@@ -74,7 +71,8 @@ gwlAreaPlot <- function(dataframe, trend, intercept, state, sig, showInterpolate
   plot.area <- ggplot(df, aes(x=as.Date(Date))) + 
     geom_ribbon(aes(ymin=med_GWL, ymax=max(lims[1],max(med_GWL, na.rm=TRUE)+5)
                     , fill="Groundwater Level"), alpha=0.3) + 
-    geom_abline(intercept=-int.well, slope=slope, aes(colour='LTT'), size=1) + 
+    geom_abline(aes(intercept = intercept, slope = slope, colour='LTT'), 
+                data = data.frame(intercept=-int.well, slope=slope), size=1) + 
     annotate(geom="text", x=minDate+as.numeric(maxDate-minDate)/50
              , y=lims[2], hjust=0, vjust=1, colour="grey50", size=3
              , label=paste0(trendprint, "        Significance: "
@@ -94,26 +92,25 @@ gwlAreaPlot <- function(dataframe, trend, intercept, state, sig, showInterpolate
                  , expand=c(0,0)) + 
     scale_fill_manual(name='', values=c('Groundwater Level' = "#1E90FF"))
   
-  nms <- c('', '')
-  vals <- c(Interp='red', LTT='orange')
-  labs <- c('Interpolated (missing) values', 'Long-term trend')
-  override_list <- list(shape=c(16, NA), linetype=c(0, 1))
+  vals <- c(LTT='orange', Interp='red')
+  labs <- c('Long-term trend', 'Interpolated (missing) values')
+  override_list <- list(colour = c("orange", "red"), shape=c(NA, 16), linetype=c(1, 0))
   
   if (showInterpolated) {
     plot.area <- plot.area + geom_point(data=df[df$nReadings==0,]
-                                        , aes(y=med_GWL), colour='red'
+                                        , aes(y=med_GWL, colour='Interp')
                                         , size=1)
   } else {
-    vals <- vals[-1]
-    labs <- labs[-1]
-    override_list <- lapply(override_list, `[`, -1)
+    vals <- vals[1]
+    labs <- labs[1]
+    override_list <- lapply(override_list, `[`, 1)
   }
   
   plot.area <- plot.area +
-    scale_colour_manual(name = nms, values=vals, labels=labs) +
-    guides(fill = guide_legend(override.aes=list(linetype = 0, shape=NA)),
-           colour = guide_legend(override.aes= override_list))
-  opts
+    scale_colour_manual(name = '', values=vals, labels = labs,
+                        guide = guide_legend(override.aes = override_list)) +
+    
+    opts
   
   if (save) {
     ggsave(filename=paste0(path, "trend_chart_well_", WellNum, ".pdf")
