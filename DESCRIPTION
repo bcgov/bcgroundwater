@@ -9,7 +9,7 @@ Description: Set of functions for analysing and visualising groundwater level
     data from the BC Ministry of Environment groundwater observation well network.
 License: Apache License (== 2.0) | file LICENSE
 Depends:
-    R (>= 3.2.3)
+    R (>= 3.2.0)
 Imports:
     dplyr (>= 0.4.3),
     rgdal (>= 1.1-3),
