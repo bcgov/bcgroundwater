@@ -18,7 +18,6 @@ Imports:
     zoo (>= 1.7-12),
     zyp (>= 0.10-1),
     ggplot2 (>= 2.0.0),
-    grid,
     scales (>= 0.3.0),
     ggmap (>= 2.6.1)
 Suggests:
