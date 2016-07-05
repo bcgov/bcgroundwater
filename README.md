@@ -13,9 +13,9 @@ An [R](http://www.r-project.org) package to facilitate analysis and
 visualization of groundwater data from the British Columbia groundwater 
 [observation well network](http://www.env.gov.bc.ca/wsd/data_searches/obswell/index.html). It provides functions for importing, cleaning, and summarizing groundwater data, analyzing long-term trends in groundwater levels, and visualizing analysis results. 
 
-This package was developed by [Environmental Reporting BC](http://www.env.gov.bc.ca/soe/) 
-to support our 2013 analysis of [trends in groundwater levels](http://www.env.gov.bc.ca/soe/indicators/water/wells/index.html?WT.ac=GH_wells). 
-The code behind that analysis is available in its own GitHub [repository](https:/github.com/bcgov/groundwater_levels/).
+This package was developed by [Environmental Reporting BC](http://www2.gov.bc.ca/gov/content?id=FF80E0B985F245CEA62808414D78C41B) 
+to support our 2013 analysis of [trends in groundwater levels](http://www.env.gov.bc.ca/soe/indicators/water/groundwater-levels.html). 
+The code behind that analysis is available in its own GitHub [repository](https:/github.com/bcgov/groundwater-levels/).
 
 ### Features
 
@@ -65,7 +65,7 @@ browseVignettes("bcgroundwater")
 
 The package works as is for its intended purpose, which was to provide a set of 
 functions required for the analysis underlying the 
-[indicator](http://www.env.gov.bc.ca/soe/indicators/water/wells/index.html?WT.ac=GH_wells).
+[indicator](http://www.env.gov.bc.ca/soe/indicators/water/groundwater-levels.html).
 We are not actively developing it at this time, but you can check the 
 [issues](https://github.com/bcgov/bcgroundwater/issues/) for things we would 
 like to fix or work on.
@@ -98,4 +98,4 @@ Please note that this project is released with a [Contributor Code of Conduct](C
     limitations under the License.
 
 
-This repository is maintained by [Environmental Reporting BC](http://www.env.gov.bc.ca/soe/). Click [here](https://github.com/bcgov/EnvReportBC-RepoList) for a complete list of our repositories on GitHub.
+This repository is maintained by [Environmental Reporting BC](http://www2.gov.bc.ca/gov/content?id=FF80E0B985F245CEA62808414D78C41B). Click [here](https://github.com/bcgov/EnvReportBC-RepoList) for a complete list of our repositories on GitHub.
