@@ -2,18 +2,21 @@ language: r
 sudo: required
 dist: trusty
 
+r_build_args: --no-build-vignettes
+r_check_args: --no-build-vignettes
+
 addons:
   apt:
     packages:
       - libgdal-dev
       - libproj-dev
 
-notifications:
-  email:
-    on_success: change
-    on_failure: change
-
 r:
   - release
   - devel
   - oldrel
+
+notifications:
+  email:
+    on_success: change
+    on_failure: change
