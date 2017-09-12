@@ -1,9 +1,10 @@
-<div id="devex-badge"><a rel="Delivery" href="https://github.com/BCDevExchange/docs/blob/master/discussion/projectstates.md"><img alt="In production, but maybe in Alpha or Beta. Intended to persist and be supported." style="border-width:0" src="https://assets.bcdevexchange.org/images/badges/delivery.svg" title="In production, but maybe in Alpha or Beta. Intended to persist and be supported." /></a></div>
-
-[![Travis-CI Build Status](https://travis-ci.org/bcgov/bcgroundwater.svg?branch=master)](https://travis-ci.org/bcgov/bcgroundwater)
----
 
 # bcgroundwater
+
+<a rel="Delivery" href="https://github.com/BCDevExchange/docs/blob/master/discussion/projectstates.md"><img alt="In production, but maybe in Alpha or Beta. Intended to persist and be supported." style="border-width:0" src="https://assets.bcdevexchange.org/images/badges/delivery.svg" title="In production, but maybe in Alpha or Beta. Intended to persist and be supported." /></a> [![Travis-CI Build Status](https://travis-ci.org/bcgov/bcgroundwater.svg?branch=master)](https://travis-ci.org/bcgov/bcgroundwater)
+
+
+## Overview
 
 *Please note: the format of the data available for download from the [Observation Well Network tool](http://www.env.gov.bc.ca/wsd/data_searches/obswell/map/obsWells.html) has changed after an upgrade to some database infrastructure.  Work is ongoing in the [`fix-newdata`](https://github.com/bcgov/bcgroundwater/tree/fix-newdata) branch, where contributor [jayrbrown](https://github.com/jayrbrown) has created a new function `readGWLdata2` for importing data in the new format. See the [issue](https://github.com/bcgov/bcgroundwater/issues/5) for details.*
 
@@ -15,7 +16,7 @@ This package was developed by [Environmental Reporting BC](http://www2.gov.bc.ca
 to support our 2013 analysis of [trends in groundwater levels](http://www.env.gov.bc.ca/soe/indicators/water/groundwater-levels.html). 
 The code behind that analysis is available in its own GitHub [repository](https:/github.com/bcgov/groundwater-levels/).
 
-### Features
+## Features
 
 Core functions include:
 
@@ -27,7 +28,7 @@ Core functions include:
   [zyp](http://cran.r-project.org/web/packages/zyp/index.html) package.
 - Plot trends in groundwater levels
 
-### Installation
+## Installation
 
 You can install the package directly from this repository. To do so, you will 
 need the [devtools](https://github.com/hadley/devtools/) package:
@@ -50,7 +51,7 @@ for importing data from the new web tool, install from the [`fix-newdata`](https
 install_github("bcgov/bcgroundwater", ref = "fix-newdata")
 ```
 
-### Usage
+## Usage
 
 See the package [vignette](https://htmlpreview.github.com/?https://github.com/bcgov/bcgroundwater/master/inst/doc/bcgroundwater.html) 
 for a simple demonstration. Or, after installing the package, use:
@@ -59,7 +60,7 @@ for a simple demonstration. Or, after installing the package, use:
 browseVignettes("bcgroundwater")
 ```
 
-### Project Status
+## Project Status
 
 The package works as is for its intended purpose, which was to provide a set of 
 functions required for the analysis underlying the 
@@ -68,18 +69,18 @@ We are not actively developing it at this time, but you can check the
 [issues](https://github.com/bcgov/bcgroundwater/issues/) for things we would 
 like to fix or work on.
 
-### Getting Help or Reporting an Issue
+## Getting Help or Reporting an Issue
 
 To report bugs/issues/feature requests, please file an [issue](https://github.com/bcgov/bcgroundwater/issues/).
 
-### How to Contribute
+## How to Contribute
 
 If you would like to contribute to the package, please see our 
 [CONTRIBUTING](CONTRIBUTING.md) guidelines.
 
 Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
 
-### License
+## License
 
     Copyright 2015 Province of British Columbia
 
