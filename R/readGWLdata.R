@@ -122,3 +122,17 @@ format_gwl <- function(data, quiet) {
   
   return(welldf)
 }
+
+#' (DEFUNCT) Read in groundwater data from file downloaded from GWL tool
+#'
+#' Read in groundwater data from file downloaded from GWL tool
+#' @param path The path to the csv
+#' @param emsID The EMS ID of the well
+#' @export
+#' @return A dataframe of the groundwater level observations
+#' @examples \dontrun{
+#'
+#'}
+readGWLdata <- function(path, emsID = NULL) {
+  stop("'readGWLdata' is now defunct and has been replaced by 'get_gwl'")
+}
