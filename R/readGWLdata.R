@@ -23,7 +23,7 @@
 readGWLdata <- function(path, emsID = NULL) {
   
   if (!inherits(path, "textConnection") && !file.exists(path)) {
-    stop(paste0("The file ", path, "does not exist."))
+    stop(paste0("The file ", path, " does not exist."))
   }
   
   welldf <- read.csv(path, skip=5, row.names=NULL, stringsAsFactors=FALSE
