@@ -76,6 +76,8 @@ format_gwl <- function(data, quiet) {
   
   welldf <- read.csv(text = data[[1]], stringsAsFactors = FALSE)
   
+  welldf$myLocation <- gsub("OW", "", welldf$myLocation)
+  
   # For average data
   if("QualifiedTime" %in% names(welldf)) {
     welldf <- dplyr::rename(welldf, "Time" = "QualifiedTime")
