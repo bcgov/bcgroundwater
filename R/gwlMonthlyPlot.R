@@ -41,7 +41,7 @@ gwlMonthlyPlot <- function(dataframe, splines=TRUE, last12=TRUE, save=FALSE, pat
                                    , na.rm=TRUE))
   
   data.last.12 <- tail(dataframe[,c("Date","dev_med_GWL")],12)
-  row.names(data.last.12) <- 1:12
+  #row.names(data.last.12) <- 1:12
   
   if (splines) {
     splines.df <- as.data.frame(spline(as.numeric(data$month), data$dev_med
