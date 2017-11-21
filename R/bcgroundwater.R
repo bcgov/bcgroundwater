@@ -19,4 +19,6 @@
 #' @docType package
 #' @author Andy Teucher \email{andy.teucher@@gov.bc.ca}
 #' @name bcgroundwater
+#' 
+#' @importFrom dplyr "%>%"
 NULL
