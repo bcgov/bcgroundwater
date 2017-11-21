@@ -15,36 +15,35 @@
 #' Assigns each reading to a month; sometimes there are several readings in a
 #' month that may be better assigned to a different month if they are at the 
 #' border.  Does not estimate values for months where there were 0 observations.
-#' @import dplyr
-#' @importFrom lubridate year month round_date floor_date
 #' 
 #' @param df data frame with columns EMS_ID, Well_Num, Date, GWL
-#' @export
+#' 
 #' @return a data frame with one value per month. Does not estimate values 
 #'         for months where there were 0 observations.
 #' @examples \dontrun{
 #'
 #'}
+#' @export
 monthlyValues <- function(df) {
   
   if (!is.data.frame(df)) stop("df must be a dataframe")
-   
+
   monthlywell <- df %>%
-    group_by(EMS_ID, Well_Num, Year=year(Date)
-             , Month = month(Date)) %>%
-    mutate(Date = if (n() < 5) {
-      lubridate::round_date(Date, "month")
-    } else {
-      lubridate::floor_date(Date, "month")
-    }
-    ) %>% ungroup() %>% 
-    group_by(EMS_ID, Well_Num, Date) %>% 
-    summarize(med_GWL = median(GWL), 
-              nReadings = n()) %>% 
-    mutate(Year = year(Date), Month = month(Date)) %>%
-    ungroup() %>% group_by(EMS_ID, Well_Num, Year) %>%
-    mutate(dev_med_GWL = med_GWL-mean(med_GWL)) %>%
-    ungroup()
+    dplyr::group_by(EMS_ID, Well_Num, 
+                    Year = lubridate::year(Date),
+                    Month = lubridate::month(Date)) %>%
+    dplyr::mutate(Date = dplyr::case_when(length(Well_Num) < 5 ~ lubridate::round_date(Date, "month"),
+                                          length(Well_Num) >= 5 ~ lubridate::floor_date(Date, "month"))) %>%
+    dplyr::ungroup() %>% 
+    dplyr::group_by(EMS_ID, Well_Num, Date) %>% 
+    dplyr::summarize(med_GWL = stats::median(GWL), 
+                     nReadings = length(Well_Num)) %>% 
+    dplyr::mutate(Year = lubridate::year(Date), 
+                  Month = lubridate::month(Date)) %>%
+    dplyr::ungroup() %>% 
+    dplyr::group_by(EMS_ID, Well_Num, Year) %>%
+    dplyr::mutate(dev_med_GWL = med_GWL - mean(med_GWL)) %>%
+    dplyr::ungroup()
 
 #   TODO: May want to make these values flipped in sign, then would have to 
 #   remove the scale_y_reverse in gwlMonthlyPlot 
