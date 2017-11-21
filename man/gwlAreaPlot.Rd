@@ -38,4 +38,3 @@ A ggplot2 object
 An area plot (hydrograph) of groundwater levels, with trend line of a 
 given slope and intercept, optionally with interpolated values shown.
 }
-
