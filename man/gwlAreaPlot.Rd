@@ -24,7 +24,7 @@ time series were interpolated}
 
 \item{save}{Save the graph to file?}
 
-\item{path}{Where to save the graph if save=TRUE}
+\item{path}{Where to save the graph if \code{save = TRUE}}
 
 \item{mkperiod}{the period (monthly or annual) the Mann-Kendall test was 
 performed on}
