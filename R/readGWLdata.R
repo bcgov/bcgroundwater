@@ -18,7 +18,10 @@
 #' Go to <http://www.env.gov.bc.ca/wsd/data_searches/obswell/map/> to find your
 #' well of interest.
 #' 
-#' Daily averages (\code{daily}) are calculated based on all Validated data.
+#' Note that well water levels are measured in meters below the ground. Thus higher values represent deeper levels. Therefore \code{Historical_Daily_Minimum} values will be greater than \code{Historical_Daily_Maximum} values, as they represent a lower water level.
+#' 
+#' Daily averages (\code{which = 'daily'}) are pre-calculated. Note that they
+#' only cover days marked as "Validated" in the full hourly dataset.
 #' 
 #' @param well Character. The well number, accepts either \code{OW000} or
 #'   \code{000} format
@@ -31,8 +34,9 @@
 #' 
 #' @examples \dontrun{
 #' 
-#' all_309 <- get_gwl_data(well = 309)
-#' recent_309 <- get_gwl_data(well = "OW309", which = "recent")
+#' all_309 <- get_gwl(well = 309)
+#' recent_309 <- get_gwl(well = "OW309", which = "recent")
+#' daily_avg_309 <- get_gwl(well = "OW309", which = "daily")
 #'}
 #'
 #' @export
@@ -83,7 +87,7 @@ format_gwl <- function(data, quiet) {
     welldf <- dplyr::rename(welldf, "Time" = "QualifiedTime")
     welldf$Approval <- "Validated"
   }
-
+  
   # Merge with mean/min/max  
   welldf$Time <- as.POSIXct(welldf$Time, tz="UTC")
   welldf$dummydate <- paste0("1800-", format(welldf$Time, "%m-%d"))
@@ -91,6 +95,8 @@ format_gwl <- function(data, quiet) {
   well_avg <- read.csv(text = data[[2]], stringsAsFactors = FALSE)
   well_avg <- well_avg[, names(well_avg)[names(well_avg) != "year"]]
   well_avg <- tidyr::spread(well_avg, "type", "Value")
+  
+  
   
   welldf <- dplyr::left_join(welldf, 
                              well_avg[, c("dummydate", "max", "mean", "min")],
@@ -136,5 +142,6 @@ format_gwl <- function(data, quiet) {
 #'
 #'}
 readGWLdata <- function(path, emsID = NULL) {
-  stop("'readGWLdata' is now defunct and has been replaced by 'get_gwl'")
+  stop("'readGWLdata' is now defunct and has been replaced by 'get_gwl'.",
+       "\nSee ?get_gwl for more details.")
 }

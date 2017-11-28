@@ -25,13 +25,17 @@ Go to <http://www.env.gov.bc.ca/wsd/data_searches/obswell/map/> to find your
 well of interest.
 }
 \details{
-Daily averages (\code{daily}) are calculated based on all Validated data.
+Note that well water levels are measured in meters below the ground. Thus higher values represent deeper levels. Therefore \code{Historical_Daily_Minimum} values will be greater than \code{Historical_Daily_Maximum} values, as they represent a lower water level.
+
+Daily averages (\code{which = 'daily'}) are pre-calculated. Note that they
+only cover days marked as "Validated" in the full hourly dataset.
 }
 \examples{
 \dontrun{
 
-all_309 <- get_gwl_data(well = 309)
-recent_309 <- get_gwl_data(well = "OW309", which = "recent")
+all_309 <- get_gwl(well = 309)
+recent_309 <- get_gwl(well = "OW309", which = "recent")
+daily_avg_309 <- get_gwl(well = "OW309", which = "daily")
 }
 
 }
