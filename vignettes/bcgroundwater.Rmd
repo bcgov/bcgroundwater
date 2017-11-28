@@ -1,32 +1,48 @@
 ---
 title: "Using the bcgroundwater package"
 date: "`r Sys.Date()`"
-output_format: 
-  rmarkdown::html_vignette
+output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Using the bcgroundwater package}
+  %\VignetteIndexEntry{bcgroundwater}
   %\VignetteEngine{knitr::rmarkdown}
-  \usepackage[utf8]{inputenc}
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r set-options, echo=FALSE}
 knitr::opts_chunk$set(fig.width = 6, fig.height = 4)
 ```
 
-First, download some data for a well of interest from the B.C. Observation Well
-Network [interactive map tool](http://www.env.gov.bc.ca/wsd/data_searches/obswell/map/obsWells.html). 
-We have downloaded the data from Observation Well 309 and saved it.
+First, decide which well is your well of interest from the B.C. Observation Well
+Network [interactive map tool](http://www.env.gov.bc.ca/wsd/data_searches/obswell/map/obsWells.html).
 
-Load the package, and read in the data:
+Here we will work with data from Observation Well **309**.
+
+First load the package:
 
 ```{r}
-library("bcgroundwater")
-data <- readGWLdata("gwl_report.csv", emsID = "E208036")
+library(bcgroundwater)
 ```
 
-The data will be in the following format: 
+Now you can download data on the well (this make take a few moments).
+
+If you are interested in daily averages, specify `which = "daily"`
 
 ```{r}
+daily_data <- get_gwl(well = 309, which = "daily")
+head(daily_data)
+```
+
+If you are interested only in recent hourly data (within the last two years), specify `which = "recent"`
+
+```{r}
+recent_data <- get_gwl(well = 309, which = "recent")
+head(recent_data)
+```
+
+Otherwise, by default `which = "all"` which downloads all hourly data for that well:
+
+```{r}
+data <- get_gwl(well = 309)
 head(data)
 ```
 
@@ -38,7 +54,7 @@ head(monthly_data)
 ```
 
 You can plot the seasonal patterns in the water levels of the well with
-`gwlMonthlyPlot()`. This displays the mean deviation from the yearly average, 
+`gwlMonthlyPlot()`. This displays the mean deviation from the yearly average,
 as well as the range of variation:
 
 ```{r}
@@ -46,8 +62,8 @@ monthlyplot <- gwlMonthlyPlot(monthly_data, last12 = TRUE)
 plot(monthlyplot)
 ```
 
-To perform the analysis, you will need to generate a full regular time series 
-with no gaps in the dates. `makeWellTS()` does this for you, interpolating the 
+To perform the analysis, you will need to generate a full regular time series
+with no gaps in the dates. `makeWellTS()` does this for you, interpolating the
 missing values:
 
 ```{r, fig.width=6, fig.height=4}
@@ -55,23 +71,22 @@ full_monthly_data <- makeWellTS(monthly_data)
 head(monthly_data)
 ```
 
-For trend analysis over a long time series, it is often beneficial to test for 
-trends with yearly averages, otherwise serial autocorrelation can be a problem 
+For trend analysis over a long time series, it is often beneficial to test for
+trends with yearly averages, otherwise serial autocorrelation can be a problem
 (even with pre-whitening). These can be calculated easily using the `dplyr`
 package:
 
 ```{r}
-library("dplyr")
+library(dplyr)
 
 annual_data <- full_monthly_data %>%
-  select(-yearmonth) %>% 
+  select(-yearmonth) %>%
   group_by(EMS_ID, Well_Num, Year) %>%
-  summarize(nReadings = n()
-            , mean_GWL = mean(med_GWL)
-            , SD = sd(med_GWL)
-            , med_GWL = median(med_GWL)
-            , q95_GWL = quantile(med_GWL, 0.95)) %>% 
-  as.data.frame(stringsAsFactors = FALSE)
+  summarize(nReadings = n(),
+            mean_GWL = mean(med_GWL),
+            SD = sd(med_GWL),
+            med_GWL = median(med_GWL),
+            q95_GWL = quantile(med_GWL, 0.95))
 ```
 
 You can now calculate the trend:
@@ -85,8 +100,8 @@ Finally, plot the time series with the trend overlaid (we will use the results
 from the yuepilon method), optionally with interpolated values overlaid:
 
 ```{r, warning=FALSE}
-trend_plot <- gwlAreaPlot(full_monthly_data, trend = trends$trend[1], 
-                          intercept = trends$intercept[1], sig = trends$sig[1], 
+trend_plot <- gwlAreaPlot(full_monthly_data, trend = trends$trend[1],
+                          intercept = trends$intercept[1], sig = trends$sig[1],
                           state = "Stable", mkperiod = "annual", showInterpolated = TRUE)
 plot(trend_plot)
 
