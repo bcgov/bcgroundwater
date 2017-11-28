@@ -14,8 +14,6 @@
 #'
 #' Create a graph of historical median monthly water level deviations from yearly 
 #' average with 5th and 95th percentiles
-#' @import dplyr ggplot2
-#' @importFrom lubridate month
 #' 
 #' @param  dataframe dataframe containing 'Well_Num', 'Date', 'dev_med_GWL'
 #' @param  splines logical: smooth the line using splines?
@@ -28,13 +26,16 @@
 #' @examples \dontrun{
 #'
 #'}
+#'
+#' @import ggplot2
+#' @export
 gwlMonthlyPlot <- function(dataframe, splines=TRUE, last12=TRUE, save=FALSE, path="./", opts=NULL) {
   
   wellNum <- dataframe$Well_Num[1]
   
   data <- dataframe %>%
-    group_by(month=month(Date, label=TRUE)) %>%
-    summarize(dev_med = mean(dev_med_GWL, na.rm=TRUE)
+    dplyr::group_by(month=lubridate::month(Date, label=TRUE)) %>%
+    dplyr::summarize(dev_med = mean(dev_med_GWL, na.rm=TRUE)
               , dev_Q5 = quantile(dev_med_GWL, prob=0.05
                                   , na.rm=TRUE)
               , dev_Q95 = quantile(dev_med_GWL, prob=0.95
