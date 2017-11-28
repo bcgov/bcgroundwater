@@ -27,11 +27,11 @@ test_that("get_gwl retrieves `daily` data", {
   expect_equal(length(unique(g$Date)), nrow(g))
 })
 
-test_that("get_gwl retrieves correct data", {
+test_that("get_gwl `all` retrieves correct data", {
   expect_message(g <- get_gwl(well = "309"), "Retrieving data...")
   
   expect_equal(g$Date[1], as.POSIXct("1989-10-19 12:00:00", tz = "UTC"))
-  expect_equal(g$GWL[1], 23.971)
+  expect_equal(g$GWL[1], 23.971, tolerance = 0.0001)
   expect_true(all(g$Historical_Daily_Minimum >= 
                     g$Historical_Daily_Average, na.rm = TRUE))
   expect_true(all(g$Historical_Daily_Maximum <= 
@@ -40,5 +40,26 @@ test_that("get_gwl retrieves correct data", {
                     g$Historical_Daily_Minimum, na.rm = TRUE))
 
   expect_equal(g$GWL[g$Date == as.POSIXct("1990-03-01 12:00:00", tz = "UTC")],
-               24.429)
+               24.429, tolerance = 0.0001)
+  expect_equal(g$GWL[g$Date == as.POSIXct("2015-03-01 12:00:00", tz = "UTC")],
+               23.8924, tolerance = 0.0001)
+})
+
+# Cannot test recent data because constantly changing the start date...
+test_that("get_gwl `daily` retrieves correct data", {
+  expect_message(g <- get_gwl(well = "309", which = "daily"), "Retrieving data...")
+  
+  expect_equal(g$Date[1], as.POSIXct("1989-10-19", tz = "UTC"))
+  expect_equal(g$GWL[1], 23.971, tolerance = 0.0001)
+  expect_true(all(g$Historical_Daily_Minimum >= 
+                    g$Historical_Daily_Average, na.rm = TRUE))
+  expect_true(all(g$Historical_Daily_Maximum <= 
+                    g$Historical_Daily_Average, na.rm = TRUE))
+  expect_true(all(g$Historical_Daily_Maximum <= 
+                    g$Historical_Daily_Minimum, na.rm = TRUE))
+  
+  expect_equal(g$GWL[g$Date == as.POSIXct("1990-03-01", tz = "UTC")],
+               24.429, tolerance = 0.0001)
+  expect_equal(g$GWL[g$Date == as.POSIXct("2015-03-01", tz = "UTC")],
+               23.89208, tolerance = 0.0001)
 })
