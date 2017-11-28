@@ -32,25 +32,25 @@
 gwlMonthlyPlot <- function(dataframe, splines = TRUE, last12 = TRUE, 
                            save = FALSE, path = "./", opts= NULL) {
   
-  wellNum <- dataframe$Well_Num[1]
+  WellNum <- dataframe$Well_Num[1]
   
   data <- dataframe %>%
     dplyr::group_by(month = lubridate::month(.data$Date, label = TRUE)) %>%
     dplyr::summarize(dev_med = mean(.data$dev_med_GWL, na.rm = TRUE),
-                     dev_Q5 = quantile(.data$dev_med_GWL, prob = 0.05,
+                     dev_Q5 = stats::quantile(.data$dev_med_GWL, prob = 0.05,
                                        na.rm = TRUE),
-                     dev_Q95 = quantile(.data$dev_med_GWL, prob = 0.95,
+                     dev_Q95 = stats::quantile(.data$dev_med_GWL, prob = 0.95,
                                         na.rm = TRUE))
   
-  data.last.12 <- tail(dataframe[, c("Date","dev_med_GWL")], 12)
+  data.last.12 <- utils::tail(dataframe[, c("Date","dev_med_GWL")], 12)
   #row.names(data.last.12) <- 1:12
   
   if (splines) {
-    splines.df <- as.data.frame(spline(as.numeric(data$month), data$dev_med,
+    splines.df <- as.data.frame(stats::spline(as.numeric(data$month), data$dev_med,
                                        method = "fmm"))
-    splines.df$y_Q5 <- spline(as.numeric(data$month), data$dev_Q5,
+    splines.df$y_Q5 <- stats::spline(as.numeric(data$month), data$dev_Q5,
                               method = "fmm")$y
-    splines.df$y_Q95 <- spline(as.numeric(data$month), data$dev_Q95,
+    splines.df$y_Q95 <- stats::spline(as.numeric(data$month), data$dev_Q95,
                                method = "fmm")$y
     names(splines.df) <- names(data)
     data <- splines.df

@@ -78,7 +78,7 @@ format_gwl <- function(data, quiet) {
   
   if(!quiet) message("Formatting data...")
   
-  welldf <- read.csv(text = data[[1]], stringsAsFactors = FALSE)
+  welldf <- utils::read.csv(text = data[[1]], stringsAsFactors = FALSE)
   
   welldf$myLocation <- gsub("OW", "", welldf$myLocation)
   
@@ -92,7 +92,7 @@ format_gwl <- function(data, quiet) {
   welldf$Time <- as.POSIXct(welldf$Time, tz="UTC")
   welldf$dummydate <- paste0("1800-", format(welldf$Time, "%m-%d"))
   
-  well_avg <- read.csv(text = data[[2]], stringsAsFactors = FALSE)
+  well_avg <- utils::read.csv(text = data[[2]], stringsAsFactors = FALSE)
   well_avg <- well_avg[, names(well_avg)[names(well_avg) != "year"]]
   well_avg <- tidyr::spread(well_avg, "type", "Value")
   

@@ -49,21 +49,23 @@ makeWellTS <- function(df) {
   x <- stats::ts(well.ts$med_GWL, frequency = 12)
   
   #Check for convergence fitting the time series model
-  struct <- suppressWarnings(StructTS(x))
+  struct <- suppressWarnings(stats::StructTS(x))
   if (struct$code != 0) {
-    print(paste0("Convergence code for well ", well, " returned ", struct$code
-                 , ": ", struct$message))
+    print(paste0("Convergence code for well ", well, " returned ", struct$code,
+                 ": ", struct$message))
   }
   
-  well.ts$fit <- as.vector(ts(rowSums(tsSmooth(struct)[, -2])))
+  well.ts$fit <- as.vector(stats::ts(rowSums(stats::tsSmooth(struct)[, -2])))
   # Fill in missing values
   
   well.ts <- dplyr::mutate(well.ts, 
-                           Date = zoo::as.Date(yearmonth),
-                           Year = lubridate::year(yearmonth),
-                           Month = lubridate::month(yearmonth),
-                           med_GWL = replace(med_GWL, is.na(med_GWL), fit[is.na(med_GWL)]),
-                           nReadings = replace(nReadings, is.na(nReadings), 0))
+                           Date = zoo::as.Date(.data$yearmonth),
+                           Year = lubridate::year(.data$yearmonth),
+                           Month = lubridate::month(.data$yearmonth),
+                           med_GWL = replace(.data$med_GWL, 
+                                             is.na(.data$med_GWL), 
+                                             .data$fit[is.na(.data$med_GWL)]),
+                           nReadings = replace(.data$nReadings, is.na(.data$nReadings), 0))
   
   for (col in c("EMS_ID", "Well_Num")) {
     well.ts[, col] <- zoo::na.locf(well.ts[, col])

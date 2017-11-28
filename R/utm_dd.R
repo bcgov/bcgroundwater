@@ -37,7 +37,7 @@ utm_dd <- function(zone = NULL, easting = NULL, northing = NULL,
     # TODO Vectorise by grouping input by datum and zone
     # requires a one-row dataframe with zone, easting, northing, datum (in that order)
     
-    utm <- sP::SpatialPoints(d[2:3], 
+    utm <- sp::SpatialPoints(d[2:3], 
                              proj4string = CRS(paste0("+proj=utm +datum=", d[4], " +zone=", d[1])))
     sp <- sp::spTransform(utm, CRS("+proj=longlat"))  
     coordinates(sp)
@@ -66,13 +66,14 @@ utm_dd <- function(zone = NULL, easting = NULL, northing = NULL,
       utms <- data[c(key, zone, easting, northing, datum)]
     }
     
-    utms <- na.omit(utms)
+    utms <- stats::na.omit(utms)
     
     longlat <- utms %>%
-      select(c(2:5)) %>%
-      dplyr::rowwise() %>%
-      dplyr::do(data.frame(get_dd(.))) %>%
-      ungroup
+      dplyr::select(c(2:5)) %>%
+      dplyr::rowwise()
+    
+    longlat <- dplyr::do(data.frame(get_dd(longlat))) %>%
+      ungroup()
     
     longlat <- cbind(utms[, key], longlat)
     

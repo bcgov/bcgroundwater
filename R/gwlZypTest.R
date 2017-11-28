@@ -38,7 +38,7 @@ gwlZypTest <- function(dataframe, wells = NULL, byID, col, method = "both") {
   }
   
   # create an empty dataframe to store results
-  mk.results <- data.frame(ID=character(), test_type = character(),
+  mk.results <- data.frame(ID = character(), test_type = character(),
                            lbound = numeric(), trend = numeric(), trendp = numeric(),
                            ubound = numeric(), tau = numeric(), sig = numeric(),
                            nruns = numeric(), autocor = numeric(),
@@ -48,13 +48,13 @@ gwlZypTest <- function(dataframe, wells = NULL, byID, col, method = "both") {
   for (well in wells) {
     d <- dataframe[[col]][dataframe[[byID]] == well]
     if (method == "both" | method == "yuepilon") {
-      zyp.yuepilon <- zup::zyp.trend.vector(d, method = "yuepilon", conf.intervals = TRUE)
+      zyp.yuepilon <- zyp::zyp.trend.vector(d, method = "yuepilon", conf.intervals = TRUE)
       
       mk.results[nrow(mk.results) + 1, 1:2] <- c(well, "yuepilon")
       mk.results[nrow(mk.results), 3:13] <- zyp.yuepilon
     }
     if (method == "both" | method == "zhang") {
-      zyp.zhang <- zup::zyp.trend.vector(d, method = "zhang", conf.intervals = TRUE)
+      zyp.zhang <- zyp::zyp.trend.vector(d, method = "zhang", conf.intervals = TRUE)
       
       mk.results[nrow(mk.results) + 1, 1:2] <- c(well, "zhang")
       mk.results[nrow(mk.results), 3:13] <- zyp.zhang

@@ -29,20 +29,22 @@ monthlyValues <- function(df) {
   if (!is.data.frame(df)) stop("df must be a dataframe")
 
   monthlywell <- df %>%
-    dplyr::group_by(EMS_ID, Well_Num, 
-                    Year = lubridate::year(Date),
-                    Month = lubridate::month(Date)) %>%
-    dplyr::mutate(Date = dplyr::case_when(length(Well_Num) < 5 ~ lubridate::round_date(Date, "month"),
-                                          length(Well_Num) >= 5 ~ lubridate::floor_date(Date, "month"))) %>%
+    dplyr::group_by(.data$EMS_ID, .data$Well_Num, 
+                    Year = lubridate::year(.data$Date),
+                    Month = lubridate::month(.data$Date)) %>%
+    dplyr::mutate(Date = dplyr::case_when(length(.data$Well_Num) < 5 ~ 
+                                            lubridate::round_date(.data$Date, "month"),
+                                          length(.data$Well_Num) >= 5 ~ 
+                                            lubridate::floor_date(.data$Date, "month"))) %>%
     dplyr::ungroup() %>% 
-    dplyr::group_by(EMS_ID, Well_Num, Date) %>% 
-    dplyr::summarize(med_GWL = stats::median(GWL), 
-                     nReadings = length(Well_Num)) %>% 
-    dplyr::mutate(Year = lubridate::year(Date), 
-                  Month = lubridate::month(Date)) %>%
+    dplyr::group_by(.data$EMS_ID, .data$Well_Num, .data$Date) %>% 
+    dplyr::summarize(med_GWL = stats::median(.data$GWL), 
+                     nReadings = length(.data$Well_Num)) %>% 
+    dplyr::mutate(Year = lubridate::year(.data$Date), 
+                  Month = lubridate::month(.data$Date)) %>%
     dplyr::ungroup() %>% 
-    dplyr::group_by(EMS_ID, Well_Num, Year) %>%
-    dplyr::mutate(dev_med_GWL = med_GWL - mean(med_GWL)) %>%
+    dplyr::group_by(.data$EMS_ID, .data$Well_Num, .data$Year) %>%
+    dplyr::mutate(dev_med_GWL = .data$med_GWL - mean(.data$med_GWL)) %>%
     dplyr::ungroup()
 
 #   TODO: May want to make these values flipped in sign, then would have to 
