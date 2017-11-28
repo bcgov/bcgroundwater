@@ -10,16 +10,16 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 
-#' Get full time series with missing values interpolated  
+#'Get full time series with missing values interpolated
 #'
-#' Takes a dataframe with monthly values and creates a full time series, interpolating
-#' missing values.
-#' 
-#' @param df A monthly dataframe created by `monthlyValues`. Must minimally
-#'   include fields `EMS_ID`, `Well_Num` `Date`, 'med_GWL`, `nReadings`
-#'   
-#' @return A full monthly time series with interpolated missing values, 
-#'         retaining all of the columns in the original data frame.
+#'Takes a dataframe with monthly values and creates a full time series, 
+#'interpolating missing values.
+#'
+#'@param df A monthly dataframe created by `monthlyValues`. Must minimally 
+#'  include fields `EMS_ID`, `Well_Num` `Date`, 'med_GWL`, `nReadings`
+#'  
+#'@return A full monthly time series with interpolated missing values, retaining
+#'  all of the columns in the original data frame.
 #' @examples \dontrun{
 #'
 #'}

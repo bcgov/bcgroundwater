@@ -14,18 +14,22 @@
 
 
 #' Retrive and format groundwater data from BC Government GWL site
-#'
-#' Go to <http://www.env.gov.bc.ca/wsd/data_searches/obswell/map/> to find your
+#' 
+#' Go to <http://www.env.gov.bc.ca/wsd/data_searches/obswell/map/> to find your 
 #' well of interest.
 #' 
-#' Note that well water levels are measured in meters below the ground. Thus higher values represent deeper levels. Therefore \code{Historical_Daily_Minimum} values will be greater than \code{Historical_Daily_Maximum} values, as they represent a lower water level.
+#' Note that well water levels are measured in meters below the ground. Thus 
+#' higher values represent deeper levels. Therefore 
+#' \code{Historical_Daily_Minimum} values will be greater than 
+#' \code{Historical_Daily_Maximum} values, as they represent a lower water 
+#' level.
 #' 
-#' Daily averages (\code{which = 'daily'}) are pre-calculated. Note that they
+#' Daily averages (\code{which = 'daily'}) are pre-calculated. Note that they 
 #' only cover days marked as "Validated" in the full hourly dataset.
 #' 
-#' @param well Character. The well number, accepts either \code{OW000} or
+#' @param well Character. The well number, accepts either \code{OW000} or 
 #'   \code{000} format
-#' @param which Character. Which data to retrieve \code{all} hourly data,
+#' @param which Character. Which data to retrieve \code{all} hourly data, 
 #'   \code{recent} hourly data, or all \code{daily} averages.
 #' @param url Character. Override the url location of the data.
 #' @param quiet Logical. Suppress progress messages?

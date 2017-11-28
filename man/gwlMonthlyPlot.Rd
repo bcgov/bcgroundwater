@@ -24,8 +24,8 @@ gwlMonthlyPlot(dataframe, splines = TRUE, last12 = TRUE, save = FALSE,
 A ggplot object
 }
 \description{
-Create a graph of historical median monthly water level deviations from yearly 
-average with 5th and 95th percentiles
+Create a graph of historical median monthly water level deviations from
+yearly average with 5th and 95th percentiles
 }
 \examples{
 \dontrun{

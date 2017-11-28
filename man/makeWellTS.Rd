@@ -7,16 +7,16 @@
 makeWellTS(df)
 }
 \arguments{
-\item{df}{A monthly dataframe created by `monthlyValues`. Must minimally
+\item{df}{A monthly dataframe created by `monthlyValues`. Must minimally 
 include fields `EMS_ID`, `Well_Num` `Date`, 'med_GWL`, `nReadings`}
 }
 \value{
-A full monthly time series with interpolated missing values, 
-        retaining all of the columns in the original data frame.
+A full monthly time series with interpolated missing values, retaining
+ all of the columns in the original data frame.
 }
 \description{
-Takes a dataframe with monthly values and creates a full time series, interpolating
-missing values.
+Takes a dataframe with monthly values and creates a full time series, 
+interpolating missing values.
 }
 \examples{
 \dontrun{

@@ -11,9 +11,9 @@
 # See the License for the specific language governing permissions and limitations under the License.
 
 #' Create a graph of historical monthly water level deviations
-#'
-#' Create a graph of historical median monthly water level deviations from yearly 
-#' average with 5th and 95th percentiles
+#' 
+#' Create a graph of historical median monthly water level deviations from
+#' yearly average with 5th and 95th percentiles
 #' 
 #' @param  dataframe dataframe containing 'Well_Num', 'Date', 'dev_med_GWL'
 #' @param  splines logical: smooth the line using splines?

@@ -10,16 +10,16 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 
-#' Obtain a single groundwater level for each month
+#'Obtain a single groundwater level for each month
 #'
-#' Assigns each reading to a month; sometimes there are several readings in a
-#' month that may be better assigned to a different month if they are at the 
-#' border.  Does not estimate values for months where there were 0 observations.
-#' 
-#' @param df data frame with columns EMS_ID, Well_Num, Date, GWL
-#' 
-#' @return a data frame with one value per month. Does not estimate values 
-#'         for months where there were 0 observations.
+#'Assigns each reading to a month; sometimes there are several readings in a 
+#'month that may be better assigned to a different month if they are at the 
+#'border.  Does not estimate values for months where there were 0 observations.
+#'
+#'@param df data frame with columns EMS_ID, Well_Num, Date, GWL
+#'  
+#'@return a data frame with one value per month. Does not estimate values for
+#'  months where there were 0 observations.
 #' @examples \dontrun{
 #'
 #'}
