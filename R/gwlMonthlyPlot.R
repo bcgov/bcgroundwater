@@ -35,11 +35,11 @@ gwlMonthlyPlot <- function(dataframe, splines = TRUE, last12 = TRUE,
   wellNum <- dataframe$Well_Num[1]
   
   data <- dataframe %>%
-    dplyr::group_by(month = lubridate::month(Date, label = TRUE)) %>%
-    dplyr::summarize(dev_med = mean(dev_med_GWL, na.rm = TRUE),
-                     dev_Q5 = quantile(dev_med_GWL, prob = 0.05,
+    dplyr::group_by(month = lubridate::month(.data$Date, label = TRUE)) %>%
+    dplyr::summarize(dev_med = mean(.data$dev_med_GWL, na.rm = TRUE),
+                     dev_Q5 = quantile(.data$dev_med_GWL, prob = 0.05,
                                        na.rm = TRUE),
-                     dev_Q95 = quantile(dev_med_GWL, prob = 0.95,
+                     dev_Q95 = quantile(.data$dev_med_GWL, prob = 0.95,
                                         na.rm = TRUE))
   
   data.last.12 <- tail(dataframe[, c("Date","dev_med_GWL")], 12)
@@ -56,25 +56,28 @@ gwlMonthlyPlot <- function(dataframe, splines = TRUE, last12 = TRUE,
     data <- splines.df
   }
   
-  plot.monthly <- ggplot(data = data, aes(x = as.numeric(month), y = dev_med)) + 
-    geom_ribbon(aes(ymin = dev_Q5, ymax = dev_Q95, fill = "#1E90FF"), alpha = 0.2) + 
-    geom_line(aes(colour = "#1E90FF", alpha = 0.4), size = 1) + 
+  plot.monthly <- ggplot(data = data, aes_string(x = "month", y = "dev_med")) + 
+    geom_ribbon(aes_string(ymin = "dev_Q5", ymax = "dev_Q95", fill = "''"), alpha = 0.2) + 
+    geom_line(aes_string(colour = "''"), alpha = 0.4, size = 1) + 
     labs(title = "Monthly groundwater level deviation", x = "Month",
          y = "Difference from yearly average GWL (m)") + 
     theme(panel.background = element_rect(fill = "white"),
           line = element_line(colour = "grey50"),
           text = element_text(colour = "grey50"),
           legend.position = "top", legend.box = "vertical",
-          legend.box.just = "left"
+          legend.box.just = "left",
+          legend.spacing = unit(0, "pt"),
+          plot.title = element_text(hjust = 0.5)
           #axis.text.x = element_text(angle = 45) # May need if using full month names
-          ) + 
+    ) + 
     scale_y_reverse() +
     scale_x_continuous(breaks = 1:12, labels = month.abb) + 
-    scale_fill_identity(name = '', guide = 'legend',
-                        labels = c('Range of 90% of water levels')) + 
-    scale_colour_identity(name = '',
-                          labels = c("Mean deviation from yearly average"),
-                          guide = "legend") + 
+    scale_colour_manual(name = '', values = "#1E90FF",
+                        labels = c("Mean deviation from yearly average"),
+                        guide = "legend") +
+    scale_fill_manual(name = '', values = "#1E90FF", guide = 'legend',
+                      labels = c('Range of 90% of water levels')) +
+
     scale_alpha_identity(name = '', labels = NA) + 
     opts
   
