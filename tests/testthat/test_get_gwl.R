@@ -14,7 +14,7 @@ test_that("get_gwl retrieves actual data", {
 
 test_that("get_gwl retrieves `all` data", {
   expect_error(g <- get_gwl(well = "309"), NA)
-  expect_true(min(g$Date) < as.Date("2015-01-01"))
+  expect_true(min(g$Date) < as.POSIXct("2015-01-01", tz = "UTC"))
 })
 
 test_that("get_gwl retrieves `recent` data", {
