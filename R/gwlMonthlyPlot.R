@@ -27,7 +27,6 @@
 #'
 #'}
 #'
-#' @import ggplot2
 #' @export
 gwlMonthlyPlot <- function(dataframe, splines = TRUE, last12 = TRUE, 
                            save = FALSE, path = "./", opts= NULL) {

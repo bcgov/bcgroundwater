@@ -20,5 +20,9 @@
 #' @author Andy Teucher \email{andy.teucher@@gov.bc.ca}
 #' @name bcgroundwater
 #' 
+#' @import ggplot2 ggmap rgdal sp
+#' @importFrom rlang .data
 #' @importFrom dplyr "%>%"
 NULL
+
+# rgdal and sp for utm_dd()

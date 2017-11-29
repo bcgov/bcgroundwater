@@ -32,7 +32,6 @@
 #' 
 #' @return A ggplot2 object
 #' 
-#' @import ggplot2
 #' @export
 gwlAreaPlot <- function(dataframe, trend, intercept, state, sig, 
                         showInterpolated = FALSE, save = FALSE, 

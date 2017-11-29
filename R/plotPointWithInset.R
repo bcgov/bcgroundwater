@@ -14,7 +14,7 @@
 #'
 #' Plot a point on a map with an inset in the top right corner showing an 
 #' overview of a larger area.
-#' @import ggmap ggplot2
+#' 
 #' @param  long longitude (dd) of point
 #' @param  lat latitude (dd) of point
 #' @param  pointColour the colour of the point
