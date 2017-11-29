@@ -73,7 +73,7 @@ utm_dd <- function(zone = NULL, easting = NULL, northing = NULL,
       dplyr::rowwise()
     
     longlat <- dplyr::do(data.frame(get_dd(longlat))) %>%
-      ungroup()
+      dplyr::ungroup()
     
     longlat <- cbind(utms[, key], longlat)
     
