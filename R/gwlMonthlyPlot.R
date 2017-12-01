@@ -29,7 +29,7 @@
 #'
 #' @export
 gwlMonthlyPlot <- function(dataframe, splines = TRUE, last12 = TRUE, 
-                           save = FALSE, path = "./", opts= NULL) {
+                           save = FALSE, path = "./", opts = NULL) {
   
   WellNum <- dataframe$Well_Num[1]
   
