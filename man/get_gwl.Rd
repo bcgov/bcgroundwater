@@ -4,7 +4,8 @@
 \alias{get_gwl}
 \title{Retrive and format groundwater data from BC Government GWL site}
 \usage{
-get_gwl(well, which = "all", url = NULL, quiet = FALSE)
+get_gwl(well, which = c("all", "recent", "daily"), url = NULL,
+  quiet = FALSE)
 }
 \arguments{
 \item{well}{Character. The well number, accepts either \code{OW000} or 

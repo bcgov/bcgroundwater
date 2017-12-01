@@ -44,9 +44,10 @@
 #'}
 #'
 #' @export
-get_gwl <- function(well, which = "all", url = NULL, quiet = FALSE) {
+get_gwl <- function(well, which = c("all", "recent", "daily"), url = NULL, quiet = FALSE) {
   
-  if(!(which %in% c("all", "recent", "daily"))) stop("type must be either 'all', 'recent', or 'daily'.")
+  which <- arg_match(which)
+  
   if(which == "all") which <- "data"
   if(which == "daily") which <- "average"
   
