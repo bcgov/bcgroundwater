@@ -32,6 +32,10 @@
 #'}
 utm_dd <- function(zone = NULL, easting = NULL, northing = NULL, 
                    datum = "NAD83", data = NULL, key = NULL) {
+  
+  if (!requireNamespace("rgdal") || !requireNamespace("sp")) {
+    stop("You need the 'sp' and 'rgdal' packages installed to use this function")
+  }
 
   get_dd <- function(d) {
     # TODO Vectorise by grouping input by datum and zone

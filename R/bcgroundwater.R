@@ -24,5 +24,3 @@
 #' @importFrom rlang .data
 #' @importFrom dplyr "%>%"
 NULL
-
-# rgdal and sp for utm_dd()
