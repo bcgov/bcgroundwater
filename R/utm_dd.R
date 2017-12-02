@@ -42,9 +42,9 @@ utm_dd <- function(zone = NULL, easting = NULL, northing = NULL,
     # requires a one-row dataframe with zone, easting, northing, datum (in that order)
     
     utm <- sp::SpatialPoints(d[2:3], 
-                             proj4string = CRS(paste0("+proj=utm +datum=", d[4], " +zone=", d[1])))
-    sp <- sp::spTransform(utm, CRS("+proj=longlat"))  
-    coordinates(sp)
+                             proj4string = sp::CRS(paste0("+proj=utm +datum=", d[4], " +zone=", d[1])))
+    sp <- sp::spTransform(utm, sp::CRS("+proj=longlat"))  
+    sp::coordinates(sp)
     
   }
   
