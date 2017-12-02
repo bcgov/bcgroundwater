@@ -11,22 +11,27 @@
 # See the License for the specific language governing permissions and limitations under the License.
 
 #' Perform Mann-Kendall trend test on many wells
-#'
-#' Uses the zyp package to calculate Mann-Kendall trend test on pre-whitened
+#' 
+#' Uses the zyp package to calculate Mann-Kendall trend test on pre-whitened 
 #' data (to remove autocorrelation) for many wells, using one or both of two 
 #' Pre-whitening methods, see zyp documentation
-#' @import zyp
-#' @param dataframe dataframe containing: an ID column (specified in \code{by}) and a column of values
-#' @param  wells vector of well numbers to test. Default NULL does all in dataframe
-#' @param  byID the name of the ID column
-#' @param  col the name of the column with the GWL values
-#' @param  method "both" (default), "yuepilon", or "zhang"
-#' @export
+#' 
+#' @param dataframe dataframe containing: an ID column (specified in \code{by})
+#'   and a column of values
+#' @param wells vector of well numbers to test. Default NULL does all in
+#'   dataframe
+#' @param byID the name of the ID column
+#' @param col the name of the column with the GWL values
+#' @param method "both" (default), "yuepilon", or "zhang"
+
 #' @return a dataframe of results for all wells evaluated
+
 #' @examples \dontrun{
 #'
 #'}
-gwlZypTest <- function(dataframe, wells=NULL, byID, col, method="both") {
+#' @export
+
+gwlZypTest <- function(dataframe, wells = NULL, byID, col, method = "both") {
   
   if (is.null(wells)) {
     wells <- unique(dataframe[[byID]])
@@ -35,26 +40,26 @@ gwlZypTest <- function(dataframe, wells=NULL, byID, col, method="both") {
   }
   
   # create an empty dataframe to store results
-  mk.results <- data.frame(ID=character(), test_type=character()
-                           , lbound=numeric(), trend=numeric(), trendp=numeric()
-                           , ubound=numeric(), tau=numeric(), sig=numeric()
-                           , nruns=numeric(), autocor=numeric()
-                           , valid_frac=numeric(), linear=numeric()
-                           , intercept=numeric(), stringsAsFactors=FALSE)
+  mk.results <- data.frame(ID = character(), test_type = character(),
+                           lbound = numeric(), trend = numeric(), trendp = numeric(),
+                           ubound = numeric(), tau = numeric(), sig = numeric(),
+                           nruns = numeric(), autocor = numeric(),
+                           valid_frac = numeric(), linear = numeric(),
+                           intercept = numeric(), stringsAsFactors = FALSE)
   
   for (well in wells) {
-    d <- dataframe[[col]][dataframe[[byID]]==well]
+    d <- dataframe[[col]][dataframe[[byID]] == well]
     if (method == "both" | method == "yuepilon") {
-      zyp.yuepilon <- zyp.trend.vector(d, method="yuepilon", conf.intervals=TRUE)
+      zyp.yuepilon <- zyp::zyp.trend.vector(d, method = "yuepilon", conf.intervals = TRUE)
       
-      mk.results[nrow(mk.results)+1,1:2] <- c(well, "yuepilon")
-      mk.results[nrow(mk.results),3:13] <- zyp.yuepilon
+      mk.results[nrow(mk.results) + 1, 1:2] <- c(well, "yuepilon")
+      mk.results[nrow(mk.results), 3:13] <- zyp.yuepilon
     }
     if (method == "both" | method == "zhang") {
-      zyp.zhang <- zyp.trend.vector(d, method="zhang", conf.intervals=TRUE)
+      zyp.zhang <- zyp::zyp.trend.vector(d, method = "zhang", conf.intervals = TRUE)
       
-      mk.results[nrow(mk.results)+1,1:2] <- c(well, "zhang")
-      mk.results[nrow(mk.results),3:13] <- zyp.zhang
+      mk.results[nrow(mk.results) + 1, 1:2] <- c(well, "zhang")
+      mk.results[nrow(mk.results), 3:13] <- zyp.zhang
     }
   }
   names(mk.results)[1] <- byID

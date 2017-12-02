@@ -1,3 +1,7 @@
+context("trimConsRuns")
+
+test_that("trimConsRuns as expected", {
+
 # Four sets in head: two within 10%, one within 10% after first 2 removed, 
 # one shouldn't be removed
 set.seed(20)
@@ -13,3 +17,5 @@ foo <- trimConsRuns(y, val = 0, n_consec = 5, head = 0.1, tail = 0.9)
 #Four runs in each of head and tail
 z <- c(x[1:(0.5 * length(x))], y[(0.5 * length(y)):length(y)])
 foo <- trimConsRuns(z, val = 0, n_consec = 5, head = 0.1, tail = 0.9)
+
+})

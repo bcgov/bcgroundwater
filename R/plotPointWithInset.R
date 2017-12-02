@@ -14,15 +14,15 @@
 #'
 #' Plot a point on a map with an inset in the top right corner showing an 
 #' overview of a larger area.
-#' @import ggmap ggplot2 
+#' 
 #' @param  long longitude (dd) of point
 #' @param  lat latitude (dd) of point
 #' @param  pointColour the colour of the point
 #' @param  bigMap ggmap of the zoomed in area that will comprise the large map
-#' @param  overviewMap ggMap of large area that will be in the inset.  If not provided, 
-#'         will be generated using overviewExtent
-#' @param  overviewExtent the extent (left, botton, right, top) of the large area that
-#'         will be in the inset. Default is British Columbia
+#' @param  overviewMap ggMap of large area that will be in the inset.  If not
+#'   provided, will be generated using overviewExtent
+#' @param  overviewExtent the extent (left, botton, right, top) of the large
+#'   area that will be in the inset. Default is British Columbia
 #' @param  opts additional options to pass to ggplot2
 #' @export
 #' @return a ggmap object

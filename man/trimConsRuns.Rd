@@ -34,4 +34,3 @@ beginning and end of a vector
  trunc_x <- x[trunc$start:trunc$end]
 }
 }
-

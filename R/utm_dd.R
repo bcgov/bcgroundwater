@@ -15,7 +15,7 @@
 #' Convert zone+utm pairs to lat/long. Can take either a single zone + utm,
 #' or a data frame with many.  Allows for datasets with different zones and 
 #' datum for each utm.
-#' @import rgdal sp dplyr
+
 #' 
 #' @param zone integer, or column name in 'data'
 #' @param  easting integer, or column name in 'data'
@@ -30,25 +30,31 @@
 #' @examples \dontrun{
 #'
 #'}
-utm_dd <- function(zone=NULL, easting=NULL, northing=NULL, datum="NAD83", data=NULL, key=NULL) {
+utm_dd <- function(zone = NULL, easting = NULL, northing = NULL, 
+                   datum = "NAD83", data = NULL, key = NULL) {
+  
+  if (!requireNamespace("rgdal") || !requireNamespace("sp")) {
+    stop("You need the 'sp' and 'rgdal' packages installed to use this function")
+  }
 
   get_dd <- function(d) {
     # TODO Vectorise by grouping input by datum and zone
     # requires a one-row dataframe with zone, easting, northing, datum (in that order)
     
-    utm <- SpatialPoints(d[2:3], proj4string=CRS(paste0("+proj=utm +datum=", d[4], " +zone=", d[1])))
-    sp <- spTransform(utm, CRS("+proj=longlat"))  
-    coordinates(sp)
+    utm <- sp::SpatialPoints(d[2:3], 
+                             proj4string = sp::CRS(paste0("+proj=utm +datum=", d[4], " +zone=", d[1])))
+    sp <- sp::spTransform(utm, sp::CRS("+proj=longlat"))  
+    sp::coordinates(sp)
     
   }
   
-  if (any(is.null(zone),is.null(easting),is.null(northing))) {
+  if (any(is.null(zone), is.null(easting), is.null(northing))) {
     
     stop("You must supply zone, easting, and northing")
     
   } else if (is.null(data)) {
     
-    utms <- data.frame(zone,easting,northing,datum, stringsAsFactors=FALSE)
+    utms <- data.frame(zone, easting, northing, datum, stringsAsFactors = FALSE)
     as.vector(get_dd(utms))
     
   } else if (is.null(key)) {
@@ -57,24 +63,25 @@ utm_dd <- function(zone=NULL, easting=NULL, northing=NULL, datum="NAD83", data=N
     
   } else {
     if (!datum %in% colnames(data)) {
-      datum <- rep(datum,nrow(data))
-      utms <- data.frame(data[c(key,zone,easting,northing)],datum
-                         , stringsAsFactors=FALSE)
+      datum <- rep(datum, nrow(data))
+      utms <- data.frame(data[c(key, zone, easting, northing)], datum,
+                         stringsAsFactors = FALSE)
     } else {
-      utms <- data[c(key,zone,easting,northing,datum)]
+      utms <- data[c(key, zone, easting, northing, datum)]
     }
     
-    utms <- na.omit(utms)
+    utms <- stats::na.omit(utms)
     
     longlat <- utms %>%
-      select(c(2:5)) %>%
-      rowwise() %>%
-      do(data.frame(get_dd(.))) %>%
-      ungroup
+      dplyr::select(c(2:5)) %>%
+      dplyr::rowwise()
     
-    longlat <- cbind(utms[,key],longlat)
+    longlat <- dplyr::do(data.frame(get_dd(longlat))) %>%
+      dplyr::ungroup()
     
-    names(longlat) <- c(key,"Longitude","Latitude")
+    longlat <- cbind(utms[, key], longlat)
+    
+    names(longlat) <- c(key, "Longitude", "Latitude")
     
     return(longlat)
   }

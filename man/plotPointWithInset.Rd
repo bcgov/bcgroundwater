@@ -16,11 +16,11 @@ plotPointWithInset(long, lat, pointColour, bigMap = NULL,
 
 \item{bigMap}{ggmap of the zoomed in area that will comprise the large map}
 
-\item{overviewMap}{ggMap of large area that will be in the inset.  If not provided, 
-will be generated using overviewExtent}
+\item{overviewMap}{ggMap of large area that will be in the inset.  If not
+provided, will be generated using overviewExtent}
 
-\item{overviewExtent}{the extent (left, botton, right, top) of the large area that
-will be in the inset. Default is British Columbia}
+\item{overviewExtent}{the extent (left, botton, right, top) of the large
+area that will be in the inset. Default is British Columbia}
 
 \item{opts}{additional options to pass to ggplot2}
 }
@@ -36,4 +36,3 @@ overview of a larger area.
 
 }
 }
-

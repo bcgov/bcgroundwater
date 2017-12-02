@@ -2,7 +2,7 @@
 % Please edit documentation in R/readGWLdata.R
 \name{readGWLdata}
 \alias{readGWLdata}
-\title{Read in groundwater data from file downloaded from GWL tool}
+\title{(DEFUNCT) Read in groundwater data from file downloaded from GWL tool}
 \usage{
 readGWLdata(path, emsID = NULL)
 }
@@ -22,4 +22,3 @@ Read in groundwater data from file downloaded from GWL tool
 
 }
 }
-

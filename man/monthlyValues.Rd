@@ -10,11 +10,11 @@ monthlyValues(df)
 \item{df}{data frame with columns EMS_ID, Well_Num, Date, GWL}
 }
 \value{
-a data frame with one value per month. Does not estimate values 
-        for months where there were 0 observations.
+a data frame with one value per month. Does not estimate values for
+ months where there were 0 observations.
 }
 \description{
-Assigns each reading to a month; sometimes there are several readings in a
+Assigns each reading to a month; sometimes there are several readings in a 
 month that may be better assigned to a different month if they are at the 
 border.  Does not estimate values for months where there were 0 observations.
 }
@@ -23,4 +23,3 @@ border.  Does not estimate values for months where there were 0 observations.
 
 }
 }
-
