@@ -1,14 +1,16 @@
 # Copyright 2015 Province of British Columbia
 # 
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not
+# use this file except in compliance with the License. You may obtain a copy of
+# the License at
 # 
 # http://www.apache.org/licenses/LICENSE-2.0
 # 
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and limitations under the License.
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+# License for the specific language governing permissions and limitations under
+# the License.
 
 
 
@@ -16,7 +18,7 @@
 #' Retrive and format groundwater data from BC Government GWL site
 #' 
 #' Go to <http://www.env.gov.bc.ca/wsd/data_searches/obswell/map/> to find your 
-#' well of interest.
+#' well(s) of interest.
 #' 
 #' Note that well water levels are measured in meters below the ground. Thus 
 #' higher values represent deeper levels. Therefore 
@@ -27,8 +29,9 @@
 #' Daily averages (\code{which = 'daily'}) are pre-calculated. Note that they 
 #' only cover days marked as "Validated" in the full hourly dataset.
 #' 
-#' @param well Character. The well number, accepts either \code{OW000} or 
-#'   \code{000} format
+#' @param wells Character vector. The well number(s), accepts either 
+#'   \code{OW000} or \code{000} format. Note that format OW000 requires three
+#'   digit numbers, e.g. OW309, OW008, etc.
 #' @param which Character. Which data to retrieve \code{all} hourly data, 
 #'   \code{recent} hourly data, or all \code{daily} averages.
 #' @param url Character. Override the url location of the data.
@@ -38,13 +41,18 @@
 #' 
 #' @examples \dontrun{
 #' 
-#' all_309 <- get_gwl(well = 309)
-#' recent_309 <- get_gwl(well = "OW309", which = "recent")
-#' daily_avg_309 <- get_gwl(well = "OW309", which = "daily")
+#' all_309 <- get_gwl(wells = 309)
+#' recent_309 <- get_gwl(wells = "OW309", which = "recent")
+#' daily_avg_309 <- get_gwl(wells = "OW309", which = "daily")
+#' 
+#' all_multi < get_gwl(wells = c(309, 89))
+#' recent_multi <- get_gwl(wells = c("OW309", "OW089"), which = "recent")
+#' daily_avg_multi <- get_gwl(wells = c("309", "89"), which = "daily")
 #'}
 #'
 #' @export
-get_gwl <- function(well, which = c("all", "recent", "daily"), url = NULL, quiet = FALSE) {
+get_gwl <- function(wells, which = c("all", "recent", "daily"), 
+                    url = NULL, quiet = FALSE) {
   
   which <- arg_match(which)
   
@@ -53,11 +61,27 @@ get_gwl <- function(well, which = c("all", "recent", "daily"), url = NULL, quiet
   
   if(is.null(url)) url <- "http://www.env.gov.bc.ca/wsd/data_searches/obswell/map/data/"
   
-  if(!grepl("OW", well)) well <- paste0("OW", well)
+  if(!all(all(grepl("OW", wells)) || 
+          is.numeric(wells) || 
+          is.numeric(utils::type.convert(wells)))) {
+    stop("wells can be specified either by 'OW000' or '000'. ",
+         "Different formating cannot be mixed")
+  } 
   
-  url <- paste0(url, well, "-")
-  gwl <- download_gwl(url, which, quiet = quiet)
-  gwl <- format_gwl(gwl, quiet = quiet)
+  if(all(!grepl("OW", wells))) {
+    wells <- paste0("OW", sprintf("%03d", as.numeric(wells)))
+  } else if(any(nchar(wells) != 5)) {
+    stop("Wells in format OW000 must have 5 characters ",
+         "(OW followed by a three-digit number, e.g. OW064)")
+  }
+  
+  url <- paste0(url, wells, "-")
+  
+  if(!quiet) message("Retrieving data...")
+  gwl <- lapply(url, download_gwl, which, quiet = quiet)
+  
+  if(!quiet) message("Formatting data...")
+  gwl <- do.call('rbind', lapply(gwl, format_gwl, quiet = quiet))
   
   return(gwl)
 }
@@ -67,7 +91,6 @@ get_gwl <- function(well, which = c("all", "recent", "daily"), url = NULL, quiet
 #' @noRd
 download_gwl <- function(url, which, quiet) {
   
-  if(!quiet) message("Retrieving data...")
   gwl_data <- httr::GET(paste0(url, which, ".csv"))
   httr::stop_for_status(gwl_data)
   gwl_data <- httr::content(gwl_data, as = "text", encoding = "UTF-8")
@@ -80,8 +103,6 @@ download_gwl <- function(url, which, quiet) {
 }
 
 format_gwl <- function(data, quiet) {
-  
-  if(!quiet) message("Formatting data...")
   
   welldf <- utils::read.csv(text = data[[1]], stringsAsFactors = FALSE)
   

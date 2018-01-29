@@ -28,21 +28,21 @@ Now you can download data on the well (this make take a few moments).
 If you are interested in daily averages, specify `which = "daily"`
 
 ```{r}
-daily_data <- get_gwl(well = 309, which = "daily")
+daily_data <- get_gwl(wells = 309, which = "daily")
 head(daily_data)
 ```
 
 If you are interested only in recent hourly data (within the last two years), specify `which = "recent"`
 
 ```{r}
-recent_data <- get_gwl(well = 309, which = "recent")
+recent_data <- get_gwl(wells = 309, which = "recent")
 head(recent_data)
 ```
 
 Otherwise, by default `which = "all"` which downloads all hourly data for that well:
 
 ```{r}
-data <- get_gwl(well = 309)
+data <- get_gwl(wells = 309)
 head(data)
 ```
 

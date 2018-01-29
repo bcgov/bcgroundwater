@@ -4,12 +4,13 @@
 \alias{get_gwl}
 \title{Retrive and format groundwater data from BC Government GWL site}
 \usage{
-get_gwl(well, which = c("all", "recent", "daily"), url = NULL,
+get_gwl(wells, which = c("all", "recent", "daily"), url = NULL,
   quiet = FALSE)
 }
 \arguments{
-\item{well}{Character. The well number, accepts either \code{OW000} or 
-\code{000} format}
+\item{wells}{Character vector. The well number(s), accepts either 
+\code{OW000} or \code{000} format. Note that format OW000 requires three
+digit numbers, e.g. OW309, OW008, etc.}
 
 \item{which}{Character. Which data to retrieve \code{all} hourly data, 
 \code{recent} hourly data, or all \code{daily} averages.}
@@ -23,7 +24,7 @@ A dataframe of the groundwater level observations
 }
 \description{
 Go to <http://www.env.gov.bc.ca/wsd/data_searches/obswell/map/> to find your 
-well of interest.
+well(s) of interest.
 }
 \details{
 Note that well water levels are measured in meters below the ground. Thus 
@@ -38,9 +39,13 @@ only cover days marked as "Validated" in the full hourly dataset.
 \examples{
 \dontrun{
 
-all_309 <- get_gwl(well = 309)
-recent_309 <- get_gwl(well = "OW309", which = "recent")
-daily_avg_309 <- get_gwl(well = "OW309", which = "daily")
+all_309 <- get_gwl(wells = 309)
+recent_309 <- get_gwl(wells = "OW309", which = "recent")
+daily_avg_309 <- get_gwl(wells = "OW309", which = "daily")
+
+all_multi < get_gwl(wells = c(309, 89))
+recent_multi <- get_gwl(wells = c("OW309", "OW089"), which = "recent")
+daily_avg_multi <- get_gwl(wells = c("309", "89"), which = "daily")
 }
 
 }
