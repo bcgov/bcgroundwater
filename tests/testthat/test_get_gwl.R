@@ -16,6 +16,15 @@ test_that("get_gwl catches incorrect well formats", {
   
 })
 
+test_that("get_gwl catches wells that don't exist", {
+  expect_warning(g <- get_gwl(wells = 0))
+  expect_null(g)
+  
+  expect_warning(g <- get_gwl(wells = c(0, 2), which = "recent"))
+  expect_equal(unique(g$Well_Num), "002")
+})
+  
+
 test_that("get_gwl retrieves `all` data", {
   expect_message(expect_error(g <- get_gwl(wells = 309), NA),
                  "Retrieving data...")

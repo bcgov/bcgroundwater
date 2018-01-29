@@ -91,6 +91,15 @@ download_gwl <- function(url, which, quiet) {
   if(which == "all") which <- "data"
   if(which == "daily") which <- "average"
   
+  if(httr::http_error(paste0(url, which, ".csv"))) {
+    warning("Cannot access online data for well ", 
+            substring(url, first = nchar(url)-5, last = nchar(url)-1),
+            ". Either it doesn't exist or the online data is inaccessible ",
+            "for some other reason.",
+            call. = FALSE)
+    return()
+  }
+
   gwl_data <- httr::GET(paste0(url, which, ".csv"))
   httr::stop_for_status(gwl_data)
   gwl_data <- httr::content(gwl_data, as = "text", encoding = "UTF-8")
@@ -99,10 +108,12 @@ download_gwl <- function(url, which, quiet) {
   httr::stop_for_status(gwl_avg)
   gwl_avg <- httr::content(gwl_avg, as = "text", encoding = "UTF-8")
   
-  return(list(gwl_data, gwl_avg))
+  list(gwl_data, gwl_avg)
 }
 
 format_gwl <- function(data, which, quiet) {
+
+  if(is.null(data)) return()
   
   welldf <- utils::read.csv(text = data[[1]], stringsAsFactors = FALSE)
   
