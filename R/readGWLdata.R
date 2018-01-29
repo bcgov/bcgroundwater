@@ -56,9 +56,6 @@ get_gwl <- function(wells, which = c("all", "recent", "daily"),
   
   which <- arg_match(which)
   
-  if(which == "all") which <- "data"
-  if(which == "daily") which <- "average"
-  
   if(is.null(url)) url <- "http://www.env.gov.bc.ca/wsd/data_searches/obswell/map/data/"
   
   if(!all(all(grepl("OW", wells)) || 
@@ -78,10 +75,10 @@ get_gwl <- function(wells, which = c("all", "recent", "daily"),
   url <- paste0(url, wells, "-")
   
   if(!quiet) message("Retrieving data...")
-  gwl <- lapply(url, download_gwl, which, quiet = quiet)
+  gwl <- lapply(url, download_gwl, which, quiet)
   
   if(!quiet) message("Formatting data...")
-  gwl <- do.call('rbind', lapply(gwl, format_gwl, quiet = quiet))
+  gwl <- do.call('rbind', lapply(gwl, format_gwl, which, quiet))
   
   return(gwl)
 }
@@ -90,6 +87,9 @@ get_gwl <- function(wells, which = c("all", "recent", "daily"),
 #' 
 #' @noRd
 download_gwl <- function(url, which, quiet) {
+  
+  if(which == "all") which <- "data"
+  if(which == "daily") which <- "average"
   
   gwl_data <- httr::GET(paste0(url, which, ".csv"))
   httr::stop_for_status(gwl_data)
@@ -102,7 +102,7 @@ download_gwl <- function(url, which, quiet) {
   return(list(gwl_data, gwl_avg))
 }
 
-format_gwl <- function(data, quiet) {
+format_gwl <- function(data, which, quiet) {
   
   welldf <- utils::read.csv(text = data[[1]], stringsAsFactors = FALSE)
   
@@ -113,9 +113,10 @@ format_gwl <- function(data, quiet) {
     welldf <- dplyr::rename(welldf, "Time" = "QualifiedTime")
     welldf$Approval <- "Validated"
   }
-  
+
   # Merge with mean/min/max  
-  welldf$Time <- as.POSIXct(welldf$Time, tz="UTC")
+  if(which == "daily") welldf$Time <- as.Date(welldf$Time)
+  if(which != "daily") welldf$Time <- as.POSIXct(welldf$Time, tz = "UTC")
   welldf$dummydate <- paste0("1800-", format(welldf$Time, "%m-%d"))
   
   well_avg <- utils::read.csv(text = data[[2]], stringsAsFactors = FALSE)
