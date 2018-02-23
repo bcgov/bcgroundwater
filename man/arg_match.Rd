@@ -17,16 +17,16 @@ Useful when specifying allowed values for a function argument in a vector in the
 }
 \examples{
 \dontrun{
-my_fun <- function(my_arg = c("a", "b")) {
- my_arg <- arg_match(my_arg)
- return(paste("The value is", my_arg))
-}
-
-my_fun("a")
-my_fun("b")
-my_fun("c")
-my_fun()
-my_fun(NULL)
-my_fun(5)
+  my_fun <- function(my_arg = c("a", "b")) {
+    my_arg <- arg_match(my_arg)
+    return(paste("The value is", my_arg))
+  }
+  
+  my_fun("a")
+  my_fun("b")
+  my_fun("c")
+  my_fun()
+  my_fun(NULL)
+  my_fun(5)
 }
 }
