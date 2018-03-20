@@ -1,7 +1,7 @@
 context("gwlZypTest")
 
 test_that("gwlZypTest returns data", {
-  g_month <- get_gwl(well = 309) %>%
+  g_month <- get_gwl(wells = 309) %>%
     monthlyValues() %>%
     makeWellTS()
   

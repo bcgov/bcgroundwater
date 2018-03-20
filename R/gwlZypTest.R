@@ -31,7 +31,11 @@
 #'}
 #' @export
 
-gwlZypTest <- function(dataframe, wells = NULL, byID, col, method = "both") {
+gwlZypTest <- function(dataframe, wells = NULL, 
+                       byID = "Well_Num", col = "mean_GWL", method = "both") {
+  
+  if (!byID %in% names(dataframe)) stop(byID, " is not a column in the data frame")
+  if (!col %in% names(dataframe)) stop(col, " is not a column in the data frame")
   
   if (is.null(wells)) {
     wells <- unique(dataframe[[byID]])
