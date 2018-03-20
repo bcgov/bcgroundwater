@@ -6,11 +6,9 @@
 
 ## Overview
 
-*Please note: the format of the data available for download from the [Observation Well Network tool](http://www.env.gov.bc.ca/wsd/data_searches/obswell/map/obsWells.html) has changed after an upgrade to some database infrastructure.  Work is ongoing in the [`fix-newdata`](https://github.com/bcgov/bcgroundwater/tree/fix-newdata) branch, where contributor [jayrbrown](https://github.com/jayrbrown) has created a new function `readGWLdata2` for importing data in the new format. See the [issue](https://github.com/bcgov/bcgroundwater/issues/5) for details.*
-
 An [R](http://www.r-project.org) package to facilitate analysis and 
-visualization of groundwater data from the British Columbia groundwater 
-[observation well network](http://www.env.gov.bc.ca/wsd/data_searches/obswell/index.html). It provides functions for importing, cleaning, and summarizing groundwater data, analyzing long-term trends in groundwater levels, and visualizing analysis results. 
+visualization of groundwater data from the [British Columbia groundwater 
+observation well network](https://www2.gov.bc.ca/gov/content?id=B03D0994BB5C4F98B6F7D4FD8610C836). The data is sourced from the [B.C. Data Catalogue](https://catalogue.data.gov.bc.ca/dataset/57c55f10-cf8e-40bb-aae0-2eff311f1685) distributed under the [Open Government Licence-British Columbia](https://www2.gov.bc.ca/gov/content?id=A519A56BC2BF44E4A008B33FCF527F61). The package provides functions for importing, cleaning, and summarizing groundwater data, analyzing long-term trends in groundwater levels, and visualizing analysis results. 
 
 This package was developed by [Environmental Reporting BC](http://www2.gov.bc.ca/gov/content?id=FF80E0B985F245CEA62808414D78C41B) 
 to support our 2013 analysis of [trends in groundwater levels](http://www.env.gov.bc.ca/soe/indicators/water/groundwater-levels.html). 
@@ -20,7 +18,7 @@ The code behind that analysis is available in its own GitHub [repository](https:
 
 Core functions include:
 
-- Import data (csv files) downloaded from the [Observation Well Network](http://www.env.gov.bc.ca/wsd/data_searches/obswell/map/obsWells.html)
+- Import data downloaded from the [B.C. Data Catalogue](https://catalogue.data.gov.bc.ca/dataset/57c55f10-cf8e-40bb-aae0-2eff311f1685)
 - Summarize and plot monthly groundwater levels
 - Interpolate missing values
 - Perform Mann-Kendall trend tests with prewhitening on multiple datasets using 
@@ -44,13 +42,6 @@ library("devtools")
 install_github("bcgov/bcgroundwater")
 ```
 
-If you want to install the development version with the `readGWLdata2` function 
-for importing data from the new web tool, install from the [`fix-newdata`](https://github.com/bcgov/bcgroundwater/tree/fix-newdata) branch:
-
-```R
-install_github("bcgov/bcgroundwater", ref = "fix-newdata")
-```
-
 ## Usage
 
 See the package [vignette](https://htmlpreview.github.com/?https://github.com/bcgov/bcgroundwater/master/inst/doc/bcgroundwater.html) 
@@ -65,9 +56,8 @@ browseVignettes("bcgroundwater")
 The package works as is for its intended purpose, which was to provide a set of 
 functions required for the analysis underlying the 
 [indicator](http://www.env.gov.bc.ca/soe/indicators/water/groundwater-levels.html).
-We are not actively developing it at this time, but you can check the 
-[issues](https://github.com/bcgov/bcgroundwater/issues/) for things we would 
-like to fix or work on.
+We are actively updating the package at this time, you can check the 
+[issues](https://github.com/bcgov/bcgroundwater/issues/) for things we are fixing or working on.
 
 ## Getting Help or Reporting an Issue
 
