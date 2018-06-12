@@ -89,8 +89,8 @@ gwlAreaPlot <- function(dataframe, trend, intercept, state, sig,
              label = paste0(trendprint, "        Significance: ",
                             format(sig, digits = 2, nsmall = 3, scientific = 3),
                             "        State: ", state)) + 
-    labs(title = "Groundwater levels and long-term trend", x = "Date",
-         y = "Depth below ground (m)") + 
+    labs(title = "Observed Long-term Trend in Groundwater Levels", x = "Date",
+         y = "Depth Below Ground (metres)") + 
     theme(panel.background = element_rect(fill = "white"),
           line = element_line(colour = "grey50"),
           text = element_text(colour = "grey50"),
@@ -104,7 +104,7 @@ gwlAreaPlot <- function(dataframe, trend, intercept, state, sig,
     scale_fill_manual(name = '', values = c('Groundwater Level' = "#1E90FF"))
    
   vals <- c(LTT = 'orange', Interp = 'red')
-  labs <- c('Long-term trend', 'Interpolated (missing) values')
+  labs <- c('Long-term Trend', 'Interpolated (Missing) Values')
   override_list <- list(colour = c("orange", "red"), shape = c(NA, 16), linetype = c(1, 0))
   
   if (showInterpolated) {
