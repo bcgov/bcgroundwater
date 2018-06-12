@@ -17,6 +17,8 @@
 #'
 #'@param df A monthly dataframe created by `monthlyValues`. Must minimally 
 #'  include fields `EMS_ID`, `Well_Num` `Date`, 'med_GWL`, `nReadings`
+#' @param trim should leading and trailing missing values in be removed? See [trimConsRuns()]. 
+#' @param ... parameters passed on to [trimConsRuns()] (`head`, `tail`, `n_consec`)
 #'  
 #'@return A full monthly time series with interpolated missing values, retaining
 #'  all of the columns in the original data frame.
@@ -25,7 +27,7 @@
 #'}
 #'
 #' @export
-makeWellTS <- function(df) {
+makeWellTS <- function(df, trim = TRUE, ...) {
   
   well <- df[1, "EMS_ID"]
   
@@ -41,6 +43,12 @@ makeWellTS <- function(df) {
   ## Join the monthly sequence to the well level data to fill missing values 
   ## with NAs so we can create a time series
   well.ts <- merge(well.seq, df, by = "yearmonth", all = TRUE)
+  
+  if (trim) {
+    missings <- as.integer(is.na(well.ts$med_GWL))
+    start_end <- trimConsRuns(missings, val = 1L, ...)
+    well.ts <- well.ts[start_end$start:start_end$end, , drop = FALSE]
+  }
   
   # Interpolate missing values - see StackOverflow question here:
   # http://stackoverflow.com/questions/4964255/interpolate-

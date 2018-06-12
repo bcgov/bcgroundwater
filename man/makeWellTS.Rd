@@ -4,11 +4,15 @@
 \alias{makeWellTS}
 \title{Get full time series with missing values interpolated}
 \usage{
-makeWellTS(df)
+makeWellTS(df, trim = TRUE, ...)
 }
 \arguments{
 \item{df}{A monthly dataframe created by `monthlyValues`. Must minimally 
 include fields `EMS_ID`, `Well_Num` `Date`, 'med_GWL`, `nReadings`}
+
+\item{trim}{should leading and trailing missing values in be removed? See [trimConsRuns()].}
+
+\item{...}{parameters passed on to [trimConsRuns()] (`head`, `tail`, `n_consec`)}
 }
 \value{
 A full monthly time series with interpolated missing values, retaining
