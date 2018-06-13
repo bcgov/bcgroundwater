@@ -7,10 +7,10 @@
 ## Overview
 
 An [R](http://www.r-project.org) package to facilitate analysis and 
-visualization of groundwater data from the [British Columbia Provincial Groundwater 
+visualisation of groundwater data from the [British Columbia Provincial Groundwater 
 Observation Well Network](https://www2.gov.bc.ca/gov/content?id=B03D0994BB5C4F98B6F7D4FD8610C836).  
 
-The package provides functions for importing, cleaning, and summarizing groundwater data, analyzing long-term trends in groundwater levels, and visualizing analysis results. The package was developed by [Environmental Reporting BC](http://www2.gov.bc.ca/gov/content?id=FF80E0B985F245CEA62808414D78C41B) 
+The package provides functions for importing, cleaning, and summarising groundwater data, analysing long-term trends in groundwater levels, and visualising analysis results. The package was developed by [Environmental Reporting BC](http://www2.gov.bc.ca/gov/content?id=FF80E0B985F245CEA62808414D78C41B) 
 to support our water indicator on [long-term trends in groundwater levels](http://www.env.gov.bc.ca/soe/indicators/water/groundwater-levels.html). 
 The code behind that analysis is available in its own GitHub [repository](https:/github.com/bcgov/groundwater-levels-indicator/).
 
@@ -19,9 +19,9 @@ The code behind that analysis is available in its own GitHub [repository](https:
 Core functions include:
 
 - Import data downloaded from the [B.C. Data Catalogue](https://catalogue.data.gov.bc.ca/dataset/57c55f10-cf8e-40bb-aae0-2eff311f1685) distributed under the [Open Government Licence-British Columbia](https://www2.gov.bc.ca/gov/content?id=A519A56BC2BF44E4A008B33FCF527F61)
-- Summarize and plot monthly groundwater levels
+- Summarise and plot monthly groundwater levels
 - Interpolate missing values
-- Perform Mann-Kendall trend tests with prewhitening on multiple datasets using 
+- Perform Mann-Kendall trend tests with pre-whitening on multiple datasets using 
   methods implemented in the 
   [zyp](http://cran.r-project.org/web/packages/zyp/index.html) package
 - Plot trends in groundwater levels
