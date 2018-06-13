@@ -1,6 +1,5 @@
 ---
-title: "Using the bcgroundwater package"
-date: "`r Sys.Date()`"
+title: "Using the 'bcgroundwater' R Package"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{bcgroundwater}
@@ -12,43 +11,68 @@ vignette: >
 knitr::opts_chunk$set(fig.width = 6, fig.height = 4)
 ```
 
-First, decide which well is your well of interest from the B.C. Observation Well
-Network [interactive map tool](http://www.env.gov.bc.ca/wsd/data_searches/obswell/map/obsWells.html).
 
-Here we will work with data from Observation Well **309**.
+You can install the 'bcgroundwater' R `r emo::ji("package")` directly from [GitHub](https://github.com/bcgov/bcgroundwater). To do so, you will 
+need the [remotes](https://cran.r-project.org/web/packages/remotes/index.html) package:
 
-First load the package:
+```{r, eval=FALSE}
+install.packages("remotes")
+```
+
+Next, install the `bcgroundwater` package using `remotes::install_github()`:
+
+```{r, eval=FALSE}
+library("remotes")
+install_github("bcgov/bcgroundwater")
+```
+
+Then load the package:
 
 ```{r}
 library(bcgroundwater)
 ```
 
-Now you can download data on the well (this make take a few moments).
 
-If you are interested in daily averages, specify `which = "daily"`
+## Get Your Data
 
-```{r}
+First, decide which groundwater observation well is your well of interest from the British Columbia Provinicial Groundwater Observation Well Monitoring
+Network [interactive map tool](https://www2.gov.bc.ca/gov/content?id=2D3DB9BA78DE4377AB4AE2DCEE1B409B). Here we will work with data from Groundwater Observation Well **#309**.
+  
+  
+Download data on the well of interest&mdash;this may take a few moments.
+  
+  
+If you are interested in daily averages, specify `which = "daily"`:
+
+```{r, message=FALSE, warning=FALSE}
 daily_data <- get_gwl(wells = 309, which = "daily")
 head(daily_data)
 ```
 
-If you are interested only in recent hourly data (within the last two years), specify `which = "recent"`
+If you are interested only in recent hourly data&mdash;within the last two years&mdash; specify `which = "recent"`:
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 recent_data <- get_gwl(wells = 309, which = "recent")
 head(recent_data)
 ```
 
 Otherwise, by default `which = "all"` which downloads all hourly data for that well:
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 data <- get_gwl(wells = 309)
 head(data)
 ```
 
+
+
+The Provincial Groundwater Observation Well Network - Groundwater Levels Data is programatically sourced from the B.C. Data Catalogue, distributed under the [Open Government Licence - British Columbia](https://www2.gov.bc.ca/gov/content?id=A519A56BC2BF44E4A008B33FCF527F61):  <https://catalogue.data.gov.bc.ca/dataset/57c55f10-cf8e-40bb-aae0-2eff311f1685>
+
+
+## Tidy & Visualise Your Data
+
 Next, calculate the median monthly values:
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 monthly_data <- monthlyValues(data)
 head(monthly_data)
 ```
@@ -57,17 +81,18 @@ You can plot the seasonal patterns in the water levels of the well with
 `gwlMonthlyPlot()`. This displays the mean deviation from the yearly average,
 as well as the range of variation:
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 monthlyplot <- gwlMonthlyPlot(monthly_data, last12 = TRUE)
 plot(monthlyplot)
 ```
 
-To perform the analysis, you will need to generate a full regular time series
-with no gaps in the dates. `makeWellTS()` does this for you, interpolating the
-missing values:
+To perform the trend analysis, you will need to generate a full regular time series
+with no gaps in the dates. `makeWellTS()` does this for you&mdash;removing consecutive missing values near the
+beginning or the end of the time series, due to the strong influence of
+these regions on trend analysis, and interpolating the remaining missing values:
 
-```{r, fig.width=6, fig.height=4}
-full_monthly_data <- makeWellTS(monthly_data)
+```{r, fig.width=6, fig.height=4, message=FALSE, warning=FALSE}
+full_monthly_data <- makeWellTS(monthly_data, head = 0.1, tail = 0.9, n_consec = 4)
 head(monthly_data)
 ```
 
@@ -76,7 +101,7 @@ trends with yearly averages, otherwise serial autocorrelation can be a problem
 (even with pre-whitening). These can be calculated easily using the `dplyr`
 package:
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 library(dplyr)
 
 annual_data <- full_monthly_data %>%
@@ -89,9 +114,11 @@ annual_data <- full_monthly_data %>%
             q95_GWL = quantile(med_GWL, 0.95))
 ```
 
-You can now calculate the trend:
+## Analyse & Visualise Your Data
 
-```{r}
+You can now calculate the long-term trend:
+
+```{r, message=FALSE, warning=FALSE}
 trends <- gwlZypTest(annual_data, byID = "Well_Num", col = "mean_GWL")
 trends
 ```
@@ -99,11 +126,25 @@ trends
 Finally, plot the time series with the trend overlaid (we will use the results
 from the yuepilon method), optionally with interpolated values overlaid:
 
-```{r, warning=FALSE}
+```{r, message=FALSE, warning=FALSE}
 trend_plot <- gwlAreaPlot(full_monthly_data, trend = trends$trend[1],
                           intercept = trends$intercept[1], sig = trends$sig[1],
                           state = "Stable", mkperiod = "annual", showInterpolated = TRUE)
 plot(trend_plot)
 
 ```
+
+## Getting Help
+
+Type `?bcgroundwater` in the R console for full documentation on the package functions and arguments.
+
+Details, rationales and references on the trend and other analytical methods used under the hood `r emo::ji("oncoming_automobile")` in the 'bcgroundwater' `r emo::ji("package")` can be found here: <http://www.env.gov.bc.ca/soe/indicators/water/groundwater-levels.html>. 
+
+`r Sys.Date()`
+
+
+
+
+
+
 
