@@ -61,12 +61,18 @@ gwlAreaPlot <- function(dataframe, trend, intercept, state, sig,
     slope <- -(trend/12/365)
   }
   
-  trendpre <- ifelse(slope > 0, "Trend: +", "Trend: ")
-  trendprintval <- paste0(format(slope * 365, digits = 2, nsmall = 2,
-                                 scientific = FALSE), "m/year")
-  
+  trendpre <- ifelse(state != "Stable" & slope > 0, "Trend: +", "Trend: ")
+  trendprintval <- ifelse(state == "Stable", "No Significant Trend",
+                          paste0(format(slope * 365, digits = 2, nsmall = 2,
+                                 scientific = FALSE), "m/year"))
   trendprint <- paste0(trendpre, trendprintval)
   
+  sigpre <- ifelse(state == "Stable", "", "Significance: ")
+  sigprintval <- ifelse(state == "Stable", "",
+                          paste0(format(sig, digits = 2, nsmall = 3, scientific = 3)))
+  sigprint <- paste0(sigpre, sigprintval)
+
+
   int.well <- intercept + slope * as.numeric(minDate)
   
   maxgwl <- max(df$med_GWL, na.rm = TRUE)
@@ -85,12 +91,13 @@ gwlAreaPlot <- function(dataframe, trend, intercept, state, sig,
                 data = data.frame(intercept = -int.well, slope = slope), size = 1) + 
     labs(title = "Observed Long-term Trend in Groundwater Levels\n", x = "Date",
          y = "Depth Below Ground (metres)",
-         subtitle = paste0("State : ", state,
+         subtitle = paste0("State: ", state,
                            "        ",
                            trendprint,
                            "        ",
-                           "Significance: ",
-                           format(sig, digits = 2, nsmall = 3, scientific = 3))) + 
+                           sigprint)) +
+                           # "Significance: ",
+                           # format(sig, digits = 2, nsmall = 3, scientific = 3))) +
     theme_minimal() +
     theme(
       text = element_text(colour = "black"),
