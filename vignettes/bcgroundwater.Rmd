@@ -92,7 +92,7 @@ beginning or the end of the time series, due to the strong influence of
 these regions on trend analysis, and interpolating the remaining missing values:
 
 ```{r, fig.width=6, fig.height=4, message=FALSE, warning=FALSE}
-full_monthly_data <- makeWellTS(monthly_data, head = 0.1, tail = 0.9, n_consec = 4)
+full_monthly_data <- makeWellTS(monthly_data)
 head(monthly_data)
 ```
 
