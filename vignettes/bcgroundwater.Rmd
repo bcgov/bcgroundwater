@@ -96,6 +96,25 @@ full_monthly_data <- makeWellTS(monthly_data)
 head(monthly_data)
 ```
 
+Ten years is often considered the minimum time series length for meaningful long-term trend analysis, and it is useful to also consider an acceptable allowable "maximum" amount of missing (interpolated) data. Let's use the `dplyr` package to generate some summary data about the well data:
+
+```{r, message=FALSE, warning=FALSE}
+library(dplyr)
+
+time_series_attr <- full_monthly_data %>%
+  group_by(Well_Num) %>%
+  summarise(dataStart = as.Date(min(Date)), 
+            dataEnd = as.Date(max(Date)), 
+            dataYears = as.numeric(dataEnd - dataStart) / 365, 
+            nObs = n(), 
+            nMissing = length(med_GWL[nReadings == 0]), 
+            percent_missing = round(nMissing/nObs*100, 1)) %>% 
+  select(Well_Num, dataYears, nMissing, percent_missing) %>% 
+  print()
+```
+
+Groundwater Observation Well **#309** has over 28 years of consecutive water level data with minimal missing data (2%), ideal for long-term trend analysis.
+
 For trend analysis over a long time series, it is often beneficial to test for
 trends with yearly averages, otherwise serial autocorrelation can be a problem
 (even with pre-whitening). These can be calculated easily using the `dplyr`
