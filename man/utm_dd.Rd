@@ -30,8 +30,3 @@ Convert zone+utm pairs to lat/long. Can take either a single zone + utm,
 or a data frame with many.  Allows for datasets with different zones and 
 datum for each utm.
 }
-\examples{
-\dontrun{
-
-}
-}

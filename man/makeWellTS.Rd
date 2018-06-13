@@ -28,9 +28,3 @@ A full monthly time series with interpolated missing values, retaining
 Takes a dataframe with monthly values and creates a full time series, 
 interpolating missing values.
 }
-\examples{
-\dontrun{
-
-}
-
-}

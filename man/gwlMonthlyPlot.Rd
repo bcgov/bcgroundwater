@@ -27,9 +27,3 @@ A ggplot object.
 Create a graph of historical median monthly water level deviations from
 yearly average with 5th and 95th percentiles.
 }
-\examples{
-\dontrun{
-
-}
-
-}

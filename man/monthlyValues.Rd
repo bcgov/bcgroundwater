@@ -18,8 +18,3 @@ Assigns each reading to a month; sometimes there are several readings in a
 month that may be better assigned to a different month if they are at the 
 border.  Does not estimate values for months where there were 0 observations.
 }
-\examples{
-\dontrun{
-
-}
-}

@@ -31,8 +31,3 @@ A ggmap object.
 Plot a point on a map with an inset in the top right corner showing an 
 overview of a larger area.
 }
-\examples{
-\dontrun{
-
-}
-}

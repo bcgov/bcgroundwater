@@ -28,8 +28,3 @@ Uses the zyp package to calculate Mann-Kendall trend test on pre-whitened
 data (to remove autocorrelation) for many wells, using one or both of two 
 pre-whitening methods, see zyp documentation.
 }
-\examples{
-\dontrun{
-
-}
-}
