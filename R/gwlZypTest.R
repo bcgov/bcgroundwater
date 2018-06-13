@@ -26,9 +26,6 @@
 
 #' @return A dataframe of results for all wells evaluated.
 
-#' @examples \dontrun{
-#'
-#'}
 #' @export
 
 gwlZypTest <- function(dataframe, wells = NULL, 

@@ -23,9 +23,6 @@
 #' @param  opts Other options passed on to ggplot2
 #' @export
 #' @return A ggplot object.
-#' @examples \dontrun{
-#'
-#'}
 #'
 #' @export
 gwlMonthlyPlot <- function(dataframe, splines = TRUE, last12 = TRUE, 

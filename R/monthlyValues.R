@@ -20,9 +20,6 @@
 #'  
 #'@return A data frame with one value per month. Does not estimate values for
 #'  months where there were 0 observations.
-#' @examples \dontrun{
-#'
-#'}
 #' @export
 monthlyValues <- function(df) {
   

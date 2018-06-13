@@ -27,9 +27,7 @@
 #' @return Either a vector of length 2 with longitude and latitude
 #'        respectively, or a dataframe with the 'key' column and longitude
 #'        and latitude.
-#' @examples \dontrun{
-#'
-#'}
+
 utm_dd <- function(zone = NULL, easting = NULL, northing = NULL, 
                    datum = "NAD83", data = NULL, key = NULL) {
   

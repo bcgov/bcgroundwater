@@ -26,9 +26,7 @@
 #' @param  opts Additional options to pass to ggplot2
 #' @export
 #' @return A ggmap object.
-#' @examples \dontrun{
-#'
-#'}
+
 plotPointWithInset <- function(long, lat, pointColour, bigMap=NULL, overviewMap=NULL, overviewExtent=c(-139,48,-114,60), opts=NULL) {
 
   mapExtent <- c(long-2, lat-1, long+2, lat+1)
