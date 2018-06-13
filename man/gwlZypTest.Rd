@@ -8,25 +8,25 @@ gwlZypTest(dataframe, wells = NULL, byID = "Well_Num", col = "mean_GWL",
   method = "both")
 }
 \arguments{
-\item{dataframe}{dataframe containing: an ID column (specified in \code{by})
+\item{dataframe}{Dataframe containing: an ID column (specified in \code{by})
 and a column of values}
 
-\item{wells}{vector of well numbers to test. Default NULL does all in
+\item{wells}{Vector of well numbers to test. Default NULL does all in
 dataframe}
 
-\item{byID}{the name of the ID column}
+\item{byID}{The name of the ID column}
 
-\item{col}{the name of the column with the GWL values}
+\item{col}{The name of the column with the GWL values}
 
 \item{method}{"both" (default), "yuepilon", or "zhang"}
 }
 \value{
-a dataframe of results for all wells evaluated
+A dataframe of results for all wells evaluated.
 }
 \description{
 Uses the zyp package to calculate Mann-Kendall trend test on pre-whitened 
 data (to remove autocorrelation) for many wells, using one or both of two 
-Pre-whitening methods, see zyp documentation
+pre-whitening methods, see zyp documentation.
 }
 \examples{
 \dontrun{

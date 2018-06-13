@@ -2,7 +2,7 @@
 % Please edit documentation in R/readGWLdata.R
 \name{get_gwl}
 \alias{get_gwl}
-\title{Retrive and format groundwater data from BC Government GWL site}
+\title{Retrieve and format groundwater data from B.C. Data Catalogue}
 \usage{
 get_gwl(wells, which = c("all", "recent", "daily"), url = NULL,
   quiet = FALSE)
@@ -13,17 +13,17 @@ get_gwl(wells, which = c("all", "recent", "daily"), url = NULL,
 digit numbers, e.g. OW309, OW008, etc.}
 
 \item{which}{Character. Which data to retrieve \code{all} hourly data, 
-\code{recent} hourly data, or all \code{daily} averages.}
+\code{recent} hourly data, or all \code{daily} averages}
 
-\item{url}{Character. Override the url location of the data.}
+\item{url}{Character. Override the url location of the data}
 
 \item{quiet}{Logical. Suppress progress messages?}
 }
 \value{
-A dataframe of the groundwater level observations
+A dataframe of the groundwater level observations.
 }
 \description{
-Go to <http://www.env.gov.bc.ca/wsd/data_searches/obswell/map/> to find your 
+Go to <https://www2.gov.bc.ca/gov/content?id=2D3DB9BA78DE4377AB4AE2DCEE1B409B> to find your 
 well(s) of interest.
 }
 \details{

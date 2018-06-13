@@ -16,21 +16,21 @@
 #' given slope and intercept, optionally with interpolated values shown.
 
 #' @importFrom scales date_breaks date_format
-#' @param  dataframe a dataframe with well level monthly time series and the 
+#' @param  dataframe A dataframe with well level monthly time series and the 
 #'         following columns: Date, med_GWL, nReadings
-#' @param  trend (numeric) trend in m/month
-#' @param  intercept (numeric) intercept in m
+#' @param  trend (Numeric) Trend in m/month
+#' @param  intercept (Numeric) Intercept in m
 #' @param  state Trend classification (stable, declining, increasing)
-#' @param  sig (numeric) significance of trend test
-#' @param  showInterpolated (logical) show the points where missing values in the 
+#' @param  sig (Numeric) Significance of trend test
+#' @param  showInterpolated (Logical) Show the points where missing values in the 
 #'         time series were interpolated
 #' @param  save Save the graph to file?
 #' @param  path Where to save the graph if \code{save = TRUE}
-#' @param  mkperiod the period (monthly or annual) the Mann-Kendall test was 
+#' @param  mkperiod The period (monthly or annual) the Mann-Kendall test was 
 #'         performed on
-#' @param  opts other options to pass to ggplot2
+#' @param  opts Other options to pass to ggplot2
 #' 
-#' @return A ggplot2 object
+#' @return A ggplot2 object.
 #' 
 #' @export
 gwlAreaPlot <- function(dataframe, trend, intercept, state, sig, 

@@ -17,8 +17,8 @@
 #'
 #'@param df A monthly dataframe created by `monthlyValues`. Must minimally 
 #'  include fields `EMS_ID`, `Well_Num` `Date`, 'med_GWL`, `nReadings`
-#' @param trim should leading and trailing missing values in be removed? See [trimConsRuns()]. 
-#' @param ... parameters passed on to [trimConsRuns()] (`head`, `tail`, `n_consec`)
+#' @param trim Should leading and trailing missing values in be removed? See [trimConsRuns()]. 
+#' @param ... Parameters passed on to [trimConsRuns()] (`head`, `tail`, `n_consec`)
 #'  
 #'@return A full monthly time series with interpolated missing values, retaining
 #'  all of the columns in the original data frame.

@@ -13,16 +13,16 @@
 #' Create a graph of historical monthly water level deviations
 #' 
 #' Create a graph of historical median monthly water level deviations from
-#' yearly average with 5th and 95th percentiles
+#' yearly average with 5th and 95th percentiles.
 #' 
-#' @param  dataframe dataframe containing 'Well_Num', 'Date', 'dev_med_GWL'
-#' @param  splines logical: smooth the line using splines?
-#' @param  last12 logical: plot the last 12 monthly readings as points?
-#' @param  save logical: save as a pdf?
-#' @param  path path to folder in which to save if save=TRUE
-#' @param  opts other options passed on to ggplot2
+#' @param  dataframe Dataframe containing 'Well_Num', 'Date', 'dev_med_GWL'
+#' @param  splines Logical: smooth the line using splines?
+#' @param  last12 Logical: plot the last 12 monthly readings as points?
+#' @param  save Logical: save as a pdf?
+#' @param  path Path to folder in which to save if save=TRUE
+#' @param  opts Other options passed on to ggplot2
 #' @export
-#' @return A ggplot object
+#' @return A ggplot object.
 #' @examples \dontrun{
 #'
 #'}
@@ -59,7 +59,7 @@ gwlMonthlyPlot <- function(dataframe, splines = TRUE, last12 = TRUE,
     geom_ribbon(aes_string(ymin = "dev_Q5", ymax = "dev_Q95", fill = "''"), alpha = 0.2) + 
     geom_line(aes_string(colour = "''"), alpha = 0.4, size = 1) + 
     labs(title = "Monthly groundwater level deviation", x = "Month",
-         y = "Difference from yearly average GWL (m)") + 
+         y = "Difference from Yearly Average GWL (metres)") + 
     theme(panel.background = element_rect(fill = "white"),
           line = element_line(colour = "grey50"),
           text = element_text(colour = "grey50"),

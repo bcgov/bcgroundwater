@@ -8,31 +8,31 @@ gwlAreaPlot(dataframe, trend, intercept, state, sig, showInterpolated = FALSE,
   save = FALSE, path = "./", mkperiod = "monthly", opts = NULL)
 }
 \arguments{
-\item{dataframe}{a dataframe with well level monthly time series and the 
+\item{dataframe}{A dataframe with well level monthly time series and the 
 following columns: Date, med_GWL, nReadings}
 
-\item{trend}{(numeric) trend in m/month}
+\item{trend}{(Numeric) Trend in m/month}
 
-\item{intercept}{(numeric) intercept in m}
+\item{intercept}{(Numeric) Intercept in m}
 
 \item{state}{Trend classification (stable, declining, increasing)}
 
-\item{sig}{(numeric) significance of trend test}
+\item{sig}{(Numeric) Significance of trend test}
 
-\item{showInterpolated}{(logical) show the points where missing values in the 
+\item{showInterpolated}{(Logical) Show the points where missing values in the 
 time series were interpolated}
 
 \item{save}{Save the graph to file?}
 
 \item{path}{Where to save the graph if \code{save = TRUE}}
 
-\item{mkperiod}{the period (monthly or annual) the Mann-Kendall test was 
+\item{mkperiod}{The period (monthly or annual) the Mann-Kendall test was 
 performed on}
 
-\item{opts}{other options to pass to ggplot2}
+\item{opts}{Other options to pass to ggplot2}
 }
 \value{
-A ggplot2 object
+A ggplot2 object.
 }
 \description{
 An area plot (hydrograph) of groundwater levels, with trend line of a 

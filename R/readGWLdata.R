@@ -15,9 +15,9 @@
 
 
 
-#' Retrive and format groundwater data from BC Government GWL site
+#' Retrieve and format groundwater data from B.C. Data Catalogue
 #' 
-#' Go to <http://www.env.gov.bc.ca/wsd/data_searches/obswell/map/> to find your 
+#' Go to <https://www2.gov.bc.ca/gov/content?id=2D3DB9BA78DE4377AB4AE2DCEE1B409B> to find your 
 #' well(s) of interest.
 #' 
 #' Note that well water levels are measured in meters below the ground. Thus 
@@ -33,11 +33,11 @@
 #'   \code{OW000} or \code{000} format. Note that format OW000 requires three
 #'   digit numbers, e.g. OW309, OW008, etc.
 #' @param which Character. Which data to retrieve \code{all} hourly data, 
-#'   \code{recent} hourly data, or all \code{daily} averages.
-#' @param url Character. Override the url location of the data.
+#'   \code{recent} hourly data, or all \code{daily} averages
+#' @param url Character. Override the url location of the data
 #' @param quiet Logical. Suppress progress messages?
 #' 
-#' @return A dataframe of the groundwater level observations
+#' @return A dataframe of the groundwater level observations.
 #' 
 #' @examples \dontrun{
 #' 

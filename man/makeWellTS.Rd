@@ -10,9 +10,9 @@ makeWellTS(df, trim = TRUE, ...)
 \item{df}{A monthly dataframe created by `monthlyValues`. Must minimally 
 include fields `EMS_ID`, `Well_Num` `Date`, 'med_GWL`, `nReadings`}
 
-\item{trim}{should leading and trailing missing values in be removed? See [trimConsRuns()].}
+\item{trim}{Should leading and trailing missing values in be removed? See [trimConsRuns()].}
 
-\item{...}{parameters passed on to [trimConsRuns()] (`head`, `tail`, `n_consec`)}
+\item{...}{Parameters passed on to [trimConsRuns()] (`head`, `tail`, `n_consec`)}
 }
 \value{
 A full monthly time series with interpolated missing values, retaining

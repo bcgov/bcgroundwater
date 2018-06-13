@@ -16,7 +16,7 @@
 #'
 #' @param arg The name of the argument in the parent function
 #'
-#' @return the value of arg after verifying, or an error
+#' @return The value of arg after verifying, or an error
 #'
 #' @examples \dontrun{
 #'   my_fun <- function(my_arg = c("a", "b")) {

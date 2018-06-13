@@ -10,21 +10,21 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 
-#' Convert zone+utm pairs to lat/long.
+#' Convert zone+utm pairs to lat/long
 #'
 #' Convert zone+utm pairs to lat/long. Can take either a single zone + utm,
 #' or a data frame with many.  Allows for datasets with different zones and 
 #' datum for each utm.
 
 #' 
-#' @param zone integer, or column name in 'data'
-#' @param  easting integer, or column name in 'data'
-#' @param  northing integer, or column name in 'data'
-#' @param  datum string or column name in 'data'. Default 'NAD83'
-#' @param  data (optional) a data frame with zone + utms
+#' @param zone Integer, or column name in 'data'
+#' @param  easting Integer, or column name in 'data'
+#' @param  northing Integer, or column name in 'data'
+#' @param  datum String or column name in 'data'. Default 'NAD83'
+#' @param  data (Optional) A data frame with zone + utms
 #' @param  key Name of column in 'data' that contains a unique identifier for each row
 #' @export
-#' @return either a vector of length 2 with longitude  and latitude
+#' @return Either a vector of length 2 with longitude and latitude
 #'        respectively, or a dataframe with the 'key' column and longitude
 #'        and latitude.
 #' @examples \dontrun{

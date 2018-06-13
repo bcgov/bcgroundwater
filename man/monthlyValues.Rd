@@ -7,10 +7,10 @@
 monthlyValues(df)
 }
 \arguments{
-\item{df}{data frame with columns EMS_ID, Well_Num, Date, GWL}
+\item{df}{Data frame with columns EMS_ID, Well_Num, Date, GWL}
 }
 \value{
-a data frame with one value per month. Does not estimate values for
+A data frame with one value per month. Does not estimate values for
  months where there were 0 observations.
 }
 \description{

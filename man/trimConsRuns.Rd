@@ -7,25 +7,25 @@
 trimConsRuns(x, val, head = 0.2, tail = 0.8, n_consec)
 }
 \arguments{
-\item{x}{the vector}
+\item{x}{The vector}
 
-\item{val}{the value for which to find consecutive runs}
+\item{val}{The value for which to find consecutive runs}
 
-\item{head}{(proportion between 0 and 1, default = 0.2) the beginning portion of 
+\item{head}{(Proportion between 0 and 1, default = 0.2) The beginning portion of 
 the vector in which to look for consecutive missing values}
 
-\item{tail}{(proportion between 0 and 1, default = 0.8) the end portion of 
+\item{tail}{(Proportion between 0 and 1, default = 0.8) The end portion of 
 the vector in which to look for consecutive missing values}
 
-\item{n_consec}{the number of consecutive values which constitutes a 'long' run}
+\item{n_consec}{The number of consecutive values which constitutes a 'long' run}
 }
 \value{
-a list of start and end points of a vector to remove heavily weighted
+A list of start and end points of a vector to remove heavily weighted
         heads and tails containing continuous runs of a value (likely denoting missing)
 }
 \description{
-Finds the start and end points of consecutive runs of of a value in the 
-beginning and end of a vector
+Finds the start and end points of consecutive runs of a value in the 
+beginning and end of a vector.
 }
 \examples{
 \dontrun{
