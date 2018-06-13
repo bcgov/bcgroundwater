@@ -58,25 +58,27 @@ gwlMonthlyPlot <- function(dataframe, splines = TRUE, last12 = TRUE,
   plot.monthly <- ggplot(data = data, aes_string(x = "month", y = "dev_med")) + 
     geom_ribbon(aes_string(ymin = "dev_Q5", ymax = "dev_Q95", fill = "''"), alpha = 0.2) + 
     geom_line(aes_string(colour = "''"), alpha = 0.4, size = 1) + 
-    labs(title = "Monthly groundwater level deviation", x = "Month",
-         y = "Difference from Yearly Average GWL (metres)") + 
-    theme(panel.background = element_rect(fill = "white"),
-          line = element_line(colour = "grey50"),
-          text = element_text(colour = "grey50"),
-          legend.position = "top", legend.box = "vertical",
-          legend.box.just = "left",
-          legend.spacing = unit(0, "pt"),
-          plot.title = element_text(hjust = 0.5)
-          #axis.text.x = element_text(angle = 45) # May need if using full month names
-    ) + 
+    labs(title = "Monthly Groundwater Level Patterns", x = "Month",
+         y = "Difference from Groundwater Level\nYearly Average (metres)") + 
+    theme_minimal() +
+    theme(
+      text = element_text(colour = "black"),
+      panel.grid.minor.x = element_blank(),
+      panel.grid.major.x = element_blank(),
+      axis.line = element_line(colour="grey50"),
+      legend.position = "top", legend.box = "horizontal",
+      legend.box.just = "left",
+      legend.spacing = unit(0, "pt"),
+      plot.title = element_text(hjust = 0.5)
+      #axis.text.x = element_text(angle = 45) # May need if using full month names
+    ) +
     scale_y_reverse() +
     scale_x_continuous(breaks = 1:12, labels = month.abb) + 
     scale_colour_manual(name = '', values = "#1E90FF",
-                        labels = c("Mean deviation from yearly average"),
+                        labels = c("Mean Deviation from Yearly Average"),
                         guide = "legend") +
     scale_fill_manual(name = '', values = "#1E90FF", guide = 'legend',
-                      labels = c('Range of 90% of water levels')) +
-
+                      labels = c('Range of 90% of Water Levels')) +
     scale_alpha_identity(name = '', labels = NA) + 
     opts
   

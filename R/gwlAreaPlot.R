@@ -83,29 +83,31 @@ gwlAreaPlot <- function(dataframe, trend, intercept, state, sig,
                            fill = "'Groundwater Level'"), alpha = 0.3) + 
     geom_abline(aes_string(intercept = "intercept", slope = "slope", colour = "'LTT'"), 
                 data = data.frame(intercept = -int.well, slope = slope), size = 1) + 
-    annotate(geom = "text", 
-             x = minDate + as.numeric(maxDate - minDate)/50, 
-             y = lims[2], hjust = 0, vjust = 1, colour = "grey50", size = 3,
-             label = paste0(trendprint, "        Significance: ",
-                            format(sig, digits = 2, nsmall = 3, scientific = 3),
-                            "        State: ", state)) + 
-    labs(title = "Observed Long-term Trend in Groundwater Levels", x = "Date",
-         y = "Depth Below Ground (metres)") + 
-    theme(panel.background = element_rect(fill = "white"),
-          line = element_line(colour = "grey50"),
-          text = element_text(colour = "grey50"),
-          panel.grid.major.x = element_blank(),
-          panel.grid.minor.x = element_blank(),
-          legend.position = "top", legend.box =  "horizontal",
-          plot.title = element_text(hjust = 0.5)) + 
+    labs(title = "Observed Long-term Trend in Groundwater Levels\n", x = "Date",
+         y = "Depth Below Ground (metres)",
+         subtitle = paste0("State : ", state,
+                           "        ",
+                           trendprint,
+                           "        ",
+                           "Significance: ",
+                           format(sig, digits = 2, nsmall = 3, scientific = 3))) + 
+    theme_minimal() +
+    theme(
+      text = element_text(colour = "black"),
+      panel.grid.minor.x = element_blank(),
+      panel.grid.major.x = element_blank(),
+      axis.line = element_line(colour="grey50"),
+      legend.position = "bottom", legend.box =  "horizontal",
+      plot.title = element_text(hjust = 0.5),
+      plot.subtitle = element_text(hjust = 0.5)) + 
     scale_y_reverse(expand = c(0,0)) + coord_cartesian(ylim = lims) + 
-    scale_x_date(labels = date_format("%Y"), breaks = date_breaks("2 years"),
+    scale_x_date(labels = date_format("%Y"), breaks = date_breaks("3 years"),
                  expand = c(0,0)) + 
     scale_fill_manual(name = '', values = c('Groundwater Level' = "#1E90FF"))
-   
-  vals <- c(LTT = 'orange', Interp = 'red')
+  
+  vals <- c(LTT = 'orange', Interp = 'grey30')
   labs <- c('Long-term Trend', 'Interpolated (Missing) Values')
-  override_list <- list(colour = c("orange", "red"), shape = c(NA, 16), linetype = c(1, 0))
+  override_list <- list(colour = c("orange", "grey30"), shape = c(NA, 16), linetype = c(1, 0))
   
   if (showInterpolated) {
     plot.area <- plot.area + 
