@@ -4,7 +4,7 @@
 \alias{makeWellTS}
 \title{Get full time series with missing values interpolated}
 \usage{
-makeWellTS(df, trim = TRUE, ...)
+makeWellTS(df, trim = TRUE, head = 0.1, tail = 0.9, n_consec = 4)
 }
 \arguments{
 \item{df}{A monthly dataframe created by `monthlyValues`. Must minimally 
@@ -12,7 +12,13 @@ include fields `EMS_ID`, `Well_Num` `Date`, 'med_GWL`, `nReadings`}
 
 \item{trim}{Should leading and trailing missing values in be removed? See [trimConsRuns()].}
 
-\item{...}{Parameters passed on to [trimConsRuns()] (`head`, `tail`, `n_consec`)}
+\item{head}{(Proportion between 0 and 1, default = 0.1) The beginning portion of 
+the vector in which to look for consecutive missing values}
+
+\item{tail}{(Proportion between 0 and 1, default = 0.9) The end portion of 
+the vector in which to look for consecutive missing values}
+
+\item{n_consec}{The number of consecutive values which constitutes a 'long' run (default = 4)}
 }
 \value{
 A full monthly time series with interpolated missing values, retaining

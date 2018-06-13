@@ -4,20 +4,20 @@
 \alias{trimConsRuns}
 \title{Find consecuctive runs of a value in extremes of a vector}
 \usage{
-trimConsRuns(x, val, head = 0.2, tail = 0.8, n_consec)
+trimConsRuns(x, val, head = 0.1, tail = 0.9, n_consec = 4)
 }
 \arguments{
 \item{x}{The vector}
 
 \item{val}{The value for which to find consecutive runs}
 
-\item{head}{(Proportion between 0 and 1, default = 0.2) The beginning portion of 
+\item{head}{(Proportion between 0 and 1, default = 0.1) The beginning portion of 
 the vector in which to look for consecutive missing values}
 
-\item{tail}{(Proportion between 0 and 1, default = 0.8) The end portion of 
+\item{tail}{(Proportion between 0 and 1, default = 0.9) The end portion of 
 the vector in which to look for consecutive missing values}
 
-\item{n_consec}{The number of consecutive values which constitutes a 'long' run}
+\item{n_consec}{The number of consecutive values which constitutes a 'long' run (default = 4)}
 }
 \value{
 A list of start and end points of a vector to remove heavily weighted
