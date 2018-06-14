@@ -26,8 +26,8 @@
 #'         time series were interpolated
 #' @param  save Save the graph to file?
 #' @param  path Where to save the graph if \code{save = TRUE}
-#' @param  mkperiod The period (monthly or annual) the Mann-Kendall test was 
-#'         performed on
+#' @param  mkperiod The period (\code{"monthly"} or \code{"annual"}) 
+#'         the Mann-Kendall test was performed on
 #' @param  opts Other options to pass to ggplot2
 #' 
 #' @return A ggplot2 object.
@@ -54,11 +54,13 @@ gwlAreaPlot <- function(dataframe, trend, intercept, state, sig,
   
   WellNum <- df$Well_Num[1]
   
-  ## Slope is in m/month, have to convert to m/day to work with Date format
   if (mkperiod == "monthly") {
+    ## Slope is in m/month, have to convert to m/day to work with Date format
+    slope <- -(trend/12/365)
+  } else if (mkperiod == "annual") {
     slope <- -(trend/365)
   } else {
-    slope <- -(trend/12/365)
+    stop("mkperiod must be either 'monthly' or 'annual'")
   }
   
   trendpre <- ifelse(state != "Stable" & slope > 0, "Trend: +", "Trend: ")
