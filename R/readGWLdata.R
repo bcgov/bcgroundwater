@@ -12,9 +12,6 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
-
-
-
 #' Retrieve and format groundwater data from B.C. Data Catalogue
 #' 
 #' Go to <https://www2.gov.bc.ca/gov/content?id=2D3DB9BA78DE4377AB4AE2DCEE1B409B> to find your 
@@ -38,7 +35,7 @@
 #' @param quiet Logical. Suppress progress messages?
 #' 
 #' @return A dataframe of the groundwater level observations.
-#' 
+#' @export
 #' @examples \dontrun{
 #' all_309 <- get_gwl(wells = 309)
 #' recent_309 <- get_gwl(wells = "OW309", which = "recent")
@@ -49,7 +46,6 @@
 #' daily_avg_multi <- get_gwl(wells = c("309", "89"), which = "daily")
 #'}
 #'
-#' @export
 get_gwl <- function(wells, which = c("all", "recent", "daily"), 
                     url = NULL, quiet = FALSE) {
   
@@ -175,9 +171,6 @@ format_gwl <- function(data, which, quiet) {
 #' @param emsID The EMS ID of the well
 #' @export
 #' @return A dataframe of the groundwater level observations
-#' @examples \dontrun{
-#'
-#'}
 readGWLdata <- function(path, emsID = NULL) {
   stop("'readGWLdata' is now defunct and has been replaced by 'get_gwl'.",
        "\nSee ?get_gwl for more details.")
