@@ -20,7 +20,12 @@
 #'         following columns: Date, med_GWL, nReadings
 #' @param  trend (Numeric) Trend in m/month
 #' @param  intercept (Numeric) Intercept in m
-#' @param  state Trend classification (stable, declining, increasing)
+#' @param  state Trend classification: \code{"stable"}, or another description 
+#'         of the magnitude and direction of the trend. This description will
+#'         be displayed on the graph in Title Case. 
+#'         If \code{"stable"}, no trend value or statistical significance 
+#'         will be displayed on the plot, otherwise this information will be 
+#'         displayed alongside the \code{state} information.
 #' @param  sig (Numeric) Significance of trend test
 #' @param  showInterpolated (Logical) Show the points where missing values in the 
 #'         time series were interpolated
@@ -63,7 +68,7 @@ gwlAreaPlot <- function(dataframe, trend, intercept, state, sig,
     stop("mkperiod must be either 'monthly' or 'annual'")
   }
   
-  if (state == "Stable") {
+  if (tolower(state) == "stable") {
     trendprint <- "Trend: No Significant Trend"
     sigprint <- ""
   } else {
@@ -94,7 +99,7 @@ gwlAreaPlot <- function(dataframe, trend, intercept, state, sig,
                 data = data.frame(intercept = -int.well, slope = slope), size = 1) + 
     labs(title = "Observed Long-term Trend in Groundwater Levels\n", x = "Date",
          y = "Depth Below Ground (metres)",
-         subtitle = paste0("State: ", state,
+         subtitle = paste0("State: ", tools::toTitleCase(tolower(state)),
                            "        ",
                            trendprint,
                            "        ",

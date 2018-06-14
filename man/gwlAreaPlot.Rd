@@ -15,7 +15,12 @@ following columns: Date, med_GWL, nReadings}
 
 \item{intercept}{(Numeric) Intercept in m}
 
-\item{state}{Trend classification (stable, declining, increasing)}
+\item{state}{Trend classification: \code{"stable"}, or another description 
+of the magnitude and direction of the trend. This description will
+be displayed on the graph in Title Case. 
+If \code{"stable"}, no trend value or statistical significance 
+will be displayed on the plot, otherwise this information will be 
+displayed alongside the \code{state} information.}
 
 \item{sig}{(Numeric) Significance of trend test}
 
