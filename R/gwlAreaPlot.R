@@ -63,17 +63,18 @@ gwlAreaPlot <- function(dataframe, trend, intercept, state, sig,
     stop("mkperiod must be either 'monthly' or 'annual'")
   }
   
-  trendpre <- ifelse(state != "Stable" & slope > 0, "Trend: +", "Trend: ")
-  trendprintval <- ifelse(state == "Stable", "No Significant Trend",
-                          paste0(format(slope * 365, digits = 2, nsmall = 2,
-                                 scientific = FALSE), "m/year"))
-  trendprint <- paste0(trendpre, trendprintval)
-  
-  sigpre <- ifelse(state == "Stable", "", "Significance: ")
-  sigprintval <- ifelse(state == "Stable", "",
-                          paste0(format(sig, digits = 2, nsmall = 3, scientific = 3)))
-  sigprint <- paste0(sigpre, sigprintval)
-
+  if (state == "Stable") {
+    trendprint <- "Trend: No Significant Trend"
+    sigprint <- ""
+  } else {
+    trendpre <- ifelse(slope > 0, "Trend: +", "Trend: ")
+    trendprint <- paste0(trendpre, 
+                         paste0(format(slope * 365, digits = 2, nsmall = 2,
+                                       scientific = FALSE), "m/year"))
+    
+    sigprint <- paste0("Significance: ", 
+                       format(sig, digits = 2, nsmall = 3, scientific = 3))
+  }
 
   int.well <- intercept + slope * as.numeric(minDate)
   
