@@ -154,6 +154,7 @@ state <-  trends %>%
                            trend <= -0.03 & sig < 0.05 ~ "Increasing",
                            TRUE ~ "Stable")) %>% 
   pull(state)
+state
 ```
 
 
