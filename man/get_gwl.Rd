@@ -38,7 +38,6 @@ only cover days marked as "Validated" in the full hourly dataset.
 }
 \examples{
 \dontrun{
-
 all_309 <- get_gwl(wells = 309)
 recent_309 <- get_gwl(wells = "OW309", which = "recent")
 daily_avg_309 <- get_gwl(wells = "OW309", which = "daily")
