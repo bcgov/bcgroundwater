@@ -15,10 +15,6 @@ r:
   - release
   - devel
   - oldrel
-  
-matrix:
-  allow_failures:
-    - r: devel
 
 notifications:
   email:
