@@ -12,7 +12,7 @@ knitr::opts_chunk$set(fig.width = 6, fig.height = 4)
 ```
 
 
-You can install the 'bcgroundwater' R `r emo::ji("package")` directly from [GitHub](https://github.com/bcgov/bcgroundwater). To do so, you will 
+You can install the 'bcgroundwater' R `r emo::ji("package")` package directly from [GitHub](https://github.com/bcgov/bcgroundwater). To do so, you will 
 need the [remotes](https://cran.r-project.org/web/packages/remotes/index.html) package:
 
 ```{r, eval=FALSE}
@@ -65,10 +65,10 @@ head(data)
 
 
 
-The Provincial Groundwater Observation Well Network - Groundwater Levels Data is programatically sourced from the B.C. Data Catalogue, distributed under the [Open Government Licence - British Columbia](https://www2.gov.bc.ca/gov/content?id=A519A56BC2BF44E4A008B33FCF527F61):  <https://catalogue.data.gov.bc.ca/dataset/57c55f10-cf8e-40bb-aae0-2eff311f1685>
+The Provincial [Groundwater Observation Well Network - Groundwater Levels Data](https://catalogue.data.gov.bc.ca/dataset/57c55f10-cf8e-40bb-aae0-2eff311f1685) is programatically sourced from the B.C. Data Catalogue, distributed under the [Open Government Licence - British Columbia](https://www2.gov.bc.ca/gov/content?id=A519A56BC2BF44E4A008B33FCF527F61).
 
 
-## Tidy & Visualise Your Data
+## Summarise & Visualise Your Data
 
 Next, calculate the median monthly values:
 
@@ -87,9 +87,9 @@ plot(monthlyplot)
 ```
 
 To perform the trend analysis, you will need to generate a full regular time series
-with no gaps in the dates. `makeWellTS()` does this for you&mdash;removing consecutive missing values near the
-beginning or the end of the time series, due to the strong influence of
-these regions on trend analysis, and interpolating the remaining missing values:
+with no gaps in the dates. `makeWellTS()` does this for you, removing consecutive missing values near the
+beginning or the end of the time series&mdash;due to the strong influence of
+these regions on trend analysis&mdash;and interpolating the remaining missing values:
 
 ```{r, fig.width=6, fig.height=4, message=FALSE, warning=FALSE}
 full_monthly_data <- makeWellTS(monthly_data)
@@ -130,7 +130,9 @@ annual_data <- full_monthly_data %>%
             mean_GWL = mean(med_GWL),
             SD = sd(med_GWL),
             med_GWL = median(med_GWL),
-            q95_GWL = quantile(med_GWL, 0.95))
+            q95_GWL = quantile(med_GWL, 0.95)) %>% 
+  mutate(Date = as.Date(paste0(Year, "-01-01")))
+head(annual_data)
 ```
 
 ## Analyse & Visualise Your Data
