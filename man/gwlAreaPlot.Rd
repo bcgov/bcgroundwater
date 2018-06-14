@@ -26,8 +26,8 @@ time series were interpolated}
 
 \item{path}{Where to save the graph if \code{save = TRUE}}
 
-\item{mkperiod}{The period (monthly or annual) the Mann-Kendall test was 
-performed on}
+\item{mkperiod}{The period (\code{"monthly"} or \code{"annual"}) 
+the Mann-Kendall test was performed on}
 
 \item{opts}{Other options to pass to ggplot2}
 }
