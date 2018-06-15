@@ -70,7 +70,7 @@ The Provincial [Groundwater Observation Well Network - Groundwater Levels Data](
 
 ## Summarise & Visualise Your Data
 
-Next, calculate the median monthly values:
+Next, you can calculate the median monthly values:
 
 ```{r, message=FALSE, warning=FALSE}
 monthly_data <- monthly_values(data)
@@ -87,13 +87,13 @@ plot(monthlyplot)
 ```
 
 To perform the trend analysis, you will need to generate a full regular time series
-with no gaps in the dates. `makeWellTS()` does this for you, removing consecutive missing values near the
+with no gaps in the dates. `make_well_ts()` does this for you, removing consecutive missing values near the
 beginning or the end of the time series&mdash;due to the strong influence of
 these regions on trend analysis&mdash;and interpolating the remaining missing values:
 
 ```{r, fig.width=6, fig.height=4, message=FALSE, warning=FALSE}
 full_monthly_data <- make_well_ts(monthly_data)
-head(monthly_data)
+head(full_monthly_data)
 ```
 
 Ten years is often considered the minimum time series length for meaningful long-term trend analysis, and it is useful to also consider an acceptable allowable "maximum" amount of missing (interpolated) data. You can use the `dplyr` package to generate some summary information about the well dataset to help you decide if it is approrpiate to conduct a trend analysis:
@@ -144,26 +144,24 @@ trends
 ```
 
 
-We can categorize the observed long-term trend using the criteria developed for the [Environmental Reporting BC indicator on trends in groundwater levels](http://www.env.gov.bc.ca/soe/indicators/water/groundwater-levels.html): Stable, Increasing, Moderate Rate of Decline or Large Rate of Decline:
+We we will use the results from the yuepilon method, and categorize the observed long-term trend using the criteria developed for the [Environmental Reporting BC indicator on trends in groundwater levels](http://www.env.gov.bc.ca/soe/indicators/water/groundwater-levels.html): Stable, Increasing, Moderate Rate of Decline or Large Rate of Decline:
 
 ```{r, message=FALSE, warning=FALSE}
-state <-  trends %>% 
+result <-  trends %>% 
   filter(test_type == "yuepilon") %>%
   mutate(state = case_when(trend >= 0.1 & sig < 0.05 ~ "Large Rate of Decline",
                            trend >= 0.03 & trend < 0.1 & sig < 0.05 ~ "Moderate Rate of Decline",
                            trend <= -0.03 & sig < 0.05 ~ "Increasing",
-                           TRUE ~ "Stable")) %>% 
-  pull(state)
-state
+                           TRUE ~ "Stable")) 
+result
 ```
 
 
-Finally, plot the time series with the trend overlaid (we will use the results
-from the yuepilon method), optionally with interpolated values overlaid:
+Finally, you can plot the time series with the trend overlaid, optionally showing any interpolated values:
 
 ```{r, message=FALSE, warning=FALSE, fig.align='center'}
-trend_plot <- gwl_area_plot(full_monthly_data, trend = trends$trend[1],
-                          intercept = trends$intercept[1], sig = trends$sig[1], state = state,
+trend_plot <- gwl_area_plot(full_monthly_data, trend = result$trend,
+                          intercept = result$intercept, sig = result$sig, state = result$state,
                           mkperiod = "annual", showInterpolated = TRUE)
 plot(trend_plot)
 
