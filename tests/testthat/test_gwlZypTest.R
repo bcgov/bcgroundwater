@@ -1,9 +1,9 @@
-context("gwlZypTest")
+context("gwl_zyp_test")
 
-test_that("gwlZypTest returns data", {
+test_that("gwl_zyp_test returns data", {
   g_month <- get_gwl(wells = 309) %>%
-    monthlyValues() %>%
-    makeWellTS()
+    monthly_values() %>%
+    make_well_ts()
   
   g_annual <- g_month %>%
     dplyr::select(-yearmonth) %>% 
@@ -14,12 +14,12 @@ test_that("gwlZypTest returns data", {
                      med_GWL = median(med_GWL),
                      q95_GWL = quantile(med_GWL, 0.95))
   
-  expect_silent(t <- gwlZypTest(g_annual, byID = "Well_Num", col = "mean_GWL"))
+  expect_silent(t <- gwl_zyp_test(g_annual, byID = "Well_Num", col = "mean_GWL"))
   expect_is(t, "data.frame")
   expect_gt(nrow(t), 0)
   expect_true(all(!is.na(t$intercept)))
   
-  expect_silent(p <- gwlAreaPlot(g_month, 
+  expect_silent(p <- gwl_area_plot(g_month, 
                                  trend = t$trend[1],
                                  intercept = t$intercept[1], sig = t$sig[1],
                                  state = "Stable", mkperiod = "annual", showInterpolated = TRUE))

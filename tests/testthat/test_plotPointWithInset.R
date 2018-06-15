@@ -1,6 +1,6 @@
-context("plotPointWithInset")
+context("plot_point_withinset")
 
-test_that("plotPointWithInset plots as expected", {
+test_that("plot_point_withinset plots as expected", {
   
   
 })
