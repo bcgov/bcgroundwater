@@ -1,7 +1,6 @@
 Package: bcgroundwater
 Title: Analyse B.C. Groundwater Level Data
 Version: 1.0.0
-Date: 2014-06-23
 Authors@R: c(person("Andy", "Teucher", email = "andy.teucher@gov.bc.ca",
                     role = c("aut", "cre")),
              person("Province of British Columbia", role="cph"),
