@@ -1,14 +1,16 @@
 Package: bcgroundwater
-Title: Analyse B.C. groundwater level data
+Title: Analyse B.C. Groundwater Level Data
 Version: 0.2.3
 Date: 2014-06-23
 Authors@R: c(person("Andy", "Teucher", email = "andy.teucher@gov.bc.ca",
                     role = c("aut", "cre")),
              person("Province of British Columbia", role="cph"),
              person("Steffi", "LaZerte", email = "steffi@steffi.ca",
-                    role = c("aut", "ctb")))
+                    role = c("aut", "ctb")),
+             person("Stephanie", "Hazlitt", email = "stephanie.hazlitt@gov.bc.ca",
+                    role = c("ctb")))
 Description: Set of functions for analysing and visualising groundwater level
-    data from the BC Ministry of Environment groundwater observation well network.
+    data from the BC Ministry of Environment Provincial Groundwater Observation Well Network.
 License: Apache License (== 2.0) | file LICENSE
 Depends:
     R (>= 3.2.0)

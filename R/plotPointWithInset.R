@@ -15,21 +15,20 @@
 #' Plot a point on a map with an inset in the top right corner showing an 
 #' overview of a larger area.
 #' 
-#' @param  long longitude (dd) of point
-#' @param  lat latitude (dd) of point
-#' @param  pointColour the colour of the point
+#' @param  long Longitude (dd) of point
+#' @param  lat Latitude (dd) of point
+#' @param  pointColour The colour of the point
 #' @param  bigMap ggmap of the zoomed in area that will comprise the large map
 #' @param  overviewMap ggMap of large area that will be in the inset.  If not
 #'   provided, will be generated using overviewExtent
-#' @param  overviewExtent the extent (left, botton, right, top) of the large
+#' @param  overviewExtent The extent (left, botton, right, top) of the large
 #'   area that will be in the inset. Default is British Columbia
-#' @param  opts additional options to pass to ggplot2
+#' @param  opts Additional options to pass to ggplot2
+#' @aliases plotPointWithInset
 #' @export
-#' @return a ggmap object
-#' @examples \dontrun{
-#'
-#'}
-plotPointWithInset <- function(long, lat, pointColour, bigMap=NULL, overviewMap=NULL, overviewExtent=c(-139,48,-114,60), opts=NULL) {
+#' @return A ggmap object.
+
+plot_point_with_inset <- function(long, lat, pointColour, bigMap=NULL, overviewMap=NULL, overviewExtent=c(-139,48,-114,60), opts=NULL) {
 
   mapExtent <- c(long-2, lat-1, long+2, lat+1)
   insExtentR <- abs(mapExtent[3]-mapExtent[1])*.95+mapExtent[1]

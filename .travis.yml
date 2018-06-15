@@ -7,6 +7,8 @@ r_check_args: --no-build-vignettes
 
 addons:
   apt:
+    sources:
+      - sourceline: 'ppa:ubuntugis/ubuntugis-unstable'
     packages:
       - libgdal-dev
       - libproj-dev
@@ -15,10 +17,6 @@ r:
   - release
   - devel
   - oldrel
-  
-matrix:
-  allow_failures:
-    - r: devel
 
 notifications:
   email:

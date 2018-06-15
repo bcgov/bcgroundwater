@@ -16,15 +16,13 @@
 #'month that may be better assigned to a different month if they are at the 
 #'border.  Does not estimate values for months where there were 0 observations.
 #'
-#'@param df data frame with columns EMS_ID, Well_Num, Date, GWL
+#'@param df Data frame with columns EMS_ID, Well_Num, Date, GWL
 #'  
-#'@return a data frame with one value per month. Does not estimate values for
+#'@return A data frame with one value per month. Does not estimate values for
 #'  months where there were 0 observations.
-#' @examples \dontrun{
-#'
-#'}
+#'  @aliases monthlyValues
 #' @export
-monthlyValues <- function(df) {
+monthly_values <- function(df) {
   
   if (!is.data.frame(df)) stop("df must be a dataframe")
 

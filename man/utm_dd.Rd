@@ -2,26 +2,26 @@
 % Please edit documentation in R/utm_dd.R
 \name{utm_dd}
 \alias{utm_dd}
-\title{Convert zone+utm pairs to lat/long.}
+\title{Convert zone+utm pairs to lat/long}
 \usage{
 utm_dd(zone = NULL, easting = NULL, northing = NULL, datum = "NAD83",
   data = NULL, key = NULL)
 }
 \arguments{
-\item{zone}{integer, or column name in 'data'}
+\item{zone}{Integer, or column name in 'data'}
 
-\item{easting}{integer, or column name in 'data'}
+\item{easting}{Integer, or column name in 'data'}
 
-\item{northing}{integer, or column name in 'data'}
+\item{northing}{Integer, or column name in 'data'}
 
-\item{datum}{string or column name in 'data'. Default 'NAD83'}
+\item{datum}{String or column name in 'data'. Default 'NAD83'}
 
-\item{data}{(optional) a data frame with zone + utms}
+\item{data}{(Optional) A data frame with zone + utms}
 
 \item{key}{Name of column in 'data' that contains a unique identifier for each row}
 }
 \value{
-either a vector of length 2 with longitude  and latitude
+Either a vector of length 2 with longitude and latitude
        respectively, or a dataframe with the 'key' column and longitude
        and latitude.
 }
@@ -29,9 +29,4 @@ either a vector of length 2 with longitude  and latitude
 Convert zone+utm pairs to lat/long. Can take either a single zone + utm,
 or a data frame with many.  Allows for datasets with different zones and 
 datum for each utm.
-}
-\examples{
-\dontrun{
-
-}
 }

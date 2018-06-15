@@ -17,8 +17,3 @@ A dataframe of the groundwater level observations
 \description{
 Read in groundwater data from file downloaded from GWL tool
 }
-\examples{
-\dontrun{
-
-}
-}

@@ -13,22 +13,19 @@
 #' Create a graph of historical monthly water level deviations
 #' 
 #' Create a graph of historical median monthly water level deviations from
-#' yearly average with 5th and 95th percentiles
+#' yearly average with 5th and 95th percentiles.
 #' 
-#' @param  dataframe dataframe containing 'Well_Num', 'Date', 'dev_med_GWL'
-#' @param  splines logical: smooth the line using splines?
-#' @param  last12 logical: plot the last 12 monthly readings as points?
-#' @param  save logical: save as a pdf?
-#' @param  path path to folder in which to save if save=TRUE
-#' @param  opts other options passed on to ggplot2
-#' @export
-#' @return A ggplot object
-#' @examples \dontrun{
-#'
-#'}
+#' @param  dataframe Dataframe containing 'Well_Num', 'Date', 'dev_med_GWL'
+#' @param  splines Logical: smooth the line using splines?
+#' @param  last12 Logical: plot the last 12 monthly readings as points?
+#' @param  save Logical: save as a pdf?
+#' @param  path Path to folder in which to save if save=TRUE
+#' @param  opts Other options passed on to ggplot2
+#' @aliases gwlMonthlyPlot
+#' @return A ggplot object.
 #'
 #' @export
-gwlMonthlyPlot <- function(dataframe, splines = TRUE, last12 = TRUE, 
+gwl_monthly_plot <- function(dataframe, splines = TRUE, last12 = TRUE, 
                            save = FALSE, path = "./", opts = NULL) {
   
   WellNum <- dataframe$Well_Num[1]
@@ -58,25 +55,25 @@ gwlMonthlyPlot <- function(dataframe, splines = TRUE, last12 = TRUE,
   plot.monthly <- ggplot(data = data, aes_string(x = "month", y = "dev_med")) + 
     geom_ribbon(aes_string(ymin = "dev_Q5", ymax = "dev_Q95", fill = "''"), alpha = 0.2) + 
     geom_line(aes_string(colour = "''"), alpha = 0.4, size = 1) + 
-    labs(title = "Monthly groundwater level deviation", x = "Month",
-         y = "Difference from yearly average GWL (m)") + 
-    theme(panel.background = element_rect(fill = "white"),
-          line = element_line(colour = "grey50"),
-          text = element_text(colour = "grey50"),
-          legend.position = "top", legend.box = "vertical",
-          legend.box.just = "left",
-          legend.spacing = unit(0, "pt"),
-          plot.title = element_text(hjust = 0.5)
-          #axis.text.x = element_text(angle = 45) # May need if using full month names
-    ) + 
+    labs(title = "Monthly Groundwater Level Patterns", x = "Month",
+         y = "Difference from Groundwater Level\nYearly Average (metres)") + 
+    theme_minimal() +
+    theme(
+      text = element_text(colour = "black"),
+      panel.grid.minor.x = element_blank(),
+      panel.grid.major.x = element_blank(),
+      axis.line = element_line(colour="grey50"),
+      legend.position = "top", legend.box = "horizontal",
+      plot.title = element_text(hjust = 0.5)
+      #axis.text.x = element_text(angle = 45) # May need if using full month names
+    ) +
     scale_y_reverse() +
     scale_x_continuous(breaks = 1:12, labels = month.abb) + 
     scale_colour_manual(name = '', values = "#1E90FF",
-                        labels = c("Mean deviation from yearly average"),
+                        labels = c("Mean Deviation from Yearly Average"),
                         guide = "legend") +
     scale_fill_manual(name = '', values = "#1E90FF", guide = 'legend',
-                      labels = c('Range of 90% of water levels')) +
-
+                      labels = c('Range of 90% of Water Levels')) +
     scale_alpha_identity(name = '', labels = NA) + 
     opts
   

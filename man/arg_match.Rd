@@ -10,7 +10,7 @@ arg_match(arg)
 \item{arg}{The name of the argument in the parent function}
 }
 \value{
-the value of arg after verifying, or an error
+The value of arg after verifying, or an error
 }
 \description{
 Useful when specifying allowed values for a function argument in a vector in the formals. See examples.

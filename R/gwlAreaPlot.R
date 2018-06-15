@@ -16,26 +16,31 @@
 #' given slope and intercept, optionally with interpolated values shown.
 
 #' @importFrom scales date_breaks date_format
-#' @param  dataframe a dataframe with well level monthly time series and the 
+#' @param  dataframe A dataframe with well level monthly time series and the 
 #'         following columns: Date, med_GWL, nReadings
-#' @param  trend (numeric) trend in m/month
-#' @param  intercept (numeric) intercept in m
-#' @param  state Trend classification (stable, declining, increasing)
-#' @param  sig (numeric) significance of trend test
-#' @param  showInterpolated (logical) show the points where missing values in the 
+#' @param  trend (Numeric) Trend in m/month
+#' @param  intercept (Numeric) Intercept in m
+#' @param  state Trend classification: \code{"stable"}, or another description 
+#'         of the magnitude and direction of the trend. This description will
+#'         be displayed on the graph in Title Case. 
+#'         If \code{"stable"}, no trend value or statistical significance 
+#'         will be displayed on the plot, otherwise this information will be 
+#'         displayed alongside the \code{state} information.
+#' @param  sig (Numeric) Significance of trend test
+#' @param  showInterpolated (Logical) Show the points where missing values in the 
 #'         time series were interpolated
 #' @param  save Save the graph to file?
 #' @param  path Where to save the graph if \code{save = TRUE}
-#' @param  mkperiod the period (monthly or annual) the Mann-Kendall test was 
-#'         performed on
-#' @param  opts other options to pass to ggplot2
+#' @param  mkperiod The period (\code{"monthly"} or \code{"annual"}) 
+#'         the Mann-Kendall test was performed on
+#' @param  opts Other options to pass to ggplot2
 #' 
-#' @return A ggplot2 object
-#' 
+#' @return A ggplot2 object.
+#' @aliases gwlAreaPlot
 #' @export
-gwlAreaPlot <- function(dataframe, trend, intercept, state, sig, 
+gwl_area_plot <- function(dataframe, trend, intercept, state, sig, 
                         showInterpolated = FALSE, save = FALSE, 
-                        path = "./", mkperiod = "monthly", opts = NULL) {
+                        path = "./", mkperiod = "annual", opts = NULL) {
   
   if (showInterpolated) {
     df <- dataframe
@@ -54,19 +59,28 @@ gwlAreaPlot <- function(dataframe, trend, intercept, state, sig,
   
   WellNum <- df$Well_Num[1]
   
-  ## Slope is in m/month, have to convert to m/day to work with Date format
   if (mkperiod == "monthly") {
+    ## Slope is in m/month, have to convert to m/day to work with Date format
+    slope <- -(trend/12/365)
+  } else if (mkperiod == "annual") {
     slope <- -(trend/365)
   } else {
-    slope <- -(trend/12/365)
+    stop("mkperiod must be either 'monthly' or 'annual'")
   }
   
-  trendpre <- ifelse(slope > 0, "Trend: +", "Trend: ")
-  trendprintval <- paste0(format(slope * 365, digits = 2, nsmall = 2,
-                                 scientific = FALSE), "m/year")
-  
-  trendprint <- paste0(trendpre, trendprintval)
-  
+  if (tolower(state) == "stable") {
+    trendprint <- "Trend: No Significant Trend"
+    sigprint <- ""
+  } else {
+    trendpre <- ifelse(slope > 0, "Trend: +", "Trend: ")
+    trendprint <- paste0(trendpre, 
+                         paste0(format(slope * 365, digits = 2, nsmall = 2,
+                                       scientific = FALSE), "m/year"))
+    
+    sigprint <- paste0("Significance: ", 
+                       format(sig, digits = 2, nsmall = 3, scientific = 3))
+  }
+
   int.well <- intercept + slope * as.numeric(minDate)
   
   maxgwl <- max(df$med_GWL, na.rm = TRUE)
@@ -83,29 +97,32 @@ gwlAreaPlot <- function(dataframe, trend, intercept, state, sig,
                            fill = "'Groundwater Level'"), alpha = 0.3) + 
     geom_abline(aes_string(intercept = "intercept", slope = "slope", colour = "'LTT'"), 
                 data = data.frame(intercept = -int.well, slope = slope), size = 1) + 
-    annotate(geom = "text", 
-             x = minDate + as.numeric(maxDate - minDate)/50, 
-             y = lims[2], hjust = 0, vjust = 1, colour = "grey50", size = 3,
-             label = paste0(trendprint, "        Significance: ",
-                            format(sig, digits = 2, nsmall = 3, scientific = 3),
-                            "        State: ", state)) + 
-    labs(title = "Groundwater levels and long-term trend", x = "Date",
-         y = "Depth below ground (m)") + 
-    theme(panel.background = element_rect(fill = "white"),
-          line = element_line(colour = "grey50"),
-          text = element_text(colour = "grey50"),
-          panel.grid.major.x = element_blank(),
-          panel.grid.minor.x = element_blank(),
-          legend.position = "top", legend.box =  "horizontal",
-          plot.title = element_text(hjust = 0.5)) + 
+    labs(title = "Observed Long-term Trend in Groundwater Levels\n", x = "Date",
+         y = "Depth Below Ground (metres)",
+         subtitle = paste0("State: ", tools::toTitleCase(tolower(state)),
+                           "        ",
+                           trendprint,
+                           "        ",
+                           sigprint)) +
+                           # "Significance: ",
+                           # format(sig, digits = 2, nsmall = 3, scientific = 3))) +
+    theme_minimal() +
+    theme(
+      text = element_text(colour = "black"),
+      panel.grid.minor.x = element_blank(),
+      panel.grid.major.x = element_blank(),
+      axis.line = element_line(colour="grey50"),
+      legend.position = "bottom", legend.box =  "horizontal",
+      plot.title = element_text(hjust = 0.5),
+      plot.subtitle = element_text(hjust = 0.5, face = "plain", size = 11)) + 
     scale_y_reverse(expand = c(0,0)) + coord_cartesian(ylim = lims) + 
-    scale_x_date(labels = date_format("%Y"), breaks = date_breaks("2 years"),
+    scale_x_date(labels = date_format("%Y"), breaks = date_breaks("3 years"),
                  expand = c(0,0)) + 
     scale_fill_manual(name = '', values = c('Groundwater Level' = "#1E90FF"))
-   
-  vals <- c(LTT = 'orange', Interp = 'red')
-  labs <- c('Long-term trend', 'Interpolated (missing) values')
-  override_list <- list(colour = c("orange", "red"), shape = c(NA, 16), linetype = c(1, 0))
+  
+  vals <- c(LTT = 'orange', Interp = 'grey30')
+  labs <- c('Long-term Trend', 'Interpolated (Missing) Values')
+  override_list <- list(colour = c("orange", "grey30"), shape = c(NA, 16), linetype = c(1, 0))
   
   if (showInterpolated) {
     plot.area <- plot.area + 

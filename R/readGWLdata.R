@@ -12,12 +12,9 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
-
-
-
-#' Retrive and format groundwater data from BC Government GWL site
+#' Retrieve and format groundwater data from B.C. Data Catalogue
 #' 
-#' Go to <http://www.env.gov.bc.ca/wsd/data_searches/obswell/map/> to find your 
+#' Go to <https://www2.gov.bc.ca/gov/content?id=2D3DB9BA78DE4377AB4AE2DCEE1B409B> to find your 
 #' well(s) of interest.
 #' 
 #' Note that well water levels are measured in meters below the ground. Thus 
@@ -33,14 +30,13 @@
 #'   \code{OW000} or \code{000} format. Note that format OW000 requires three
 #'   digit numbers, e.g. OW309, OW008, etc.
 #' @param which Character. Which data to retrieve \code{all} hourly data, 
-#'   \code{recent} hourly data, or all \code{daily} averages.
-#' @param url Character. Override the url location of the data.
+#'   \code{recent} hourly data, or all \code{daily} averages
+#' @param url Character. Override the url location of the data
 #' @param quiet Logical. Suppress progress messages?
 #' 
-#' @return A dataframe of the groundwater level observations
-#' 
+#' @return A dataframe of the groundwater level observations.
+#' @export
 #' @examples \dontrun{
-#' 
 #' all_309 <- get_gwl(wells = 309)
 #' recent_309 <- get_gwl(wells = "OW309", which = "recent")
 #' daily_avg_309 <- get_gwl(wells = "OW309", which = "daily")
@@ -50,7 +46,6 @@
 #' daily_avg_multi <- get_gwl(wells = c("309", "89"), which = "daily")
 #'}
 #'
-#' @export
 get_gwl <- function(wells, which = c("all", "recent", "daily"), 
                     url = NULL, quiet = FALSE) {
   
@@ -176,9 +171,6 @@ format_gwl <- function(data, which, quiet) {
 #' @param emsID The EMS ID of the well
 #' @export
 #' @return A dataframe of the groundwater level observations
-#' @examples \dontrun{
-#'
-#'}
 readGWLdata <- function(path, emsID = NULL) {
   stop("'readGWLdata' is now defunct and has been replaced by 'get_gwl'.",
        "\nSee ?get_gwl for more details.")

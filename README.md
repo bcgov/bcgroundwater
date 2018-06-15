@@ -1,44 +1,44 @@
 
 # bcgroundwater
 
-<a rel="Delivery" href="https://github.com/BCDevExchange/assets/blob/master/README.md"><img alt="In production, but maybe in Alpha or Beta. Intended to persist and be supported." style="border-width:0" src="https://assets.bcdevexchange.org/images/badges/delivery.svg" title="In production, but maybe in Alpha or Beta. Intended to persist and be supported." /></a>[![Travis-CI Build Status](https://travis-ci.org/bcgov/bcgroundwater.svg?branch=master)](https://travis-ci.org/bcgov/bcgroundwater)
+<a rel="Delivery" href="https://github.com/BCDevExchange/assets/blob/master/README.md"><img alt="In production, but maybe in Alpha or Beta. Intended to persist and be supported." style="border-width:0" src="https://assets.bcdevexchange.org/images/badges/delivery.svg" title="In production, but maybe in Alpha or Beta. Intended to persist and be supported." /></a>[![Travis-CI Build Status](https://travis-ci.org/bcgov/bcgroundwater.svg?branch=master)](https://travis-ci.org/bcgov/bcgroundwater)[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 
 ## Overview
 
 An [R](http://www.r-project.org) package to facilitate analysis and 
-visualization of groundwater data from the [British Columbia groundwater 
-observation well network](https://www2.gov.bc.ca/gov/content?id=B03D0994BB5C4F98B6F7D4FD8610C836). The data is sourced from the [B.C. Data Catalogue](https://catalogue.data.gov.bc.ca/dataset/57c55f10-cf8e-40bb-aae0-2eff311f1685) distributed under the [Open Government Licence-British Columbia](https://www2.gov.bc.ca/gov/content?id=A519A56BC2BF44E4A008B33FCF527F61). The package provides functions for importing, cleaning, and summarizing groundwater data, analyzing long-term trends in groundwater levels, and visualizing analysis results. 
+visualisation of groundwater data from the [British Columbia Provincial Groundwater 
+Observation Well Network](https://www2.gov.bc.ca/gov/content?id=B03D0994BB5C4F98B6F7D4FD8610C836).  
 
-This package was developed by [Environmental Reporting BC](http://www2.gov.bc.ca/gov/content?id=FF80E0B985F245CEA62808414D78C41B) 
-to support our 2013 analysis of [trends in groundwater levels](http://www.env.gov.bc.ca/soe/indicators/water/groundwater-levels.html). 
-The code behind that analysis is available in its own GitHub [repository](https:/github.com/bcgov/groundwater-levels/).
+The package provides functions for importing, cleaning, and summarising groundwater data, analysing long-term trends in groundwater levels, and visualising analysis results. The package was developed by [Environmental Reporting BC](http://www2.gov.bc.ca/gov/content?id=FF80E0B985F245CEA62808414D78C41B) 
+to support our water indicator on [long-term trends in groundwater levels](http://www.env.gov.bc.ca/soe/indicators/water/groundwater-levels.html). 
+The code behind that analysis is available in its own GitHub [repository](https:/github.com/bcgov/groundwater-levels-indicator/).
 
 ## Features
 
 Core functions include:
 
-- Import data downloaded from the [B.C. Data Catalogue](https://catalogue.data.gov.bc.ca/dataset/57c55f10-cf8e-40bb-aae0-2eff311f1685)
-- Summarize and plot monthly groundwater levels
+- Import data downloaded from the [B.C. Data Catalogue](https://catalogue.data.gov.bc.ca/dataset/57c55f10-cf8e-40bb-aae0-2eff311f1685) distributed under the [Open Government Licence-British Columbia](https://www2.gov.bc.ca/gov/content?id=A519A56BC2BF44E4A008B33FCF527F61)
+- Summarise and plot monthly groundwater levels
 - Interpolate missing values
-- Perform Mann-Kendall trend tests with prewhitening on multiple datasets using 
+- Perform Mann-Kendall trend tests with pre-whitening on multiple datasets using 
   methods implemented in the 
-  [zyp](http://cran.r-project.org/web/packages/zyp/index.html) package.
+  [zyp](http://cran.r-project.org/web/packages/zyp/index.html) package
 - Plot trends in groundwater levels
 
 ## Installation
 
 You can install the package directly from this repository. To do so, you will 
-need the [devtools](https://github.com/hadley/devtools/) package:
+need the [remotes](https://cran.r-project.org/web/packages/remotes/index.html) package:
 
 ```R
-install.packages("devtools")
+install.packages("remotes")
 ```
 
-Next, install the `bcgroundwater` package using `devtools::install_github()`:
+Next, install the `bcgroundwater` package using `remotes::install_github()`:
 
 ```R
-library("devtools")
+library("remotes")
 install_github("bcgov/bcgroundwater")
 ```
 
@@ -53,9 +53,9 @@ browseVignettes("bcgroundwater")
 
 ## Project Status
 
-The package works as is for its intended purpose, which was to provide a set of 
+The package works as is for the intended purpose, which was to provide a set of 
 functions required for the analysis underlying the 
-[indicator](http://www.env.gov.bc.ca/soe/indicators/water/groundwater-levels.html).
+[Environmental Reporting BC indicator](http://www.env.gov.bc.ca/soe/indicators/water/groundwater-levels.html).
 We are actively updating the package at this time, you can check the 
 [issues](https://github.com/bcgov/bcgroundwater/issues/) for things we are fixing or working on.
 
@@ -87,4 +87,4 @@ Please note that this project is released with a [Contributor Code of Conduct](C
     limitations under the License.
 
 
-This repository is maintained by [Environmental Reporting BC](http://www2.gov.bc.ca/gov/content?id=FF80E0B985F245CEA62808414D78C41B). Click [here](https://github.com/bcgov/EnvReportBC-RepoList) for a complete list of our repositories on GitHub.
+This repository is maintained by [Environmental Reporting BC](http://www2.gov.bc.ca/gov/content?id=FF80E0B985F245CEA62808414D78C41B). Click [here](https://github.com/bcgov/EnvReportBC) for a complete list of our repositories on GitHub.

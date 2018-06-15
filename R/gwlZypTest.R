@@ -14,24 +14,21 @@
 #' 
 #' Uses the zyp package to calculate Mann-Kendall trend test on pre-whitened 
 #' data (to remove autocorrelation) for many wells, using one or both of two 
-#' Pre-whitening methods, see zyp documentation
+#' pre-whitening methods, see zyp documentation.
 #' 
-#' @param dataframe dataframe containing: an ID column (specified in \code{by})
+#' @param dataframe Dataframe containing: an ID column (specified in \code{by})
 #'   and a column of values
-#' @param wells vector of well numbers to test. Default NULL does all in
+#' @param wells Vector of well numbers to test. Default NULL does all in
 #'   dataframe
-#' @param byID the name of the ID column
-#' @param col the name of the column with the GWL values
+#' @param byID The name of the ID column
+#' @param col The name of the column with the GWL values
 #' @param method "both" (default), "yuepilon", or "zhang"
+#' @aliases gwlZypTest
+#' @return A dataframe of results for all wells evaluated.
 
-#' @return a dataframe of results for all wells evaluated
-
-#' @examples \dontrun{
-#'
-#'}
 #' @export
 
-gwlZypTest <- function(dataframe, wells = NULL, 
+gwl_zyp_test <- function(dataframe, wells = NULL, 
                        byID = "Well_Num", col = "mean_GWL", method = "both") {
   
   if (!byID %in% names(dataframe)) stop(byID, " is not a column in the data frame")
