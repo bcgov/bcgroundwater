@@ -36,11 +36,11 @@
 #' @param  opts Other options to pass to ggplot2
 #' 
 #' @return A ggplot2 object.
-#' 
+#' @aliases gwlAreaPlot
 #' @export
-gwlAreaPlot <- function(dataframe, trend, intercept, state, sig, 
+gwl_area_plot <- function(dataframe, trend, intercept, state, sig, 
                         showInterpolated = FALSE, save = FALSE, 
-                        path = "./", mkperiod = "monthly", opts = NULL) {
+                        path = "./", mkperiod = "annual", opts = NULL) {
   
   if (showInterpolated) {
     df <- dataframe
@@ -114,7 +114,7 @@ gwlAreaPlot <- function(dataframe, trend, intercept, state, sig,
       axis.line = element_line(colour="grey50"),
       legend.position = "bottom", legend.box =  "horizontal",
       plot.title = element_text(hjust = 0.5),
-      plot.subtitle = element_text(hjust = 0.5)) + 
+      plot.subtitle = element_text(hjust = 0.5, face = "plain", size = 11)) + 
     scale_y_reverse(expand = c(0,0)) + coord_cartesian(ylim = lims) + 
     scale_x_date(labels = date_format("%Y"), breaks = date_breaks("3 years"),
                  expand = c(0,0)) + 
