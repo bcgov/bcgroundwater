@@ -73,16 +73,16 @@ The Provincial [Groundwater Observation Well Network - Groundwater Levels Data](
 Next, calculate the median monthly values:
 
 ```{r, message=FALSE, warning=FALSE}
-monthly_data <- monthlyValues(data)
+monthly_data <- monthly_values(data)
 head(monthly_data)
 ```
 
 You can plot the seasonal patterns in the water levels of the well with
-`gwlMonthlyPlot()`. This displays the mean deviation from the yearly average,
+`gwl_monthly_plot()`. This displays the mean deviation from the yearly average,
 as well as the range of variation:
 
-```{r, message=FALSE, warning=FALSE}
-monthlyplot <- gwlMonthlyPlot(monthly_data, last12 = TRUE)
+```{r, message=FALSE, warning=FALSE, fig.align='center'}
+monthlyplot <- gwl_monthly_plot(monthly_data, last12 = TRUE)
 plot(monthlyplot)
 ```
 
@@ -92,7 +92,7 @@ beginning or the end of the time series&mdash;due to the strong influence of
 these regions on trend analysis&mdash;and interpolating the remaining missing values:
 
 ```{r, fig.width=6, fig.height=4, message=FALSE, warning=FALSE}
-full_monthly_data <- makeWellTS(monthly_data)
+full_monthly_data <- make_well_ts(monthly_data)
 head(monthly_data)
 ```
 
@@ -139,7 +139,7 @@ head(annual_data)
 You can now calculate the long-term trend:
 
 ```{r, message=FALSE, warning=FALSE}
-trends <- gwlZypTest(annual_data, byID = "Well_Num", col = "mean_GWL")
+trends <- gwl_zyp_test(annual_data, byID = "Well_Num", col = "mean_GWL")
 trends
 ```
 
@@ -161,8 +161,8 @@ state
 Finally, plot the time series with the trend overlaid (we will use the results
 from the yuepilon method), optionally with interpolated values overlaid:
 
-```{r, message=FALSE, warning=FALSE}
-trend_plot <- gwlAreaPlot(full_monthly_data, trend = trends$trend[1],
+```{r, message=FALSE, warning=FALSE, fig.align='center'}
+trend_plot <- gwl_area_plot(full_monthly_data, trend = trends$trend[1],
                           intercept = trends$intercept[1], sig = trends$sig[1], state = state,
                           mkperiod = "annual", showInterpolated = TRUE)
 plot(trend_plot)
