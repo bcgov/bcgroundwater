@@ -7,7 +7,7 @@
 \usage{
 gwl_area_plot(dataframe, trend, intercept, state, sig,
   showInterpolated = FALSE, save = FALSE, path = "./",
-  mkperiod = "monthly", opts = NULL)
+  mkperiod = "annual", opts = NULL)
 }
 \arguments{
 \item{dataframe}{A dataframe with well level monthly time series and the 
