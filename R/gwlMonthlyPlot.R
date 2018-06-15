@@ -21,11 +21,11 @@
 #' @param  save Logical: save as a pdf?
 #' @param  path Path to folder in which to save if save=TRUE
 #' @param  opts Other options passed on to ggplot2
-#' @export
+#' @aliases gwlMonthlyPlot
 #' @return A ggplot object.
 #'
 #' @export
-gwlMonthlyPlot <- function(dataframe, splines = TRUE, last12 = TRUE, 
+gwl_monthly_plot <- function(dataframe, splines = TRUE, last12 = TRUE, 
                            save = FALSE, path = "./", opts = NULL) {
   
   WellNum <- dataframe$Well_Num[1]
@@ -64,8 +64,6 @@ gwlMonthlyPlot <- function(dataframe, splines = TRUE, last12 = TRUE,
       panel.grid.major.x = element_blank(),
       axis.line = element_line(colour="grey50"),
       legend.position = "top", legend.box = "horizontal",
-      legend.box.just = "left",
-      legend.spacing = unit(0, "pt"),
       plot.title = element_text(hjust = 0.5)
       #axis.text.x = element_text(angle = 45) # May need if using full month names
     ) +
