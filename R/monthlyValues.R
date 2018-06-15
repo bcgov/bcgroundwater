@@ -20,8 +20,9 @@
 #'  
 #'@return A data frame with one value per month. Does not estimate values for
 #'  months where there were 0 observations.
+#'  @aliases monthlyValues
 #' @export
-monthlyValues <- function(df) {
+monthly_values <- function(df) {
   
   if (!is.data.frame(df)) stop("df must be a dataframe")
 

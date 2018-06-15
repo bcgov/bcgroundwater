@@ -24,10 +24,11 @@
 #' @param  overviewExtent The extent (left, botton, right, top) of the large
 #'   area that will be in the inset. Default is British Columbia
 #' @param  opts Additional options to pass to ggplot2
+#' @aliases plotPointWithInset
 #' @export
 #' @return A ggmap object.
 
-plotPointWithInset <- function(long, lat, pointColour, bigMap=NULL, overviewMap=NULL, overviewExtent=c(-139,48,-114,60), opts=NULL) {
+plot_point_with_inset <- function(long, lat, pointColour, bigMap=NULL, overviewMap=NULL, overviewExtent=c(-139,48,-114,60), opts=NULL) {
 
   mapExtent <- c(long-2, lat-1, long+2, lat+1)
   insExtentR <- abs(mapExtent[3]-mapExtent[1])*.95+mapExtent[1]

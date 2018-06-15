@@ -17,14 +17,14 @@
 #'
 #'@param df A monthly dataframe created by `monthlyValues`. Must minimally 
 #'  include fields `EMS_ID`, `Well_Num` `Date`, 'med_GWL`, `nReadings`
-#' @param trim Should leading and trailing missing values in be removed? See [trimConsRuns()]. 
-#' @inheritParams trimConsRuns
+#' @param trim Should leading and trailing missing values in be removed? See [trim_cons_runs()]. 
+#' @inheritParams trim_cons_runs
 #'  
 #'@return A full monthly time series with interpolated missing values, retaining
 #'  all of the columns in the original data frame.
-#'
+#' @aliases makeWellTS
 #' @export
-makeWellTS <- function(df, trim = TRUE, head = 0.1, tail = 0.9 , n_consec = 4) {
+make_well_ts <- function(df, trim = TRUE, head = 0.1, tail = 0.9 , n_consec = 4) {
   
   well <- df[1, "EMS_ID"]
   
@@ -43,7 +43,7 @@ makeWellTS <- function(df, trim = TRUE, head = 0.1, tail = 0.9 , n_consec = 4) {
   
   if (trim) {
     missings <- as.integer(is.na(well.ts$med_GWL))
-    start_end <- trimConsRuns(missings, val = 1L, head = head, tail = tail, n_consec = n_consec)
+    start_end <- trim_cons_runs(missings, val = 1L, head = head, tail = tail, n_consec = n_consec)
     well.ts <- well.ts[start_end$start:start_end$end, , drop = FALSE]
   }
   

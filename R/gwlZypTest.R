@@ -23,12 +23,12 @@
 #' @param byID The name of the ID column
 #' @param col The name of the column with the GWL values
 #' @param method "both" (default), "yuepilon", or "zhang"
-
+#' @aliases gwlZypTest
 #' @return A dataframe of results for all wells evaluated.
 
 #' @export
 
-gwlZypTest <- function(dataframe, wells = NULL, 
+gwl_zyp_test <- function(dataframe, wells = NULL, 
                        byID = "Well_Num", col = "mean_GWL", method = "both") {
   
   if (!byID %in% names(dataframe)) stop(byID, " is not a column in the data frame")
