@@ -23,8 +23,9 @@ digit numbers, e.g. OW309, OW008, etc.}
 A dataframe of the groundwater level observations.
 }
 \description{
-Go to <https://www2.gov.bc.ca/gov/content?id=2D3DB9BA78DE4377AB4AE2DCEE1B409B> to find your 
-well(s) of interest.
+Go to the B.C. Groundwater Observation Well Monitoring
+Network interactive map tool to find your 
+well(s) of interest: https://www2.gov.bc.ca/gov/content?id=2D3DB9BA78DE4377AB4AE2DCEE1B409B
 }
 \details{
 Note that well water levels are measured in meters below the ground. Thus 

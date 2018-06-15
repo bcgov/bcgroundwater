@@ -14,8 +14,9 @@
 
 #' Retrieve and format groundwater data from B.C. Data Catalogue
 #' 
-#' Go to <https://www2.gov.bc.ca/gov/content?id=2D3DB9BA78DE4377AB4AE2DCEE1B409B> to find your 
-#' well(s) of interest.
+#' Go to the B.C. Groundwater Observation Well Monitoring
+#' Network interactive map tool to find your 
+#' well(s) of interest: https://www2.gov.bc.ca/gov/content?id=2D3DB9BA78DE4377AB4AE2DCEE1B409B
 #' 
 #' Note that well water levels are measured in meters below the ground. Thus 
 #' higher values represent deeper levels. Therefore 
