@@ -12,7 +12,6 @@ monthly_values(df)
 \value{
 A data frame with one value per month. Does not estimate values for
  months where there were 0 observations.
- @aliases monthlyValues
 }
 \description{
 Assigns each reading to a month; sometimes there are several readings in a 

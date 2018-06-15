@@ -22,7 +22,6 @@
 #'  
 #'@return A full monthly time series with interpolated missing values, retaining
 #'  all of the columns in the original data frame.
-#' @aliases makeWellTS
 #' @export
 make_well_ts <- function(df, trim = TRUE, head = 0.1, tail = 0.9 , n_consec = 4) {
   

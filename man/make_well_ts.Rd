@@ -2,7 +2,6 @@
 % Please edit documentation in R/makeWellTS.R
 \name{make_well_ts}
 \alias{make_well_ts}
-\alias{makeWellTS}
 \title{Get full time series with missing values interpolated}
 \usage{
 make_well_ts(df, trim = TRUE, head = 0.1, tail = 0.9, n_consec = 4)

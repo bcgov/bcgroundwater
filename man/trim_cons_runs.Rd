@@ -2,7 +2,6 @@
 % Please edit documentation in R/trimConsRuns.R
 \name{trim_cons_runs}
 \alias{trim_cons_runs}
-\alias{trimConsRuns}
 \title{Find consecuctive runs of a value in extremes of a vector}
 \usage{
 trim_cons_runs(x, val, head = 0.1, tail = 0.9, n_consec = 4)

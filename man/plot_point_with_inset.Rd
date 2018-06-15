@@ -2,7 +2,6 @@
 % Please edit documentation in R/plotPointWithInset.R
 \name{plot_point_with_inset}
 \alias{plot_point_with_inset}
-\alias{plotPointWithInset}
 \title{Plot a point on a map with an overview inset}
 \usage{
 plot_point_with_inset(long, lat, pointColour, bigMap = NULL,

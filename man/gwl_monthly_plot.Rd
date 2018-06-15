@@ -2,7 +2,6 @@
 % Please edit documentation in R/gwlMonthlyPlot.R
 \name{gwl_monthly_plot}
 \alias{gwl_monthly_plot}
-\alias{gwlMonthlyPlot}
 \title{Create a graph of historical monthly water level deviations}
 \usage{
 gwl_monthly_plot(dataframe, splines = TRUE, last12 = TRUE, save = FALSE,

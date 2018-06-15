@@ -36,7 +36,6 @@
 #' @param  opts Other options to pass to ggplot2
 #' 
 #' @return A ggplot2 object.
-#' @aliases gwlAreaPlot
 #' @export
 gwl_area_plot <- function(dataframe, trend, intercept, state, sig, 
                         showInterpolated = FALSE, save = FALSE, 

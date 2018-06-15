@@ -2,7 +2,6 @@
 % Please edit documentation in R/gwlAreaPlot.R
 \name{gwl_area_plot}
 \alias{gwl_area_plot}
-\alias{gwlAreaPlot}
 \title{Creates an area plot of groundwater levels with trend line}
 \usage{
 gwl_area_plot(dataframe, trend, intercept, state, sig,

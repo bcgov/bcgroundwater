@@ -22,7 +22,6 @@
 #'         the vector in which to look for consecutive missing values
 #' @param  n_consec The number of consecutive values which constitutes a 'long' run (default = 4)
 #' @export
-#' @aliases trimConsRuns
 #' @return A list of start and end points of a vector to remove heavily weighted
 #'         heads and tails containing continuous runs of a value (likely denoting missing)
 #' @examples \dontrun{

@@ -23,7 +23,6 @@
 #' @param byID The name of the ID column
 #' @param col The name of the column with the GWL values
 #' @param method "both" (default), "yuepilon", or "zhang"
-#' @aliases gwlZypTest
 #' @return A dataframe of results for all wells evaluated.
 
 #' @export

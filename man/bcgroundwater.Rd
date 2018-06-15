@@ -4,7 +4,7 @@
 \name{bcgroundwater}
 \alias{bcgroundwater}
 \alias{bcgroundwater-package}
-\title{bcgroundwater: Analyse B.C. Groundwater Level Data.}
+\title{bcgroundwater: Analyse B.C. Groundwater Level Data}
 \description{
 Set of functions for downloading, analysing, and visualising
 groundwater level data from the BC Ministry of Environment Provincial Groundwater
@@ -12,4 +12,8 @@ Observation Well Network.
 }
 \author{
 Andy Teucher \email{andy.teucher@gov.bc.ca}
+
+Steffi LaZerte \email{steffi@steffi.ca}
+
+Stephanie Hazlitt \email{stephanie.hazlitt@gov.bc.ca}
 }

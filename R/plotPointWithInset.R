@@ -24,7 +24,6 @@
 #' @param  overviewExtent The extent (left, botton, right, top) of the large
 #'   area that will be in the inset. Default is British Columbia
 #' @param  opts Additional options to pass to ggplot2
-#' @aliases plotPointWithInset
 #' @export
 #' @return A ggmap object.
 

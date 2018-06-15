@@ -2,7 +2,6 @@
 % Please edit documentation in R/gwlZypTest.R
 \name{gwl_zyp_test}
 \alias{gwl_zyp_test}
-\alias{gwlZypTest}
 \title{Perform Mann-Kendall trend test on many wells}
 \usage{
 gwl_zyp_test(dataframe, wells = NULL, byID = "Well_Num", col = "mean_GWL",

@@ -21,7 +21,6 @@
 #' @param  save Logical: save as a pdf?
 #' @param  path Path to folder in which to save if save=TRUE
 #' @param  opts Other options passed on to ggplot2
-#' @aliases gwlMonthlyPlot
 #' @return A ggplot object.
 #'
 #' @export
