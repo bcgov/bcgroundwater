@@ -119,15 +119,15 @@ gwl_area_plot <- function(dataframe, trend, intercept, state, sig,
                  expand = c(0,0)) + 
     scale_fill_manual(name = '', values = c('Groundwater Level' = "#1E90FF"))
   
-  vals <- c(LTT = 'orange', Interp = 'grey30')
+  vals <- c(LTT = 'orange', Interp = 'grey60')
   labs <- c('Long-term Trend', 'Interpolated (Missing) Values')
-  override_list <- list(colour = c("orange", "grey30"), shape = c(NA, 16), linetype = c(1, 0))
+  override_list <- list(colour = c("orange", "grey60"), shape = c(NA, 16), linetype = c(1, 0))
   
   if (showInterpolated) {
     plot.area <- plot.area + 
       geom_point(data = df[df$nReadings == 0,],
                  aes_string(y = "med_GWL", colour = "'Interp'"),
-                 size = 1)
+                 size = 0.5)
   } else {
     vals <- vals[1]
     labs <- labs[1]
