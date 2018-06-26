@@ -22,6 +22,6 @@ test_that("gwl_zyp_test returns data", {
   expect_silent(p <- gwl_area_plot(g_month, 
                                  trend = t$trend[1],
                                  intercept = t$intercept[1], sig = t$sig[1],
-                                 state = "Stable", mkperiod = "annual", showInterpolated = TRUE))
+                                 trend_category = "Stable", mkperiod = "annual", showInterpolated = TRUE))
   expect_is(p, "ggplot")
 })
