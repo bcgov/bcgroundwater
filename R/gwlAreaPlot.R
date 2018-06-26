@@ -72,13 +72,13 @@ gwl_area_plot <- function(dataframe, trend, intercept, trend_category,
   
   if (tolower(trend_category) == "stable") {
     trendprint <- " "
-
+    
   } else {
     trendpre <- ifelse(slope > 0, "(+", "(")
     trendprint <- paste0(trendpre, 
                          paste0(format(slope * 365, digits = 2, nsmall = 2,
                                        scientific = FALSE), " m/year)"))
-  
+    
   }
 
   int.well <- intercept + slope * as.numeric(minDate)
@@ -128,7 +128,7 @@ gwl_area_plot <- function(dataframe, trend, intercept, trend_category,
     labs <- labs[1]
     override_list <- lapply(override_list, `[`, 1)
   }
-
+  
   if (show_stable_line) {
     plot.area <- plot.area + 
       geom_abline(aes_string(intercept = "intercept", slope = "slope", colour = "'LTT'"),
@@ -142,10 +142,10 @@ gwl_area_plot <- function(dataframe, trend, intercept, trend_category,
       override_list <- lapply(override_list, `[`, 2)
       
     } else {
-    plot.area <- plot.area + 
-    geom_abline(aes_string(intercept = "intercept", slope = "slope", colour = "'LTT'"),
-                data = data.frame(intercept = -int.well, slope = slope), size = 1) 
-  }
+      plot.area <- plot.area + 
+        geom_abline(aes_string(intercept = "intercept", slope = "slope", colour = "'LTT'"),
+                    data = data.frame(intercept = -int.well, slope = slope), size = 1) 
+    }
   }
   
   plot.area <- plot.area +
