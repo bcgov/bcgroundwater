@@ -69,7 +69,7 @@ trends
 ## ---- message=FALSE, warning=FALSE---------------------------------------
 result <-  trends %>% 
   filter(test_type == "yuepilon") %>%
-  mutate(state = case_when(trend >= 0.1 & sig < 0.05 ~ "Large Rate of Decline",
+  mutate(trend_category = case_when(trend >= 0.1 & sig < 0.05 ~ "Large Rate of Decline",
                            trend >= 0.03 & trend < 0.1 & sig < 0.05 ~ "Moderate Rate of Decline",
                            trend <= -0.03 & sig < 0.05 ~ "Increasing",
                            TRUE ~ "Stable")) 
@@ -77,8 +77,9 @@ result
 
 ## ---- message=FALSE, warning=FALSE, fig.align='center'-------------------
 trend_plot <- gwl_area_plot(full_monthly_data, trend = result$trend,
-                          intercept = result$intercept, sig = result$sig, state = result$state,
-                          mkperiod = "annual", showInterpolated = TRUE)
+                          intercept = result$intercept, sig = result$sig, 
+                          trend_category = result$trend_category,
+                          mkperiod = "annual", showInterpolated = TRUE,
+                          show_stable_line = TRUE)
 plot(trend_plot)
-
 
