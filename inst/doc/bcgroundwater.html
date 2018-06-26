@@ -312,26 +312,26 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">recent_data &lt;-<span class="st"> </span><span class="kw">get_gwl</span>(<span class="dt">wells =</span> <span class="dv">309</span>, <span class="dt">which =</span> <span class="st">&quot;recent&quot;</span>)</a>
 <a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw">head</span>(recent_data)</a></code></pre></div>
 <pre><code>##   Well_Num EMS_ID Station_Name                Date      GWL
-## 1      309     NA           NA 2017-06-26 00:00:00 22.74447
-## 2      309     NA           NA 2017-06-26 01:00:00 22.74651
-## 3      309     NA           NA 2017-06-26 02:00:00 22.74454
-## 4      309     NA           NA 2017-06-26 03:00:00 22.74658
-## 5      309     NA           NA 2017-06-26 04:00:00 22.74761
-## 6      309     NA           NA 2017-06-26 05:00:00 22.74865
+## 1      309     NA           NA 2017-06-27 00:00:00 22.77332
+## 2      309     NA           NA 2017-06-27 01:00:00 22.77336
+## 3      309     NA           NA 2017-06-27 02:00:00 22.77239
+## 4      309     NA           NA 2017-06-27 03:00:00 22.77243
+## 5      309     NA           NA 2017-06-27 04:00:00 22.77346
+## 6      309     NA           NA 2017-06-27 05:00:00 22.77550
 ##   Historical_Daily_Average Historical_Daily_Minimum
-## 1                 22.76632                   23.655
-## 2                 22.76632                   23.655
-## 3                 22.76632                   23.655
-## 4                 22.76632                   23.655
-## 5                 22.76632                   23.655
-## 6                 22.76632                   23.655
+## 1                 22.77486                   23.643
+## 2                 22.77486                   23.643
+## 3                 22.77486                   23.643
+## 4                 22.77486                   23.643
+## 5                 22.77486                   23.643
+## 6                 22.77486                   23.643
 ##   Historical_Daily_Maximum    Status
-## 1                   21.679 Validated
-## 2                   21.679 Validated
-## 3                   21.679 Validated
-## 4                   21.679 Validated
-## 5                   21.679 Validated
-## 6                   21.679 Validated</code></pre>
+## 1                   21.665 Validated
+## 2                   21.665 Validated
+## 3                   21.665 Validated
+## 4                   21.665 Validated
+## 5                   21.665 Validated
+## 6                   21.665 Validated</code></pre>
 <p>Otherwise, by default <code>which = &quot;all&quot;</code> which downloads all hourly data for that well:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">data &lt;-<span class="st"> </span><span class="kw">get_gwl</span>(<span class="dt">wells =</span> <span class="dv">309</span>)</a>
 <a class="sourceLine" id="cb8-2" data-line-number="2"><span class="kw">head</span>(data)</a></code></pre></div>
