@@ -4,9 +4,9 @@
 \alias{gwl_area_plot}
 \title{Creates an area plot of groundwater levels with trend line}
 \usage{
-gwl_area_plot(dataframe, trend, intercept, state, sig,
-  showInterpolated = FALSE, save = FALSE, path = "./",
-  mkperiod = "annual", opts = NULL)
+gwl_area_plot(dataframe, trend, intercept, trend_category, sig,
+  showInterpolated = FALSE, show_stable_line = FALSE, save = FALSE,
+  path = "./", mkperiod = "annual", opts = NULL)
 }
 \arguments{
 \item{dataframe}{A dataframe with well level monthly time series and the 
@@ -16,17 +16,20 @@ following columns: Date, med_GWL, nReadings}
 
 \item{intercept}{(Numeric) Intercept in m}
 
-\item{state}{Trend classification: \code{"stable"}, or another description 
+\item{trend_category}{Trend category: \code{"stable"}, or another description 
 of the magnitude and direction of the trend. This description will
 be displayed on the graph in Title Case. 
 If \code{"stable"}, no trend value or statistical significance 
-will be displayed on the plot, otherwise this information will be 
-displayed alongside the \code{state} information.}
+will be displayed on the plot, otherwise trend value will be 
+displayed alongside the \code{category} information.}
 
 \item{sig}{(Numeric) Significance of trend test}
 
 \item{showInterpolated}{(Logical) Show the points where missing values in the 
 time series were interpolated}
+
+\item{show_stable_line}{(Logical) Show the Mann-Kendall trend line when category is
+\code{"stable"}}
 
 \item{save}{Save the graph to file?}
 
