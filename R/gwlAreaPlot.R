@@ -20,15 +20,17 @@
 #'         following columns: Date, med_GWL, nReadings
 #' @param  trend (Numeric) Trend in m/month
 #' @param  intercept (Numeric) Intercept in m
-#' @param  state Trend classification: \code{"stable"}, or another description 
+#' @param  trend_category Trend category: \code{"stable"}, or another description 
 #'         of the magnitude and direction of the trend. This description will
 #'         be displayed on the graph in Title Case. 
 #'         If \code{"stable"}, no trend value or statistical significance 
-#'         will be displayed on the plot, otherwise this information will be 
-#'         displayed alongside the \code{state} information.
+#'         will be displayed on the plot, otherwise trend value will be 
+#'         displayed alongside the \code{category} information.
 #' @param  sig (Numeric) Significance of trend test
 #' @param  showInterpolated (Logical) Show the points where missing values in the 
 #'         time series were interpolated
+#' @param  show_stable_line (Logical) Show the Mann-Kendall trend line when category is
+#'         \code{"stable"}      
 #' @param  save Save the graph to file?
 #' @param  path Where to save the graph if \code{save = TRUE}
 #' @param  mkperiod The period (\code{"monthly"} or \code{"annual"}) 
@@ -37,9 +39,10 @@
 #' 
 #' @return A ggplot2 object.
 #' @export
-gwl_area_plot <- function(dataframe, trend, intercept, state, sig, 
-                        showInterpolated = FALSE, save = FALSE, 
-                        path = "./", mkperiod = "annual", opts = NULL) {
+gwl_area_plot <- function(dataframe, trend, intercept, trend_category,
+                          sig, showInterpolated = FALSE,
+                          show_stable_line = FALSE, save = FALSE, 
+                          path = "./", mkperiod = "annual", opts = NULL) {
   
   if (showInterpolated) {
     df <- dataframe
@@ -67,17 +70,15 @@ gwl_area_plot <- function(dataframe, trend, intercept, state, sig,
     stop("mkperiod must be either 'monthly' or 'annual'")
   }
   
-  if (tolower(state) == "stable") {
-    trendprint <- "Trend: No Significant Trend"
-    sigprint <- ""
+  if (tolower(trend_category) == "stable") {
+    trendprint <- " "
+
   } else {
-    trendpre <- ifelse(slope > 0, "Trend: +", "Trend: ")
+    trendpre <- ifelse(slope > 0, "(+", "(")
     trendprint <- paste0(trendpre, 
                          paste0(format(slope * 365, digits = 2, nsmall = 2,
-                                       scientific = FALSE), "m/year"))
-    
-    sigprint <- paste0("Significance: ", 
-                       format(sig, digits = 2, nsmall = 3, scientific = 3))
+                                       scientific = FALSE), " m/year)"))
+  
   }
 
   int.well <- intercept + slope * as.numeric(minDate)
@@ -94,17 +95,11 @@ gwl_area_plot <- function(dataframe, trend, intercept, state, sig,
     geom_ribbon(aes_string(ymin = "med_GWL", 
                            ymax = "max_lims",
                            fill = "'Groundwater Level'"), alpha = 0.3) + 
-    geom_abline(aes_string(intercept = "intercept", slope = "slope", colour = "'LTT'"), 
-                data = data.frame(intercept = -int.well, slope = slope), size = 1) + 
     labs(title = "Observed Long-term Trend in Groundwater Levels\n", x = "Date",
          y = "Depth Below Ground (metres)",
-         subtitle = paste0("State: ", tools::toTitleCase(tolower(state)),
-                           "        ",
-                           trendprint,
-                           "        ",
-                           sigprint)) +
-                           # "Significance: ",
-                           # format(sig, digits = 2, nsmall = 3, scientific = 3))) +
+         subtitle = paste0("Category: ", tools::toTitleCase(tolower(trend_category)),
+                           " ",
+                           trendprint)) +
     theme_minimal() +
     theme(
       text = element_text(colour = "black"),
@@ -132,6 +127,25 @@ gwl_area_plot <- function(dataframe, trend, intercept, state, sig,
     vals <- vals[1]
     labs <- labs[1]
     override_list <- lapply(override_list, `[`, 1)
+  }
+
+  if (show_stable_line) {
+    plot.area <- plot.area + 
+      geom_abline(aes_string(intercept = "intercept", slope = "slope", colour = "'LTT'"),
+                  data = data.frame(intercept = -int.well, slope = slope), size = 1) 
+  } else {
+    if (tolower(trend_category) == "stable") {
+      plot.area
+      
+      vals <- vals[2]
+      labs <- labs[2]
+      override_list <- lapply(override_list, `[`, 2)
+      
+    } else {
+    plot.area <- plot.area + 
+    geom_abline(aes_string(intercept = "intercept", slope = "slope", colour = "'LTT'"),
+                data = data.frame(intercept = -int.well, slope = slope), size = 1) 
+  }
   }
   
   plot.area <- plot.area +
