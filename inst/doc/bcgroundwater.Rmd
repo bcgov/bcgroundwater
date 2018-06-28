@@ -144,12 +144,12 @@ trends
 ```
 
 
-We we will use the results from the yuepilon method, and categorize the observed long-term trend using the criteria developed for the [Environmental Reporting BC indicator on trends in groundwater levels](http://www.env.gov.bc.ca/soe/indicators/water/groundwater-levels.html): Stable, Increasing, Moderate Rate of Decline or Large Rate of Decline:
+We we will use the results from the yuepilon method, and categorize the observed long-term trend using the combined statistical & environmental significance criteria developed for the [Environmental Reporting BC indicator on trends in groundwater levels](http://www.env.gov.bc.ca/soe/indicators/water/groundwater-levels.html): Stable, Increasing, Moderate Rate of Decline or Large Rate of Decline:
 
 ```{r, message=FALSE, warning=FALSE}
 result <-  trends %>% 
   filter(test_type == "yuepilon") %>%
-  mutate(state = case_when(trend >= 0.1 & sig < 0.05 ~ "Large Rate of Decline",
+  mutate(trend_category = case_when(trend >= 0.1 & sig < 0.05 ~ "Large Rate of Decline",
                            trend >= 0.03 & trend < 0.1 & sig < 0.05 ~ "Moderate Rate of Decline",
                            trend <= -0.03 & sig < 0.05 ~ "Increasing",
                            TRUE ~ "Stable")) 
@@ -157,15 +157,17 @@ result
 ```
 
 
-Finally, you can plot the time series with the trend overlaid, optionally showing any interpolated values:
+Finally, you can plot the time series and the significant trend lines, optionally showing any interpolated values. Showing the overlaid trend line when the trend category is stable is also optional:
 
 ```{r, message=FALSE, warning=FALSE, fig.align='center'}
 trend_plot <- gwl_area_plot(full_monthly_data, trend = result$trend,
-                          intercept = result$intercept, sig = result$sig, state = result$state,
-                          mkperiod = "annual", showInterpolated = TRUE)
+                          intercept = result$intercept, sig = result$sig, 
+                          trend_category = result$trend_category,
+                          mkperiod = "annual", showInterpolated = TRUE,
+                          show_stable_line = TRUE)
 plot(trend_plot)
-
 ```
+
 
 ## Getting Help
 
