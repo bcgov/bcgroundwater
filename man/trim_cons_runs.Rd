@@ -30,7 +30,7 @@ beginning and end of a vector.
 \examples{
 \dontrun{
  x <- rbinom(100, size=1, prob=0.5)
- trunc <- trimConsRuns(x, 1, n_consec=4)
+ trunc <- trim_cons_runs(x, 1, n_consec=4)
  trunc_x <- x[trunc$start:trunc$end]
 }
 }

@@ -26,7 +26,7 @@
 #'         heads and tails containing continuous runs of a value (likely denoting missing)
 #' @examples \dontrun{
 #'  x <- rbinom(100, size=1, prob=0.5)
-#'  trunc <- trimConsRuns(x, 1, n_consec=4)
+#'  trunc <- trim_cons_runs(x, 1, n_consec=4)
 #'  trunc_x <- x[trunc$start:trunc$end]
 #'}
 trim_cons_runs <- function(x, val, head=0.1, tail=0.9, n_consec = 4)  {
