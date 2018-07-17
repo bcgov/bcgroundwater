@@ -12,7 +12,7 @@ knitr::opts_chunk$set(fig.width = 6, fig.height = 4)
 ```
 
 
-You can install the 'bcgroundwater' R `r emo::ji("package")` package directly from [GitHub](https://github.com/bcgov/bcgroundwater). To do so, you will 
+You can install the 'bcgroundwater' R 📦 package directly from [GitHub](https://github.com/bcgov/bcgroundwater). To do so, you will 
 need the [remotes](https://cran.r-project.org/web/packages/remotes/index.html) package:
 
 ```{r, eval=FALSE}
@@ -175,7 +175,7 @@ plot(trend_plot)
 
 Type `?bcgroundwater` in the R console for full documentation on the package functions and arguments.
 
-Details, rationales and references on the trend and other analytical methods used under the hood `r emo::ji("oncoming_automobile")` in the 'bcgroundwater' `r emo::ji("package")` can be found here: <http://www.env.gov.bc.ca/soe/indicators/water/groundwater-levels.html>. 
+Details, rationales and references on the trend and other analytical methods used under the hood 🚘 in the 'bcgroundwater' 📦 can be found here: <http://www.env.gov.bc.ca/soe/indicators/water/groundwater-levels.html>. 
 
 `r Sys.Date()`
 
