@@ -130,7 +130,9 @@ annual_data <- full_monthly_data %>%
             mean_GWL = mean(med_GWL),
             SD = sd(med_GWL),
             med_GWL = median(med_GWL),
-            q95_GWL = quantile(med_GWL, 0.95))
+            q95_GWL = quantile(med_GWL, 0.95),
+            n_months = n()) %>% 
+  filter(n_months == 12)
 head(annual_data)
 ```
 
