@@ -29,6 +29,9 @@ Suggests:
     rgdal,
     rmarkdown,
     sp,
-    testthat
+    testthat,
+    gghighlight,
+    EnvStats,
+    tibble
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1

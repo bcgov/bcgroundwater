@@ -5,9 +5,10 @@ vignette: >
   %\VignetteIndexEntry{bcgroundwater}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteDepends{gghighlight, EnvStats, tibble}
 ---
 
-```{r set-options, echo=FALSE}
+```{r set-options, echo=FALSE, message=FALSE, warning=FALSE}
 knitr::opts_chunk$set(fig.width = 7, fig.height = 4, message=FALSE, warning=FALSE)
 ```
 
@@ -24,7 +25,7 @@ library(ggplot2) # plotting
 library(dplyr) # data munging
 library(gghighlight) # highlight interpolated (missing) values
 library(EnvStats) # for seasonal M-K test
-library(tibble) # wrangle Mann-Kendall output
+library(tibble) # wrangle Sesonal Kendall output
 ```
 
 
