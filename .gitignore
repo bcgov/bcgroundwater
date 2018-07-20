@@ -3,3 +3,4 @@
 .RData
 /data
 vignettes/gwl_report.csv
+.DS_Store
