@@ -13,19 +13,18 @@ knitr::opts_chunk$set(fig.width = 7, fig.height = 4, message=FALSE, warning=FALS
 
 One example of how to generate a reproducible trend analysis on B.C. groundwater level data using the `bcgroundwater` R package. 
 
-This example examines long-term trends in water level data from [British Columbia groundwater observation monitoring well #45](https://www2.gov.bc.ca/gov/content?id=2D3DB9BA78DE4377AB4AE2DCEE1B409B), using both the Mann-Kendall and Seasonal Kendall non-parametric trend tests, implemented in the [`zyp`](https://cran.r-project.org/web/packages/zyp/index.html) and [`EnvStats`](https://cran.r-project.org/web/packages/EnvStats/index.html) R packages respectively.
+This example examines long-term trends in water level data from [British Columbia groundwater observation monitoring well #45](https://www2.gov.bc.ca/gov/content?id=2D3DB9BA78DE4377AB4AE2DCEE1B409B), using both the Mann-Kendall and Seasonal Kendall non-parametric trend tests, as implemented in the [`zyp`](https://cran.r-project.org/web/packages/zyp/index.html) and [`EnvStats`](https://cran.r-project.org/web/packages/EnvStats/index.html) R packages respectively.
 
 ### Load Packages
 
 ```{r}
-## install `bcgroundwater` with remotes::install_github("bcgov/bcgroundwater")
-library(bcgroundwater) # get B.C. data, M-K trend test
+library(bcgroundwater) # get B.C. data, implements `zyp` M-K trend test
+# you will need to install `bcgroundwater` with remotes::install_github("bcgov/bcgroundwater")
 library(ggplot2) # plotting
 library(dplyr) # data munging
 library(gghighlight) # highlight interpolated (missing) values
 library(EnvStats) # for seasonal M-K test
 library(tibble) # wrangle Mann-Kendall output
-
 ```
 
 
@@ -157,7 +156,6 @@ print(sk)
 ```
 
 Pull out the various result statistics and visualise:
-
 
 ```{r fig.width = 7, fig.height = 6}
 # overall seasonal model effect size
