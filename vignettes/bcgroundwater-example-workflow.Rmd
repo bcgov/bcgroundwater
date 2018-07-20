@@ -1,0 +1,63 @@
+---
+title: "Example Groundwater Level Trend Analysis Workflow"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{bcgroundwater}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r set-options, echo=FALSE}
+knitr::opts_chunk$set(fig.width = 6, fig.height = 4)
+```
+
+One example of how to generate a reproducible trend analysis on groundwater level data using the `bcgroundwater` R package. 
+
+This example examines long-term trends in water level data from [British Columbia groundwater observation monitoring well #45](https://www2.gov.bc.ca/gov/content?id=2D3DB9BA78DE4377AB4AE2DCEE1B409B), using both the non-parametric Mann-Kendall trend and the Mann-Kendall seasonal trend tests implemented in the [`zyp`](https://cran.r-project.org/web/packages/zyp/index.html) and [`EnvStats`](https://cran.r-project.org/web/packages/EnvStats/index.html) R packages respectively.
+
+### Load Packages
+
+```{r, message=FALSE, warning=FALSE}
+## install `bcgroundwater` with remotes::install_github("bcgov/bcgroundwater")
+library(bcgroundwater) # get B.C. data, M-K trend test
+library(ggplot2) # plotting
+library(dplyr) # data munging
+library(gghighlight) # highlight interpolated (missing) values
+library(EnvStats) # for seasonal M-K test
+library(tibble) # wrangle Mann-Kendall output
+
+```
+
+
+### Get Data Using `bcgroundwater`
+
+Pull the data of interest&mdash;Observation Well #045&mdash;from the [B.C. Data Catalogue](https://catalogue.data.gov.bc.ca/dataset/57c55f10-cf8e-40bb-aae0-2eff311f1685) using the bcgroundwater R package. The data is provided under the [Open Government Licence - British Columbia](https://www2.gov.bc.ca/gov/content?id=A519A56BC2BF44E4A008B33FCF527F61).
+
+```{r message=FALSE, warning=FALSE}
+well <- "45" # Observation Well #45
+
+data <- get_gwl(wells = well)
+head(data)
+```
+
+## Wrangle the Raw Data
+
+Calculate & visualise the monthly median groundwater levels:
+
+```{r message=FALSE, warning=FALSE}
+# calculate the median monthly values
+monthly_data <- monthly_values(data) %>% 
+  mutate(Date = as.Date(Date))
+
+# visualise the monthly time-series data
+ggplot(monthly_data, aes(Date, med_GWL)) + 
+  geom_point() +
+  scale_x_date(date_breaks = "3 year", date_labels = "%Y") +
+  scale_y_reverse() +
+  theme_bw() +
+  labs(title = paste0("Median Monthly GWL Values from Well #", well),
+       caption = paste0("\nData sourced from B.C. Data Catalogue on ", Sys.Date()),
+       x = NULL,
+       y = "Depth Below Ground (metres)")
+```
+
