@@ -8,7 +8,7 @@ vignette: >
   %\VignetteDepends{gghighlight, EnvStats, tibble}
 ---
 
-```{r set-options, echo=FALSE, message=FALSE, warning=FALSE}
+```{r set-options, echo=FALSE}
 knitr::opts_chunk$set(fig.width = 7, fig.height = 4, message=FALSE, warning=FALSE)
 ```
 
