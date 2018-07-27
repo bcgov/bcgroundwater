@@ -1,6 +1,6 @@
 Package: bcgroundwater
 Title: Analyse B.C. Groundwater Level Data
-Version: 1.0.0
+Version: 1.1.0
 Authors@R: c(person("Andy", "Teucher", email = "andy.teucher@gov.bc.ca",
                     role = c("aut", "cre")),
              person("Province of British Columbia", role="cph"),
@@ -29,6 +29,8 @@ Suggests:
     rgdal,
     rmarkdown,
     sp,
-    testthat
+    testthat,
+    gghighlight,
+    EnvStats
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1

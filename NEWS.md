@@ -1,3 +1,7 @@
+# bcgroundwater 1.1
+
+* Add example workflow vignette 
+
 # bcgroundwater 1.0
 
 * All function names now lower_case
