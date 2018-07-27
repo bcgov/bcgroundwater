@@ -1,6 +1,6 @@
 # bcgroundwater 1.1
 
-* Adds example workflow vignette 
+* Add example workflow vignette 
 
 # bcgroundwater 1.0
 

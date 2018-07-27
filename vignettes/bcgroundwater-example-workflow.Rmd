@@ -12,13 +12,13 @@ vignette: >
 knitr::opts_chunk$set(fig.width = 7, fig.height = 4, message=FALSE, warning=FALSE)
 ```
 
-One example of how to generate a reproducible trend analysis on B.C. groundwater level data using the `bcgroundwater` R package. 
+This vignette illustrates one example of how to generate a reproducible trend analysis on B.C. groundwater level data using the `bcgroundwater` R package. 
 
 This example examines long-term trends in water level data from [British Columbia groundwater observation monitoring well #45](https://www2.gov.bc.ca/gov/content?id=2D3DB9BA78DE4377AB4AE2DCEE1B409B), using both the Mann-Kendall and Seasonal Kendall non-parametric trend tests, as implemented in the [`zyp`](https://cran.r-project.org/web/packages/zyp/index.html) and [`EnvStats`](https://cran.r-project.org/web/packages/EnvStats/index.html) R packages respectively.
 
 ### Load Packages
 
-```{r}
+```{r setup}
 library(bcgroundwater) # get B.C. data, implements `zyp` M-K trend test
 # you will need to install `bcgroundwater` with remotes::install_github("bcgov/bcgroundwater")
 library(ggplot2) # plotting
@@ -145,10 +145,8 @@ Ensure complete set of median monthly values for each year and implement a Seaso
 # use years with all (12) months data
 full_monthly_data_comp_yrs <- full_monthly_data %>% 
   group_by(Year) %>% 
-  mutate(n = n()) %>% 
-  filter(n == 12) %>% 
-  ungroup() %>% 
-  select(-n)
+  filter(n() == 12) %>% 
+  ungroup()
 
 #seasonal-K trend test
 sk <- kendallSeasonalTrendTest(med_GWL ~ Month + Year, 

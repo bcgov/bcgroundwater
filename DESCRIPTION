@@ -31,7 +31,6 @@ Suggests:
     sp,
     testthat,
     gghighlight,
-    EnvStats,
-    tibble
+    EnvStats
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1
