@@ -5,7 +5,7 @@ vignette: >
   %\VignetteIndexEntry{bcgroundwater}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
-  %\VignetteDepends{gghighlight, EnvStats, tibble}
+  %\VignetteDepends{gghighlight, EnvStats}
 ---
 
 ```{r set-options, echo=FALSE}
