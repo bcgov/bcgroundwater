@@ -1,7 +1,7 @@
-## ----set-options, echo=FALSE, message=FALSE, warning=FALSE---------------
+## ----set-options, echo=FALSE---------------------------------------------
 knitr::opts_chunk$set(fig.width = 7, fig.height = 4, message=FALSE, warning=FALSE)
 
-## ------------------------------------------------------------------------
+## ----setup---------------------------------------------------------------
 library(bcgroundwater) # get B.C. data, implements `zyp` M-K trend test
 # you will need to install `bcgroundwater` with remotes::install_github("bcgov/bcgroundwater")
 library(ggplot2) # plotting
@@ -101,10 +101,8 @@ ggplot(annual_data) +
 # use years with all (12) months data
 full_monthly_data_comp_yrs <- full_monthly_data %>% 
   group_by(Year) %>% 
-  mutate(n = n()) %>% 
-  filter(n == 12) %>% 
-  ungroup() %>% 
-  select(-n)
+  filter(n() == 12) %>% 
+  ungroup()
 
 #seasonal-K trend test
 sk <- kendallSeasonalTrendTest(med_GWL ~ Month + Year, 
