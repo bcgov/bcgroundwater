@@ -70,7 +70,7 @@ gwl_area_plot <- function(dataframe, trend, intercept, trend_category,
     stop("mkperiod must be either 'monthly' or 'annual'")
   }
   
-  if (tolower(trend_category) == "stable") {
+  if (tolower(trend_category) == "stable" | is.na(slope)) {
     trendprint <- " "
     
   } else {
