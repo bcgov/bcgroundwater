@@ -128,12 +128,12 @@ gwl_area_plot <- function(dataframe, trend, intercept, trend_category,
     labs <- labs[1]
     override_list <- lapply(override_list, `[`, 1)
   }
-  
-  if (show_stable_line || tolower(trend_category) != "stable") {
+
+  if ((show_stable_line || tolower(trend_category) != "stable") && !is.na(slope)) {
     plot.area <- plot.area + 
       geom_abline(aes_string(intercept = "intercept", slope = "slope", colour = "'LTT'"),
                   data = data.frame(intercept = -int.well, slope = slope), size = 1)
-  } else if (tolower(trend_category) == "stable") {
+  } else {
     vals <- vals[2]
     labs <- labs[2]
     override_list <- lapply(override_list, `[`, 2)
