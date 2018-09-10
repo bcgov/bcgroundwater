@@ -58,6 +58,7 @@ gwl_area_plot <- function(dataframe, trend, intercept, trend_category,
   
   minDate <- min(df$Date)
   maxDate <- max(df$Date)
+  nYears <- as.numeric(difftime(maxDate, minDate, units = "days"))/365
   
   WellNum <- df$Well_Num[1]
   
@@ -70,7 +71,7 @@ gwl_area_plot <- function(dataframe, trend, intercept, trend_category,
     stop("mkperiod must be either 'monthly' or 'annual'")
   }
   
-  if (tolower(trend_category) == "stable") {
+  if (tolower(trend_category) == "stable" | is.na(slope)) {
     trendprint <- " "
     
   } else {
@@ -110,10 +111,13 @@ gwl_area_plot <- function(dataframe, trend, intercept, trend_category,
       plot.title = element_text(hjust = 0.5),
       plot.subtitle = element_text(hjust = 0.5, face = "plain", size = 11)) + 
     scale_y_reverse(expand = c(0,0)) + coord_cartesian(ylim = lims) + 
-    scale_x_date(labels = date_format("%Y"), breaks = date_breaks("3 years"),
+    scale_x_date(labels = date_format("%Y"), 
+                 breaks = date_breaks(dplyr::if_else(nYears < 10, 
+                                                     "1 year",
+                                                     "3 years")),
                  expand = c(0,0)) + 
     scale_fill_manual(name = '', values = c('Groundwater Level' = "#1E90FF"))
-  
+
   vals <- c(LTT = 'orange', Interp = 'grey60')
   labs <- c('Long-term Trend', 'Interpolated (Missing) Values')
   override_list <- list(colour = c("orange", "grey60"), shape = c(NA, 16), linetype = c(1, 0))
@@ -128,12 +132,12 @@ gwl_area_plot <- function(dataframe, trend, intercept, trend_category,
     labs <- labs[1]
     override_list <- lapply(override_list, `[`, 1)
   }
-  
-  if (show_stable_line || tolower(trend_category) != "stable") {
+
+  if ((show_stable_line || tolower(trend_category) != "stable") && !is.na(slope)) {
     plot.area <- plot.area + 
       geom_abline(aes_string(intercept = "intercept", slope = "slope", colour = "'LTT'"),
                   data = data.frame(intercept = -int.well, slope = slope), size = 1)
-  } else if (tolower(trend_category) == "stable") {
+  } else {
     vals <- vals[2]
     labs <- labs[2]
     override_list <- lapply(override_list, `[`, 2)
