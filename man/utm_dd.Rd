@@ -4,8 +4,8 @@
 \alias{utm_dd}
 \title{Convert zone+utm pairs to lat/long}
 \usage{
-utm_dd(zone = NULL, easting = NULL, northing = NULL, datum = "NAD83",
-  data = NULL, key = NULL)
+utm_dd(zone = NULL, easting = NULL, northing = NULL,
+  datum = "NAD83", data = NULL, key = NULL)
 }
 \arguments{
 \item{zone}{Integer, or column name in 'data'}

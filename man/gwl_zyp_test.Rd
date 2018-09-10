@@ -4,8 +4,8 @@
 \alias{gwl_zyp_test}
 \title{Perform Mann-Kendall trend test on many wells}
 \usage{
-gwl_zyp_test(dataframe, wells = NULL, byID = "Well_Num", col = "mean_GWL",
-  method = "both")
+gwl_zyp_test(dataframe, wells = NULL, byID = "Well_Num",
+  col = "mean_GWL", method = "both")
 }
 \arguments{
 \item{dataframe}{Dataframe containing: an ID column (specified in \code{by})

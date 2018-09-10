@@ -4,8 +4,8 @@
 \alias{gwl_monthly_plot}
 \title{Create a graph of historical monthly water level deviations}
 \usage{
-gwl_monthly_plot(dataframe, splines = TRUE, last12 = TRUE, save = FALSE,
-  path = "./", opts = NULL)
+gwl_monthly_plot(dataframe, splines = TRUE, last12 = TRUE,
+  save = FALSE, path = "./", opts = NULL)
 }
 \arguments{
 \item{dataframe}{Dataframe containing 'Well_Num', 'Date', 'dev_med_GWL'}

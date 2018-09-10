@@ -5,7 +5,8 @@
 \title{Plot a point on a map with an overview inset}
 \usage{
 plot_point_with_inset(long, lat, pointColour, bigMap = NULL,
-  overviewMap = NULL, overviewExtent = c(-139, 48, -114, 60), opts = NULL)
+  overviewMap = NULL, overviewExtent = c(-139, 48, -114, 60),
+  opts = NULL)
 }
 \arguments{
 \item{long}{Longitude (dd) of point}
