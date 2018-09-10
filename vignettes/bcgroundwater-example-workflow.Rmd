@@ -2,7 +2,7 @@
 title: "Example Groundwater Level Trend Analysis Workflow"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{bcgroundwater}
+  %\VignetteIndexEntry{Example Workflow}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
   %\VignetteDepends{gghighlight, EnvStats}

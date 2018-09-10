@@ -2,7 +2,7 @@
 title: "Using the 'bcgroundwater' R Package"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{bcgroundwater}
+  %\VignetteIndexEntry{Introduction to bcgroundwater}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
