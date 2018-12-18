@@ -134,6 +134,8 @@ format_gwl <- function(data, which, quiet) {
     welldf <- dplyr::left_join(welldf, 
                                well_avg[, c("dummydate", "max", "mean", "min")],
                                by = "dummydate")
+  } else {
+    welldf$max <- welldf$mean <- welldf$min <- NA
   }
   
   ################################
@@ -152,18 +154,14 @@ format_gwl <- function(data, which, quiet) {
   welldf$EMS_ID <- NA
   welldf$Station_Name <- NA
   
-  all_cols <- c("Well_Num" = "myLocation",
-                "EMS_ID", "Station_Name",
-                "Date" = "Time", "GWL" = "Value", 
-                "Historical_Daily_Average" = "mean", 
-                "Historical_Daily_Minimum" = "min",
-                "Historical_Daily_Maximum" = "max",
-                "Status" = "Approval")
-  
-  col_selection <- all_cols[all_cols %in% names(welldf)]
-  
   # Select and rename final variables
-  welldf <- dplyr::select(welldf, col_selection)
+  welldf <- dplyr::select(welldf, "Well_Num" = "myLocation",
+                          "EMS_ID", "Station_Name",
+                          "Date" = "Time", "GWL" = "Value", 
+                          "Historical_Daily_Average" = "mean", 
+                          "Historical_Daily_Minimum" = "min",
+                          "Historical_Daily_Maximum" = "max",
+                          "Status" = "Approval")
   
   return(welldf)
 }
