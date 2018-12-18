@@ -109,7 +109,7 @@ download_gwl <- function(url, which, quiet) {
 
 format_gwl <- function(data, which, quiet) {
 
-  if(is.null(data)) return()
+  if (is.null(data)) return()
   
   welldf <- utils::read.csv(text = data[[1]], stringsAsFactors = FALSE)
   
@@ -122,19 +122,19 @@ format_gwl <- function(data, which, quiet) {
   }
 
   # Merge with mean/min/max  
-  if(which == "daily") welldf$Time <- as.Date(welldf$Time)
-  if(which != "daily") welldf$Time <- as.POSIXct(welldf$Time, tz = "UTC")
+  if (which == "daily") welldf$Time <- as.Date(welldf$Time)
+  if (which != "daily") welldf$Time <- as.POSIXct(welldf$Time, tz = "UTC")
   welldf$dummydate <- paste0("1800-", format(welldf$Time, "%m-%d"))
   
   well_avg <- utils::read.csv(text = data[[2]], stringsAsFactors = FALSE)
-  well_avg <- well_avg[, names(well_avg)[names(well_avg) != "year"]]
-  well_avg <- tidyr::spread(well_avg, "type", "Value")
   
-  
-  
-  welldf <- dplyr::left_join(welldf, 
-                             well_avg[, c("dummydate", "max", "mean", "min")],
-                             by = "dummydate")
+  if (!all(is.na(well_avg$dummydate))) {
+    well_avg <- well_avg[, names(well_avg)[names(well_avg) != "year"]]
+    well_avg <- tidyr::spread(well_avg, "type", "Value")
+    welldf <- dplyr::left_join(welldf, 
+                               well_avg[, c("dummydate", "max", "mean", "min")],
+                               by = "dummydate")
+  }
   
   ################################
   # Need station name/location meta information!
@@ -152,15 +152,18 @@ format_gwl <- function(data, which, quiet) {
   welldf$EMS_ID <- NA
   welldf$Station_Name <- NA
   
+  all_cols <- c("Well_Num" = "myLocation",
+                "EMS_ID", "Station_Name",
+                "Date" = "Time", "GWL" = "Value", 
+                "Historical_Daily_Average" = "mean", 
+                "Historical_Daily_Minimum" = "min",
+                "Historical_Daily_Maximum" = "max",
+                "Status" = "Approval")
+  
+  col_selection <- all_cols[all_cols %in% names(welldf)]
+  
   # Select and rename final variables
-  welldf <- dplyr::select(welldf,
-                          "Well_Num" = "myLocation",
-                          "EMS_ID", "Station_Name",
-                          "Date" = "Time", "GWL" = "Value", 
-                          "Historical_Daily_Average" = "mean", 
-                          "Historical_Daily_Minimum" = "min",
-                          "Historical_Daily_Maximum" = "max",
-                          "Status" = "Approval")
+  welldf <- dplyr::select(welldf, col_selection)
   
   return(welldf)
 }
