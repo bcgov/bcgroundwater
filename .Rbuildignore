@@ -5,3 +5,4 @@ Makefile
 ^CONTRIBUTING\.md$
 CODE_OF_CONDUCT.md
 ^\.travis\.yml$
+^COMPLIANCE\.yaml$
